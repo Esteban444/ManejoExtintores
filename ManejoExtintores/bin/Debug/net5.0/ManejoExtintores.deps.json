@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "ManejoExtintores/1.0.0": {
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "ManejoExtintores.Core": "1.0.0",
           "ManejoExtintores.Infraestructura": "1.0.0",
           "Microsoft.EntityFrameworkCore": "5.0.6",

@@ -8,10 +8,8 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
     {
         public void Configure(EntityTypeBuilder<DetalleServicio> builder)
         {
-            builder.ToTable("DetalleServicio");
 
-            builder.HasKey(e => e.IdDetalleServ)
-                    .HasName("PK__DetalleS__96EB61C9AFC39956");
+            builder.HasKey(e => e.IdDetalleServ);
 
 
             builder.Property(e => e.IdDetalleServ).HasColumnName("idDetalleServ");
@@ -23,26 +21,26 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
                 .IsUnicode(false)
                 .HasColumnName("descripcion");
 
-            builder.Property(e => e.IdServicios).HasColumnName("idServicios");
+            builder.Property(e => e.IdServicio).HasColumnName("idServicios");
 
             builder.Property(e => e.PesoXlibras).HasColumnName("pesoXLibras");
 
             builder.Property(e => e.TipoExtintor)
-                .HasMaxLength(80)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("tipoExtintor");
 
             builder.Property(e => e.Total)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("total");
 
             builder.Property(e => e.Valor)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("valor");
 
             builder.HasOne(d => d.Servicios)
                 .WithMany(p => p.DetalleServicios)
-                .HasForeignKey(d => d.IdServicios)
+                .HasForeignKey(d => d.IdServicio)
                 .HasConstraintName("fk_Detalleservicios");
         }
     }

@@ -8,16 +8,7 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
     {
         public void Configure(EntityTypeBuilder<PesoExtintor> builder)
         {
-            builder.HasKey(e => e.IdPesoExtintor)
-                    .HasName("PK__PesoExti__202D2BB874D54491");
-
-            builder.ToTable("PesoExtintor");
-
-            builder.Property(e => e.IdPesoExtintor).HasColumnName("idPesoExtintor");
-
-            builder.Property(e => e.IdDetalleServ).HasColumnName("idDetalleServ");
-
-            builder.Property(e => e.PesoXlibras).HasColumnName("pesoXLibras");
+            builder.HasKey(e => e.IdPesoExtintor);
 
             builder.HasOne(d => d.DetalleServ)
                 .WithMany(p => p.PesoExtintors)

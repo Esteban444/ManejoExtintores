@@ -52,7 +52,7 @@ namespace ManejoExtintores.Core.Servicios
             var detalles = _repositorio.ConsultaPorId(d => d.IdDetalleServ == detalle.IdDetalleServ);
             if (detalles != null)
             {
-                detalles.IdServicios = detalle.IdServicios;
+                detalles.IdServicio = detalle.IdServicio;
                 detalles.Descripcion = detalle.Descripcion;
                 detalles.TipoExtintor = detalle.TipoExtintor;
                 detalles.PesoXlibras = detalle.PesoXlibras;

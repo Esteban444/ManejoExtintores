@@ -5,7 +5,7 @@ namespace ManejoExtintores.Core.Modelos
     public class DetalleServicio
     {
         public int IdDetalleServ { get; set; }
-        public int? IdServicios { get; set; }
+        public int? IdServicio { get; set; } 
         public string Descripcion { get; set; }
         public string TipoExtintor { get; set; }
         public int? PesoXlibras { get; set; }

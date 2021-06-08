@@ -1,5 +1,4 @@
 ﻿using ManejoExtintores.Core.Modelos;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,49 +10,37 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Clientes");
 
-            builder.HasKey(e => e.IdCliente)
-                     .HasName("PK__Clientes__885457EE01AFCB4F");
-
-            builder.Property(e => e.IdCliente).HasColumnName("idCliente");
+            builder.HasKey(e => e.IdCliente);
 
             builder.Property(e => e.Apellido)
-                .HasMaxLength(80)
-                .IsUnicode(false)
-                .HasColumnName("apellido");
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.Descripcion)
-                .HasMaxLength(250)
-                .IsUnicode(false)
-                .HasColumnName("descripcion");
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.Direccion)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("direccion");
+                .IsUnicode(false);
 
-            builder.Property(e => e.DocCliente)
-                .HasColumnType("decimal(18, 0)")
-                .HasColumnName("doc_Cliente");
+            builder.Property(e => e.DocCliente).HasColumnType("decimal(18, 0)");
 
             builder.Property(e => e.Email)
                 .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
+                .IsUnicode(false);
 
             builder.Property(e => e.Nit)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("nit");
+                .IsUnicode(false);
 
             builder.Property(e => e.Nombre)
-                .HasMaxLength(80)
-                .IsUnicode(false)
-                .HasColumnName("nombre");
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.Telefono)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("telefono");
+                .HasMaxLength(30)
+                .IsUnicode(false);
         }
     }
 }

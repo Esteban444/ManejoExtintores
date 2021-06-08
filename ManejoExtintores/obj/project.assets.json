@@ -6036,6 +6036,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 8.1.1",
       "ManejoExtintores.Core >= 1.0.0",
       "ManejoExtintores.Infraestructura >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.6",
@@ -6099,6 +6100,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[8.1.1, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.6, )"
