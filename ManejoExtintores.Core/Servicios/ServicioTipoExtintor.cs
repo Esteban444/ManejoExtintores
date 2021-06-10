@@ -3,6 +3,7 @@ using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Servicios 
@@ -31,7 +32,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El tipo de extintor que solicita no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { mensaje = "El tipo de extintor que solicita no existe en la base de datos" });
             }
         }
 
@@ -56,7 +57,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El tipo de extintor que desea actualizar no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NoContent, new { mensaje = "El tipo de extintor que desea actualizar no existe en la base de datos" });
             }
         }
 
@@ -73,12 +74,12 @@ namespace ManejoExtintores.Core.Servicios
                 }
                 catch (Exception)
                 {
-                    throw new Excepcion_Servidor("El tipo de extintor tiene relacion con productos o detalle de servicio no se puede borrar");
+                    throw new ManejoExcepciones(HttpStatusCode.InternalServerError, new { mensaje = "El tipo de extintor tiene relacion con productos o detalle de servicio no se puede borrar" });
                 }
             }
             else
             {
-                throw new Excepcion_Servidor("El tipo de extintor no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { mensaje = "El tipo de extintor no existe en la base de datos" });
             }
         }
 

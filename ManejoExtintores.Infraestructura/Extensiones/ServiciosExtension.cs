@@ -2,14 +2,14 @@
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Servicios;
-using ManejoExtintores.Infraestructura.Filtros;
 using ManejoExtintores.Infraestructura.Repositorios;
 using ManejoExtintores.Infraestructura.Validaciones;
 using ManejoExtintores.Core.Modelos;
 using ManejoExtintores.Infraestructura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection; 
+using Microsoft.Extensions.DependencyInjection;
+using ManejoExtintores.Core.DTOs.Request;
 
 namespace ManejoExtintores.Infraestructura.Extensiones
 {
@@ -25,7 +25,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
         {
             services.AddControllers(option =>
             {
-                option.Filters.Add<Filtro_Excepciones>();
+                
 
             }).AddNewtonsoftJson(options =>
             {
@@ -59,6 +59,8 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IValidator<ProductoBase>, ValidacionesProducto>();   
             services.AddTransient<IValidator<TipoExtintorBase>, ValidacionTipoExtintor>();   
             services.AddTransient<IValidator<ServicioBase>, ValidacionServicios>();   
+            services.AddTransient<IValidator<AutenticacionUsuarioDTO>, ValidacionAutenticacionUsuario>();   
+            services.AddTransient<IValidator<VerificacionDosPasosDTO>, ValidacionVerificacionDosPasos>();   
 
             services.AddTransient<IServicioCliente, ServicioCliente>();
             services.AddTransient<IDetalleServicio, ServicioDetalleServicio>();

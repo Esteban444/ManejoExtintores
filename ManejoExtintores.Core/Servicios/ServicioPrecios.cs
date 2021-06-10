@@ -5,6 +5,7 @@ using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Servicios 
@@ -39,7 +40,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El precio que solicita no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El precio que solicita no existe en la base de datos" });
             }
         }
 
@@ -65,7 +66,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El precio que desea actualizar no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El precio que desea actualizar no existe en la base de datos" });
             }
         }
 
@@ -81,12 +82,12 @@ namespace ManejoExtintores.Core.Servicios
                 }
                 catch (Exception)
                 {
-                    throw new Excepcion_Servidor("El Precio tiene relacion con productos o detalle de servicio no se puede borrar");
+                    throw new ManejoExcepciones(HttpStatusCode.InternalServerError, new { Mensaje = "El Precio tiene relacion con productos o detalle de servicio no se puede borrar" });
                 }
             }
             else
             {
-                throw new Excepcion_Servidor("El Precio no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El Precio no existe en la base de datos" });
             }
         }
     }

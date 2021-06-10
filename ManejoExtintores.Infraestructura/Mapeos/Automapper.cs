@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.DTOs.Request;
 using ManejoExtintores.Core.Modelos;
 
 namespace ManejoExtintores.Infraestructura.Mapeos 
@@ -8,6 +9,8 @@ namespace ManejoExtintores.Infraestructura.Mapeos
     {
         public Automapper()
         {
+            CreateMap<Usuario, RegistroUsuarioDTO >().ReverseMap();
+
             CreateMap<Cliente, ClienteDTO>().ReverseMap();
             CreateMap<Cliente, ClientesBase>().ReverseMap();
 

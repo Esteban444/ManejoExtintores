@@ -4,6 +4,7 @@ using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Servicios 
@@ -41,7 +42,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El registro de gasto no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El registro de gasto no existe en la base de datos" });
             }
         }
 
@@ -65,7 +66,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El registro de gasto que desea actualizar no existe en la base de datos"); 
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El registro de gasto que desea actualizar no existe en la base de datos" }); 
             }
         }
 
@@ -79,7 +80,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El gasto no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El gasto no existe en la base de datos" });
             }
         }
     }

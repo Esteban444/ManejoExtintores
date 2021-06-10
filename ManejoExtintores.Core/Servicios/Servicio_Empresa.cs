@@ -3,6 +3,7 @@ using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Servicios 
@@ -31,7 +32,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("La empresa que solicita no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "La empresa que solicita no existe en la base de datos" });
             }
         }
 
@@ -56,7 +57,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("La empresa que desea actualizar no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "La empresa que desea actualizar no existe en la base de datos" });
             }
         }
 
@@ -72,12 +73,12 @@ namespace ManejoExtintores.Core.Servicios
                 }
                 catch (Exception)
                 {
-                    throw new Excepcion_Servidor("La empresa tiene relacion con empleados no se puede borrar");
+                    throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "La empresa tiene relacion con empleados no se puede borrar" });
                 }
             }
             else
             {
-                throw new Excepcion_Servidor("La empresa no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "La empresa no existe en la base de datos" });
             }
         }
     }

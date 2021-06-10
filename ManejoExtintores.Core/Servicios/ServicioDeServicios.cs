@@ -5,6 +5,7 @@ using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Servicios 
@@ -39,7 +40,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El servicio que solicita no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El servicio que solicita no existe en la base de datos" });
             }
         }
 
@@ -71,7 +72,7 @@ namespace ManejoExtintores.Core.Servicios
             }
             else
             {
-                throw new Excepcion_Servidor("El servicio que desea actualizar no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El servicio que desea actualizar no existe en la base de datos" });
             }
         }
 
@@ -88,12 +89,12 @@ namespace ManejoExtintores.Core.Servicios
                 catch (Exception)
                 {
 
-                    throw new Excepcion_Servidor("El servicio tiene relaciones con otros datos no se puede borrar");
+                    throw new ManejoExcepciones(HttpStatusCode.InternalServerError, new { Mensaje = "El servicio tiene relaciones con otros datos no se puede borrar" });
                 }
             }
             else
             {
-                throw new Excepcion_Servidor("El servicio no existe en la base de datos");
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El servicio no existe en la base de datos" });
             }
         }
     }
