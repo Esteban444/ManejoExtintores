@@ -1,4 +1,6 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System;
@@ -11,24 +13,27 @@ namespace ManejoExtintores.Core.Servicios
     public class Servicio_Empresa : IServicio_Empresa
     {
         private readonly IRepositorio<Empresa> _repositorio;
+        private readonly IMapper _mapper;
 
-        public Servicio_Empresa(IRepositorio<Empresa> repositorio)  
+        public Servicio_Empresa(IRepositorio<Empresa> repositorio,IMapper mapper)  
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<Empresa> GetEmpresas()
+        public IEnumerable<EmpresaDTO> GetEmpresas()
         {
             var empresa = _repositorio.Consultas();
-            return empresa;
+            var empresaDTO = _mapper.Map<IEnumerable<EmpresaDTO>>(empresa);
+            return empresaDTO;
         }
 
-        public  Empresa GetEmpresa(int id)
+        public  EmpresaDTO GetEmpresa(int id)
         {
             var empresa =  _repositorio.ConsultaPorId(c => c.IdEmpresa == id);
             if (empresa != null)
             {
-                return empresa;
+                return _mapper.Map<EmpresaDTO>(empresa);
             }
             else
             {
@@ -36,24 +41,28 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearEmpresa(Empresa empresa)
+        public async Task<EmpresaBase> CrearEmpresa(EmpresaBase empresabase)
         {
+            var empresa = _mapper.Map<Empresa>(empresabase);
             await _repositorio.Crear(empresa);
+            empresabase = _mapper.Map<EmpresaBase>(empresa);
+            return empresabase;
         }
 
-        public async Task<bool> ActualizarEmpresa(Empresa empresa)
+        public async Task<EmpresaBase> ActualizarEmpresa(int id,EmpresaBase empresa)
         {
-            var empresas = _repositorio.ConsultaPorId(e => e.IdEmpresa == empresa.IdEmpresa);
-            if (empresas != null)
+            var empresasbd = _repositorio.ConsultaPorId(e => e.IdEmpresa == id);
+            if (empresasbd != null)
             {
-                empresas.Nombre = empresa.Nombre;
-                empresas.Direccion = empresa.Direccion;
-                empresas.Telefono = empresa.Telefono;
-                empresas.Email = empresa.Email;
-                empresas.Nit = empresa.Nit;
+                empresasbd.Nombre = empresa.Nombre;
+                empresasbd.Direccion = empresa.Direccion;
+                empresasbd.Telefono = empresa.Telefono;
+                empresasbd.Email = empresa.Email;
+                empresasbd.Nit = empresa.Nit;
 
-                await _repositorio.Actualizar(empresas);
-                return true;
+                await _repositorio.Actualizar(empresasbd);
+                empresa = _mapper.Map<EmpresaBase>(empresasbd);
+                return empresa;
             }
             else
             {
@@ -61,7 +70,7 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarEmpresa(int id)
+        public async Task<EmpresaDTO> EliminarEmpresa(int id)
         {
             var empresabd = _repositorio.ConsultaPorId(e => e.IdEmpresa == id);
             if (empresabd != null)
@@ -69,7 +78,8 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorio.Eliminar(empresabd);
-                    return true;
+                    var empresaE = _mapper.Map<EmpresaDTO>(empresabd);
+                    return empresaE; 
                 }
                 catch (Exception)
                 {

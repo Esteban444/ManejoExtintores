@@ -1,9 +1,13 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 using ManejoExtintores.Core.Modelos;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -11,46 +15,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioCliente : IServicioCliente
     {
-        private readonly IRepositorio<Cliente> _repositorio;
-
-        public ServicioCliente(IRepositorio<Cliente> repositorio) 
+        private readonly IRepositorioClientes _repositorio;
+        private readonly IMapper _mapper;
+        public ServicioCliente(IRepositorioClientes repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Cliente> GetClientes(FiltroClientes filtro)
+        public async Task<IEnumerable<ClienteDTO>> GetClientes(FiltroClientes filtro)
         {
-            var clientes = _repositorio.Consultas();
-
-            if (filtro.Documento != null)
-            {
-                clientes = clientes.Where(x => x.DocCliente == filtro.Documento);
-            }
-
-            if (filtro.Nombres != null)
-            {
-                clientes = clientes.Where(x => x.Nombre.ToLower().Contains(filtro.Nombres.ToLower()));
-            }
-
-            if (filtro.Apellidos != null)
-            {
-                clientes = clientes.Where(x => x.Apellido.ToLower().Contains(filtro.Apellidos.ToLower()));
-            }
-
-            if (filtro.Nit != null)
-            {
-                clientes = clientes.Where(x => x.Nit == filtro.Nit);
-            }
-
-            return clientes;
+            var clientes =  await _repositorio.ConsultaData(filtro); 
+            var clientesdto = _mapper.Map<IEnumerable<ClienteDTO>>(clientes);
+            return clientesdto;
         }
 
-        public  Cliente GetCliente(int id)
+        public  ClienteDTO GetCliente(int id)
         {
             var cliente = _repositorio.ConsultaPorId(c => c.IdCliente == id);
             if (cliente != null)
             {
-                return cliente;
+                return _mapper.Map<ClienteDTO>(cliente);
             }
             else
             {
@@ -58,15 +43,18 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearCliente(Cliente cliente)
+        public async Task<ClientesBase> CrearCliente(ClientesBase clienteb) 
         {
+            var cliente = _mapper.Map<Cliente>(clienteb);
             await _repositorio.Crear(cliente);
-            
+            clienteb = _mapper.Map<ClientesBase>(cliente);
+            return clienteb;
+
         }
 
-        public async Task<bool> ActualizarCliente(Cliente cliente)
+        public async Task<ClientesBase> ActualizarCliente(int id,ClientesBase cliente)
         {
-            var clientes = _repositorio.ConsultaPorId(c => c.IdCliente == cliente.IdCliente);
+            var clientes = _repositorio.ConsultaPorId(c => c.IdCliente == id);
             if (clientes != null)
             {
                 clientes.DocCliente = cliente.DocCliente;
@@ -79,7 +67,8 @@ namespace ManejoExtintores.Core.Servicios
                 clientes.Nit = cliente.Nit;
 
                 await _repositorio.Actualizar(clientes);
-                return true;
+                var clientedt = _mapper.Map<ClientesBase>(clientes);
+                return clientedt;
             }
             else
             {
@@ -87,14 +76,21 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarCliente(int id)
+        public async Task<ClienteDTO> EliminarCliente(int id)
         {
             var clientebd = _repositorio.ConsultaPorId(c => c.IdCliente == id);
             if (clientebd != null)
             {
-
-                await _repositorio.Eliminar(clientebd);
-                return true;
+                try
+                {
+                    await _repositorio.Eliminar(clientebd);
+                    var clienteE = _mapper.Map<ClienteDTO>(clientebd);
+                    return clienteE;
+                }
+                catch (Exception)
+                {
+                    throw new ManejoExcepciones(HttpStatusCode.InternalServerError, new { Mensaje = "El cliente tiene relacion con un servicio no se puede borrar" });
+                }
             }
             else
             {

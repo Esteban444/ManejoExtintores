@@ -85,8 +85,8 @@ namespace ManejoExtintores
             services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddControllers(c=> {
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                c.Filters.Add(new AuthorizeFilter(policy));
+                //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+               // c.Filters.Add(new AuthorizeFilter(policy));
             });
             services.AddSwaggerGen(c =>
             {

@@ -21,7 +21,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             var modeloset = DatabaseContext.Set<T>();
             return   modeloset.AsQueryable();
         }
-        public virtual T ConsultaPorId(Expression<Func<T, bool>> predicado)
+        public T ConsultaPorId(Expression<Func<T, bool>> predicado)
         {
             return  Consultas().FirstOrDefault(predicado);
         }

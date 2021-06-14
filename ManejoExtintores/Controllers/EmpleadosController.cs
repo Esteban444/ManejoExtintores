@@ -5,7 +5,6 @@ using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,22 +28,21 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroEmpleados filtros)
+        public async Task<IActionResult> Consultas([FromQuery] FiltroEmpleados filtros)
         {
-            var empleados = _servicioEmpleado.GetEmpleados(filtros);
-            var empleadoDTO = _mapper.Map<IEnumerable<EmpleadosDTO>>(empleados);
-            var response = new Respuesta<IEnumerable<EmpleadosDTO>>(empleadoDTO);
+            var empleados = await _servicioEmpleado.GetEmpleados(filtros);
+            
+            var response = new Respuesta<IEnumerable<EmpleadosDTO>>(empleados);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult Consulta(int id)
         {
 
-            var empleado =  _servicioEmpleado.GetEmpleado(id);
-            var empleadoDTO = _mapper.Map<EmpleadosDTO>(empleado);
-
-            var response = new Respuesta<EmpleadosDTO>(empleadoDTO);
+            var empleado =   _servicioEmpleado.GetEmpleado(id);
+            
+            var response = new Respuesta<EmpleadosDTO>(empleado);
             return Ok(response);
         }
 
@@ -59,12 +57,8 @@ namespace ManejoExtintores.Api.Controllers
                 return BadRequest(new RespuestaEmpleado { Errors = errors });
             }
             else
-            {
-                var empleado = _mapper.Map<Empleado>(empleadob);
-
-                await _servicioEmpleado.CrearEmpleado(empleado);
-
-                empleadob = _mapper.Map<EmpleadoBase>(empleado);
+            { 
+                await _servicioEmpleado.CrearEmpleado(empleadob);
                 var response = new Respuesta<EmpleadoBase>(empleadob);
                 return Ok(response);
             }
@@ -82,19 +76,17 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var empleado = _mapper.Map<Empleado>(actualizar);
-                empleado.IdEmpleados = id;
-                var result = await _servicioEmpleado.ActualizarEmpleado(empleado);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioEmpleado.ActualizarEmpleado(id,actualizar);
+                var response = new Respuesta<EmpleadoBase>(result);
                 return Ok(response);
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int id)
+        public async Task<IActionResult> Eliminar(int id) 
         {
             var result = await _servicioEmpleado.EliminarEmpleado(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<EmpleadosDTO>(result);
             return Ok(response);
 
         }

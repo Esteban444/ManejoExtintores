@@ -1,7 +1,10 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,38 +14,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioEmpleado : IServicioEmpleado
     {
-        private readonly IRepositorio<Empleado> _repositorio;
+        private readonly IMapper _mapper;
+        private readonly IRepositorioEmpleado _repositorio;
 
-        public ServicioEmpleado(IRepositorio<Empleado> repositorio)  
+        public ServicioEmpleado(IRepositorioEmpleado repositorio,IMapper mapper)  
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<Empleado> GetEmpleados(FiltroEmpleados filtros) 
+        public async Task<IEnumerable<EmpleadosDTO>> GetEmpleados(FiltroEmpleados filtros) 
         {
-
-            var empleado = _repositorio.Consultas();
-
-            if (filtros.Nombres != null)
-            {
-                empleado = empleado.Where(x => x.Nombre.ToLower().Contains(filtros.Nombres.ToLower()));
-            }
-
-            if (filtros.Apellidos != null)
-            {
-                empleado = empleado.Where(x => x.Apellido.ToLower().Contains(filtros.Apellidos.ToLower()));
-            }
-
-
-            return empleado;
+            var empleado =  await _repositorio.ConsultaData(filtros);
+            return _mapper.Map<IEnumerable<EmpleadosDTO>>(empleado);
         }
 
-        public Empleado GetEmpleado(int id) 
+        public EmpleadosDTO GetEmpleado(int id) 
         {
             var empleado = _repositorio.ConsultaPorId(e => e.IdEmpleados == id);
             if (empleado != null)
             {
-                return empleado;
+                return  _mapper.Map<EmpleadosDTO>(empleado);
             }
             else
             {
@@ -50,25 +42,29 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearEmpleado(Empleado empleado)  
+        public async Task<EmpleadoBase> CrearEmpleado(EmpleadoBase empleadob)  
         {
-           await _repositorio.Crear(empleado); 
+            var empleado = _mapper.Map<Empleado>(empleadob);
+            await _repositorio.Crear(empleado);
+            empleadob = _mapper.Map<EmpleadoBase>(empleado);
+            return empleadob;
         }
 
-        public async Task<bool> ActualizarEmpleado(Empleado empleado) 
+        public async Task<EmpleadoBase> ActualizarEmpleado(int id,EmpleadoBase empleadod) 
         {
-            var empleados = _repositorio.ConsultaPorId(e => e.IdEmpleados == empleado.IdEmpleados);
-            if (empleados != null)
+            var empleadobd = _repositorio.ConsultaPorId(e => e.IdEmpleados == id);
+            if (empleadobd != null)
             {
-                empleados.IdEmpresa = empleado.IdEmpresa;
-                empleados.Nombre = empleado.Nombre;
-                empleados.Apellido = empleado.Apellido;
-                empleados.Direccion = empleado.Direccion;
-                empleados.Telefono = empleado.Telefono;
-                empleados.Email = empleado.Email;
+                empleadobd.IdEmpresa = empleadod.IdEmpresa;
+                empleadobd.Nombre = empleadod.Nombre;
+                empleadobd.Apellido = empleadod.Apellido;
+                empleadobd.Direccion = empleadod.Direccion;
+                empleadobd.Telefono = empleadod.Telefono;
+                empleadobd.Email = empleadod.Email;
 
-                await _repositorio.Actualizar(empleados);
-                return true;
+                await _repositorio.Actualizar(empleadobd);
+                empleadod = _mapper.Map<EmpleadoBase>(empleadobd);
+                return empleadod;
             }
             else
             {
@@ -76,14 +72,14 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarEmpleado(int id) 
+        public async Task<EmpleadosDTO> EliminarEmpleado(int id) 
         {
             var empleadobd =  _repositorio.ConsultaPorId(e => e.IdEmpleados == id);
             if (empleadobd != null)
-            {
-               
+            { 
                 await _repositorio.Eliminar(empleadobd);
-                return true;
+                var empleadoE = _mapper.Map<EmpleadosDTO>(empleadobd);
+                return empleadoE; 
             }
             else
             {

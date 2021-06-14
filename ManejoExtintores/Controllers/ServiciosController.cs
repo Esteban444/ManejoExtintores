@@ -63,11 +63,10 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var serviciodetalle = new ServicioBase();
+                //var serviciodetalle =  _mapper.Map<Servicio>(serviciobase);
+                await _Repositorioservicio.CrearServicioDetalle(serviciobase);
 
-                await _Repositorioservicio.CrearServicioDetalle(serviciodetalle);
-
-                return Ok(serviciodetalle);
+                return Ok(serviciobase);
             }
         }
 

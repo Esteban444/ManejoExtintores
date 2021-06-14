@@ -4,7 +4,6 @@ using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,22 +27,18 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Consultas()
+        public  IActionResult Consultas()
         {
-            var empresas = _servicioEmpresa.GetEmpresas();
-            var empresaDTO = _mapper.Map<IEnumerable<EmpresaDTO>>(empresas);
-            var response = new Respuesta<IEnumerable<EmpresaDTO>>(empresaDTO);
+            var empresas =  _servicioEmpresa.GetEmpresas();
+            var response = new Respuesta<IEnumerable<EmpresaDTO>>(empresas);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult Consulta(int id)
         {
-
             var empresa =  _servicioEmpresa.GetEmpresa(id);
-            var empresaDTO =  _mapper.Map<EmpresaDTO>(empresa);
-
-            var response =  new Respuesta<EmpresaDTO>(empresaDTO);
+            var response =  new Respuesta<EmpresaDTO>(empresa);
             return Ok(response);
         }
 
@@ -59,18 +54,14 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var empresa = _mapper.Map<Empresa>(empresabase);
-
-                await _servicioEmpresa.CrearEmpresa(empresa);
-
-                empresabase = _mapper.Map<EmpresaBase>(empresa);
+                await _servicioEmpresa.CrearEmpresa(empresabase);
                 var response = new Respuesta<EmpresaBase>(empresabase);
                 return Ok(response);
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarGasto(int id, EmpresaBase actualizar)
+        public async Task<IActionResult> ActualizarEmpresa(int id, EmpresaBase actualizar) 
         {
             var Validacion = _validator.Validate(actualizar);
             if (!Validacion.IsValid)
@@ -81,10 +72,8 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var empresa = _mapper.Map<Empresa>(actualizar);
-                empresa.IdEmpresa = id;
-                var result = await _servicioEmpresa.ActualizarEmpresa(empresa);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioEmpresa.ActualizarEmpresa(id,actualizar);
+                var response = new Respuesta<EmpresaBase>(result);
                 return Ok(response);
             }
         }
@@ -93,7 +82,7 @@ namespace ManejoExtintores.Api.Controllers
         public async Task<IActionResult> Eliminar(int id)
         {
             var result = await _servicioEmpresa.EliminarEmpresa(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<EmpresaDTO>(result);
             return Ok(response);
 
         }

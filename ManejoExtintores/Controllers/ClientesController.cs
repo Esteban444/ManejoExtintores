@@ -28,22 +28,19 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroClientes filtro)
+        public async Task<IActionResult> Consultas([FromQuery] FiltroClientes filtro)
         {
-            var clientes = _servicioCliente.GetClientes(filtro);
-            var cliente = _mapper.Map<IEnumerable<ClienteDTO>>(clientes);
-            var response = new Respuesta<IEnumerable<ClienteDTO>>(cliente);
+            var clientes = await _servicioCliente.GetClientes(filtro);
+            var response = new Respuesta<IEnumerable<ClienteDTO>>(clientes);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult Consulta(int id)
         {
 
             var cliente =  _servicioCliente.GetCliente(id);
-            var clienteDTO = _mapper.Map<ClienteDTO>(cliente);
-
-            var response = new Respuesta<ClienteDTO>(clienteDTO);
+            var response = new Respuesta<ClienteDTO>(cliente);
             return Ok(response);
         }
 
@@ -59,11 +56,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var cliente = _mapper.Map<Cliente>(clienteb);
-
-                await _servicioCliente.CrearCliente(cliente);
-
-                clienteb = _mapper.Map<ClientesBase>(cliente);
+                await _servicioCliente.CrearCliente(clienteb);
                 var response = new Respuesta<ClientesBase>(clienteb);
                 return Ok(response);
             }
@@ -81,10 +74,8 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var cliente = _mapper.Map<Cliente>(actualizar);
-                cliente.IdCliente = id;
-                var result = await _servicioCliente.ActualizarCliente(cliente);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioCliente.ActualizarCliente(id,actualizar);
+                var response = new Respuesta<ClientesBase>(result);
                 return Ok(response);
             }
         }
@@ -93,7 +84,7 @@ namespace ManejoExtintores.Api.Controllers
         public async Task<IActionResult> Eliminar(int id)
         {
             var result = await _servicioCliente.EliminarCliente(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<ClienteDTO>(result);
             return Ok(response);
 
         }

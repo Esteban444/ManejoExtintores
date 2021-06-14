@@ -72,7 +72,6 @@ D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\n
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\ManejoExtintores.Infraestructura.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\ManejoExtintores.Core.pdb
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\ManejoExtintores.Infraestructura.pdb
-D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.csprojAssemblyReference.cache
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.GeneratedMSBuildEditorConfig.editorconfig
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.AssemblyInfoInputs.cache
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.AssemblyInfo.cs
@@ -88,3 +87,6 @@ D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\n
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ref\ManejoExtintores.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.pdb
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.genruntimeconfig.cache
+D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.csproj.AssemblyReference.cache
+D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll

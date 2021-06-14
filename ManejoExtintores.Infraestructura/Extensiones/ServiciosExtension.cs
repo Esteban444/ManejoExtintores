@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ManejoExtintores.Core.DTOs.Request;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 
 namespace ManejoExtintores.Infraestructura.Extensiones
 {
@@ -37,9 +38,11 @@ namespace ManejoExtintores.Infraestructura.Extensiones
         public static IServiceCollection AgregarServicios(this IServiceCollection services) 
         {
             services.AddScoped(typeof(IRepositorio<Cliente>), typeof(RepositorioBase<Cliente>));
+            services.AddTransient<IRepositorioClientes, RepositorioClientes>();
             services.AddScoped(typeof(IRepositorio<DetalleServicio>), typeof(RepositorioBase<DetalleServicio>));
             services.AddScoped(typeof(IRepositorio<Empresa>), typeof(RepositorioBase<Empresa>));
             services.AddScoped(typeof(IRepositorio<Empleado>), typeof(RepositorioBase<Empleado>));
+            services.AddTransient<IRepositorioEmpleado, RepositorioEmpleado>();
             services.AddScoped(typeof(IRepositorio<Gasto>), typeof(RepositorioBase<Gasto>));
             services.AddScoped(typeof(IRepositorio<Inventario>), typeof(RepositorioBase<Inventario>));
             services.AddScoped(typeof(IRepositorio<PesoExtintor>), typeof(RepositorioBase<PesoExtintor>));
@@ -47,7 +50,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddScoped(typeof(IRepositorio<Producto>), typeof(RepositorioBase<Producto>));
             services.AddScoped(typeof(IRepositorio<TipoExtintor>), typeof(RepositorioBase<TipoExtintor>));
             services.AddScoped(typeof(IRepositorio<Servicio>), typeof(RepositorioBase<Servicio>));
-            services.AddScoped(typeof(IRepositorioServicio), typeof(RepositorioServicio));
+            services.AddTransient<IRepositorioServicio, RepositorioServicio>();
 
             services.AddTransient<IValidator<ClientesBase>, ValidacionClientes>();
             services.AddTransient<IValidator<EmpresaBase>, ValidacionesEmpresas>();
