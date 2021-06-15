@@ -9,7 +9,6 @@ namespace ManejoExtintores.Core.Filtros_Busqueda
         [DataType(DataType.Date)]
         public DateTime? Fecha { get; set; }
         public string Descripcion { get; set; }
-        public string Tipo { get; set; }
         [DataType(DataType.Date)]
         public DateTime? FechaVencimiento { get; set; }
     }

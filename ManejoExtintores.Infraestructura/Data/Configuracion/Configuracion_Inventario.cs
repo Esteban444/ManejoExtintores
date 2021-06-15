@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManejoExtintores.Infraestructura.Data.Configuracion
 {
-    class Configuracion_Inventario : IEntityTypeConfiguration<Inventario>
+    class Configuracion_Inventario : IEntityTypeConfiguration<Inventarios>
     {
-        public void Configure(EntityTypeBuilder<Inventario> builder)
+        public void Configure(EntityTypeBuilder<Inventarios> builder)
         {
             builder.ToTable("Inventarios");
 
@@ -31,7 +31,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasForeignKey(d => d.DetalleServId)
                 .HasConstraintName("FK_Inventario_DetalleServicio");
 
-            builder.HasOne(d => d.Productos)
+            builder.HasOne(d => d.Producto)
                 .WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.IdProductos)
                 .HasConstraintName("fk_Inventario");

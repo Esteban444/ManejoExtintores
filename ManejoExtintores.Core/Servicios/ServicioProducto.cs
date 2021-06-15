@@ -1,10 +1,12 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,31 +14,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioProducto : IServicioProducto
     {
-        private readonly IRepositorio<Producto> _repositorio;
-
-        public ServicioProducto(IRepositorio<Producto> repositorio) 
+        private readonly IRepositorioProducto _repositorio;
+        private readonly IMapper _mapper;
+        public ServicioProducto(IRepositorioProducto repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<Producto> GetProductos(FiltroProductos filtros)
+        public async Task<IEnumerable<ProductoDTO>> ConsultaProductos(FiltroProductos filtros)
         {
-            var productos = _repositorio.Consultas();
-
-            if (filtros.TipoProducto != null)
-            {
-                productos = productos.Where(x => x.TipoProducto.ToLower().Contains(filtros.TipoProducto.ToLower()));
-            }
-
-            return productos;
+            var productos = await _repositorio.ConsultaData(filtros);
+            var productodt = _mapper.Map<IEnumerable<ProductoDTO>>(productos);
+            return productodt;
         }
          
-        public Producto GetProducto(int id)
+        public ProductoDTO ConsultaPorId(int id) 
         {
-            var producto = _repositorio.ConsultaPorId(p => p.IdProductos == id);
-            if (producto != null)
+            var productobd = _repositorio.ConsultaPorId(p => p.IdProductos == id);
+            if (productobd != null)
             {
-                return producto;
+                return _mapper.Map<ProductoDTO>(productobd);
             }
             else
             {
@@ -44,26 +42,28 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearProducto(Producto producto)
+        public async Task<ProductoBase> CrearProducto(ProductoBase productobase)
         {
-                await _repositorio.Crear(producto);
-            
+            var producto = _mapper.Map<Productos>(productobase);
+            await _repositorio.Crear(producto);
+            productobase = _mapper.Map<ProductoBase>(producto);
+            return productobase;
         }
 
-        public async Task<bool> ActualizarProducto(Producto producto)
+        public async Task<ProductoBase> ActualizarProducto(int id,ProductoBase productobs)
         {
-            var productos = _repositorio.ConsultaPorId(p => p.IdProductos == producto.IdProductos);
-            if (productos != null)
+            var productosbd = _repositorio.ConsultaPorId(p => p.IdProductos == id);
+            if (productosbd != null)
             {
-                productos.IdTipoExtintor = producto.IdTipoExtintor;
-                productos.IdPesoExtintor = producto.IdPesoExtintor;
-                productos.TipoProducto = producto.TipoProducto;
-                productos.PesoXlibras = producto.PesoXlibras;
-                productos.PesoXlibras = producto.PesoXlibras;
+                productosbd.IdTipoExtintor = productobs.IdTipoExtintor;
+                productosbd.IdPesoExtintor = productobs.IdPesoExtintor;
+                productosbd.TipoProducto = productobs.TipoProducto;
+                productosbd.PesoXlibras = productobs.PesoXlibras;
+                productosbd.PesoXlibras = productobs.PesoXlibras;
 
-
-                await _repositorio.Actualizar(productos);
-                return true;
+                await _repositorio.Actualizar(productosbd);
+                productobs = _mapper.Map<ProductoBase>(productosbd);
+                return productobs;
             }
             else
             {
@@ -71,16 +71,16 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarProducto(int id)
+        public async Task<ProductoBase> EliminarProducto(int id)
         {
             var productobd = _repositorio.ConsultaPorId(p => p.IdProductos == id);
             if (productobd != null)
             {
                 try
                 {
-              
                     await _repositorio.Eliminar(productobd);
-                    return true;
+                    var productoE = _mapper.Map<ProductoBase>(productobd);
+                    return productoE;
                 }
                 catch (Exception) { 
                 

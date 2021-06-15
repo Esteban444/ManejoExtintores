@@ -7,11 +7,11 @@ namespace ManejoExtintores.Core.Interfaces
 {
     public interface IServicioDeServicios
     {
-        IEnumerable<Servicio> GetServicios(FiltroServicios filtros);
-        Servicio GetServicio(int id); 
-        Task CrearServicios(Servicio servicio);
-        Task<Servicio> CrearServicioDetalle(Servicio servicio);   
-        Task<bool> ActualizarServicios(Servicio servicio);
+        IEnumerable<Modelos.Servicios> GetServicios(FiltroServicios filtros);
+        Modelos.Servicios GetServicio(int id); 
+        Task CrearServicios(Modelos.Servicios servicio);
+        Task<Modelos.Servicios> CrearServicioDetalle(Modelos.Servicios servicio);   
+        Task<bool> ActualizarServicios(Modelos.Servicios servicio);
         Task<bool> EliminarServicios(int id); 
     }
 }

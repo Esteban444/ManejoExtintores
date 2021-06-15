@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
@@ -17,39 +16,34 @@ namespace ManejoExtintores.Api.Controllers
     public class EmpleadosController : ControllerBase
     {
         private readonly IServicioEmpleado _servicioEmpleado;
-        private readonly IMapper _mapper;
         private readonly IValidator<EmpleadoBase> _validator;
          
-        public EmpleadosController(IServicioEmpleado servicioEmpleado, IMapper mapper,IValidator<EmpleadoBase> validator) 
+        public EmpleadosController(IServicioEmpleado servicioEmpleado,IValidator<EmpleadoBase> validator) 
         {
             _servicioEmpleado = servicioEmpleado;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Consultas([FromQuery] FiltroEmpleados filtros)
+        public async Task<IActionResult> ConsultaEmpleados([FromQuery] FiltroEmpleados filtros)
         {
-            var empleados = await _servicioEmpleado.GetEmpleados(filtros);
-            
+            var empleados = await _servicioEmpleado.ConsultaEmpleados(filtros);
             var response = new Respuesta<IEnumerable<EmpleadosDTO>>(empleados);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Consulta(int id)
+        public IActionResult ConsultaEmpleadoPorId(int id) 
         {
-
-            var empleado =   _servicioEmpleado.GetEmpleado(id);
-            
+            var empleado =   _servicioEmpleado.ConsultaEmpleadoPorId(id);
             var response = new Respuesta<EmpleadosDTO>(empleado);
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(EmpleadoBase empleadob)
+        public async Task<IActionResult> CrearEmpleado(EmpleadoBase empleadob)
         {
-            var Validacion = _validator.Validate(empleadob);
+            var Validacion = _validator.Validate(empleadob); 
             if (!Validacion.IsValid)
             {
                 var errors = Validacion.Errors.Select(e => e.ErrorMessage);
@@ -83,7 +77,7 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int id) 
+        public async Task<IActionResult> EliminarEmpleado(int id)  
         {
             var result = await _servicioEmpleado.EliminarEmpleado(id);
             var response = new Respuesta<EmpleadosDTO>(result);

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManejoExtintores.Core.Modelos   
 {
-    public class Empleado
+    public class Empleados
     {
         public int IdEmpleados { get; set; }
         public int? IdEmpresa { get; set; }
@@ -13,7 +12,7 @@ namespace ManejoExtintores.Core.Modelos
         public string Telefono { get; set; }
         public string Email { get; set; }
 
-        public virtual Empresa Empresa { get; set; } 
-        public virtual ICollection<Servicio> Servicios { get; set; }
+        public Empresas Empresa { get; set; } 
+        public ICollection<Servicios> Servicios { get; set; }
     }
 }

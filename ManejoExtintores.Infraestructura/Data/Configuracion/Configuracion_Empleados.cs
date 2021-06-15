@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManejoExtintores.Infraestructura.Data.Configuracion 
 {
-    class Configuracion_Empleados : IEntityTypeConfiguration<Empleado>
+    class Configuracion_Empleados : IEntityTypeConfiguration<Empleados>
     {
     
-        public void Configure(EntityTypeBuilder<Empleado> builder)
+        public void Configure(EntityTypeBuilder<Empleados> builder)
         {
             builder.ToTable("Empleados");
 

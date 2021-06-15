@@ -82,7 +82,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var servicio = _mapper.Map<Servicio>(serviciob);
+                var servicio = _mapper.Map<Servicios>(serviciob);
 
                 await _serviciodeServicio.CrearServicios(servicio);
 
@@ -104,7 +104,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var servicio = _mapper.Map<Servicio>(actualizar);
+                var servicio = _mapper.Map<Servicios>(actualizar);
                 servicio.IdServicios = id;
                 var result = await _serviciodeServicio.ActualizarServicios(servicio);
                 var response = new Respuesta<bool>(result);

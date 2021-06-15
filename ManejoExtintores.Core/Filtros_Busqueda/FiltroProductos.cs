@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-
+﻿
 namespace ManejoExtintores.Core.Filtros_Busqueda 
 {
     public class FiltroProductos

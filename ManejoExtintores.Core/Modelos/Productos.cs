@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManejoExtintores.Core.Modelos    
 {
-    public  class Producto
+    public  class Productos
     {
         public int IdProductos { get; set; } 
         public int? IdTipoExtintor { get; set; }
@@ -11,9 +10,9 @@ namespace ManejoExtintores.Core.Modelos
         public string TipoProducto { get; set; }
         public int? PesoXlibras { get; set; }
 
-        public PesoExtintor PesoExtintor { get; set; } 
-        public TipoExtintor TipoExtintor { get; set; } 
-        public ICollection<Inventario> Inventarios { get; set; }
-        public  ICollection<Precio> Precios { get; set; }
+        public PesoExtintors PesoExtintor { get; set; } 
+        public TipoExtintors TipoExtintor { get; set; } 
+        public ICollection<Inventarios> Inventarios { get; set; }
+        public  ICollection<Precios> Precios { get; set; }
     }
 }

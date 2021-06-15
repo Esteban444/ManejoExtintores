@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Manejo_Extintores.Infraestructura.Data.Configuracion
 {
-    public class ConfiguracionCreditoServicio : IEntityTypeConfiguration<CreditoServicio>
+    public class ConfiguracionCreditoServicio : IEntityTypeConfiguration<CreditoServicios>
     {
-        public void Configure(EntityTypeBuilder<CreditoServicio> builder)
+        public void Configure(EntityTypeBuilder<CreditoServicios> builder)
         {
             builder.ToTable("CreditoServicios");
 

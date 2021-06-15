@@ -1,6 +1,9 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 using ManejoExtintores.Core.Modelos;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,34 +14,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioGasto : IServicioGasto
     {
-        private readonly IRepositorio<Gasto> _repositorio;
+        private readonly IRepositorioGastos _repositorio;
+        private readonly IMapper _mapper;
 
-        public ServicioGasto(IRepositorio<Gasto> repositorio)
+        public ServicioGasto(IRepositorioGastos repositorio,IMapper mapper)
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
-        public IEnumerable<Gasto> GetGastos(Filtros_Cargos filtros)
+        public async Task<IEnumerable<GastosDTO>> GetGastos(FiltrosGastos filtros)
         {
-            var gastos = _repositorio.Consultas();
-            
-            if (filtros.Descripcion != null )
-            {
-                gastos = gastos.Where(x => x.Descripcion.ToLower().Contains( filtros.Descripcion.ToLower()));
-            }
-
-            if (filtros.Fecha != null)
-            {
-                gastos = gastos.Where(x => x.Fecha == filtros.Fecha); 
-            }
-            return gastos;
+            var gastos = await _repositorio.ConsultaData(filtros);
+            var gastosdt = _mapper.Map<IEnumerable<GastosDTO>>(gastos);
+            return gastosdt; 
         }
 
-        public async Task<Gasto> GetGasto(int id)
+        public GastosDTO GetGasto(int id)
         {
-            var gastos =  _repositorio.ConsultaPorId(c => c.IdGastos == id);
-            if (gastos != null)
+            var gastobd =  _repositorio.ConsultaPorId(c => c.IdGastos == id);
+            if (gastobd != null)
             {
-                return gastos;
+                return _mapper.Map<GastosDTO>(gastobd);
             }
             else
             {
@@ -46,23 +42,27 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearGasto(Gasto gasto)
+        public async Task<GastosBase> CrearGasto(GastosBase gastobs)
         {
+            var gasto = _mapper.Map<Gastos>(gastobs);
             await _repositorio.Crear(gasto);
+            gastobs = _mapper.Map<GastosBase>(gasto);
+            return gastobs;
         }
 
-        public async Task<bool> ActualizarGasto(Gasto gasto) 
+        public async Task<GastosBase> ActualizarGasto(int id,GastosBase gastoac) 
         {
-            var gastos =  _repositorio.ConsultaPorId(c => c.IdGastos == gasto.IdGastos);
-            if (gastos != null)
+            var gastobd =  _repositorio.ConsultaPorId(c => c.IdGastos == id);
+            if (gastobd != null)
             {
-                gastos.Descripcion = gasto.Descripcion;
-                gastos.Fecha = gasto.Fecha;
-                gastos.Cantidad = gasto.Cantidad;
-                gastos.Total = gasto.Total;
-                await _repositorio.Actualizar(gastos);
-                
-                return true;
+                gastobd.Descripcion = gastoac.Descripcion;
+                gastobd.Fecha = gastoac.Fecha;
+                gastobd.Cantidad = gastoac.Cantidad;
+                gastobd.Total = gastoac.Total;
+
+                await _repositorio.Actualizar(gastobd);
+                var gastoA = _mapper.Map<GastosBase>(gastobd);
+                return gastoA;
             }
             else
             {
@@ -70,13 +70,14 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarGasto(int id)
+        public async Task<GastosDTO> EliminarGasto(int id)
         {
             var gastobd =  _repositorio.ConsultaPorId(c => c.IdGastos == id);
             if (gastobd != null)
             {
                 await _repositorio.Eliminar(gastobd);
-                return true;
+                var gastoE = _mapper.Map<GastosDTO>(gastobd);
+                return gastoE;
             }
             else
             {

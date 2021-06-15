@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManejoExtintores.Infraestructura.Data.Configuracion 
 {
-    public class Configuracion_Gastos : IEntityTypeConfiguration<Gasto>
+    public class Configuracion_Gastos : IEntityTypeConfiguration<Gastos>
     {
-        public void Configure(EntityTypeBuilder<Gasto> builder)
+        public void Configure(EntityTypeBuilder<Gastos> builder)
         {
             builder.ToTable("Gastos");
 

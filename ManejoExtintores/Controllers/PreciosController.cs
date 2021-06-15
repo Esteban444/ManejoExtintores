@@ -60,7 +60,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var precio = _mapper.Map<Precio>(preciobase);
+                var precio = _mapper.Map<Precios>(preciobase);
 
                 await _servicioPrecios.CrearPrecio(precio);
 
@@ -82,7 +82,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var precio = _mapper.Map<Precio>(actualizar);
+                var precio = _mapper.Map<Precios>(actualizar);
                 precio.IdPrecios = id;
                 var result = await _servicioPrecios.ActualizarPrecio(precio);
                 var response = new Respuesta<bool>(result);

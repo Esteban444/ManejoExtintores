@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,33 +15,27 @@ namespace ManejoExtintores.Api.Controllers
     public class PesoExtintoresController : ControllerBase
     {
         private readonly IServicioPesoExtintor _servicioPesoExtintor;
-        private readonly IMapper _mapper;
         private readonly IValidator<PesoExtintorBase> _validator;
 
-        public PesoExtintoresController(IServicioPesoExtintor servicioPeso, IMapper mapper,IValidator<PesoExtintorBase> validator) 
+        public PesoExtintoresController(IServicioPesoExtintor servicioPeso,IValidator<PesoExtintorBase> validator) 
         {
             _servicioPesoExtintor = servicioPeso;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
         public IActionResult Consultas()
         {
-            var pesos = _servicioPesoExtintor.GetPesoExts();
-            var pesoDTO = _mapper.Map<IEnumerable<PesoExtintorDTO>>(pesos);
-            var response = new Respuesta<IEnumerable<PesoExtintorDTO>>(pesoDTO);
+            var pesos = _servicioPesoExtintor.ConsultaPesoExtintor();
+            var response = new Respuesta<IEnumerable<PesoExtintorDTO>>(pesos);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult Consulta(int id)
         {
-
-            var peso =  _servicioPesoExtintor.GetPesoExt(id);
-            var pesoDTO = _mapper.Map<PesoExtintorDTO>(peso);
-
-            var response = new Respuesta<PesoExtintorDTO>(pesoDTO);
+            var peso =  _servicioPesoExtintor.ConsultaPorId(id);
+            var response = new Respuesta<PesoExtintorDTO>(peso);
             return Ok(response);
         }
 
@@ -59,11 +51,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var peso = _mapper.Map<PesoExtintor>(pesobase);
-
-                await _servicioPesoExtintor.CrearPesoExt(peso);
-
-                pesobase = _mapper.Map<PesoExtintorBase>(peso);
+                await _servicioPesoExtintor.CrearPesoExtintor(pesobase);
                 var response = new Respuesta<PesoExtintorBase>(pesobase);
                 return Ok(response);
             }
@@ -81,10 +69,8 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var peso = _mapper.Map<PesoExtintor>(actualizar);
-                peso.IdPesoExtintor = id;
-                var result = await _servicioPesoExtintor.ActualizarPesoExt(peso);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioPesoExtintor.ActualizarPesoExtintor(id,actualizar);
+                var response = new Respuesta<PesoExtintorBase>(result);
                 return Ok(response);
             }
         }
@@ -92,8 +78,8 @@ namespace ManejoExtintores.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
-            var result = await _servicioPesoExtintor.EliminarPesoExt(id);
-            var response = new Respuesta<bool>(result);
+            var result = await _servicioPesoExtintor.EliminarPesoExtintor(id);
+            var response = new Respuesta<PesoExtintorDTO>(result);
             return Ok(response);
 
         }

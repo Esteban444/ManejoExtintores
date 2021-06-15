@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ManejoExtintores.Infraestructura.Data
 {
-    public partial class ManejoExtintoresContext : IdentityDbContext<Usuario>
+    public partial class ManejoExtintoresContext : IdentityDbContext<Usuarios>
     {
 
         public ManejoExtintoresContext(DbContextOptions<ManejoExtintoresContext> options)
@@ -13,19 +13,19 @@ namespace ManejoExtintores.Infraestructura.Data
         {
         }
 
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<CreditoServicio> CreditoServicios { get; set; }
-        public DbSet<DetalleExtCliente> DetalleExtClientes { get; set; }
-        public DbSet<DetalleServicio> DetalleServicios { get; set; }
-        public DbSet<Empleado> Empleados { get; set; }
-        public DbSet<Empresa> Empresas { get; set; }
-        public DbSet<Gasto> Gastos { get; set; }
-        public DbSet<Inventario> Inventarios { get; set; }
-        public DbSet<PesoExtintor> PesoExtintors { get; set; }
-        public DbSet<Precio> Precios { get; set; }
-        public DbSet<Producto> Productos { get; set; }
-        public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<TipoExtintor> TipoExtintors { get; set; }
+        public DbSet<Clientes> Clientes { get; set; }
+        public DbSet<CreditoServicios> CreditoServicios { get; set; }
+        public DbSet<DetalleExtClientes> DetalleExtClientes { get; set; }
+        public DbSet<DetalleServicios> DetalleServicios { get; set; }
+        public DbSet<Empleados> Empleados { get; set; }
+        public DbSet<Empresas> Empresas { get; set; }
+        public DbSet<Gastos> Gastos { get; set; }
+        public DbSet<Inventarios> Inventarios { get; set; }
+        public DbSet<PesoExtintors> PesoExtintors { get; set; }
+        public DbSet<Precios> Precios { get; set; }
+        public DbSet<Productos> Productos { get; set; }
+        public DbSet<Servicios> Servicios { get; set; }
+        public DbSet<TipoExtintors> TipoExtintors { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

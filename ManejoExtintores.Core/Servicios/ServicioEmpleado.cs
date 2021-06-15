@@ -4,9 +4,7 @@ using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -23,13 +21,13 @@ namespace ManejoExtintores.Core.Servicios
             _mapper = mapper;
         }
         
-        public async Task<IEnumerable<EmpleadosDTO>> GetEmpleados(FiltroEmpleados filtros) 
+        public async Task<IEnumerable<EmpleadosDTO>> ConsultaEmpleados(FiltroEmpleados filtros) 
         {
-            var empleado =  await _repositorio.ConsultaData(filtros);
+            var empleado =  await _repositorio.ConsultaData(filtros);  
             return _mapper.Map<IEnumerable<EmpleadosDTO>>(empleado);
         }
 
-        public EmpleadosDTO GetEmpleado(int id) 
+        public EmpleadosDTO ConsultaEmpleadoPorId(int id)  
         {
             var empleado = _repositorio.ConsultaPorId(e => e.IdEmpleados == id);
             if (empleado != null)
@@ -44,7 +42,7 @@ namespace ManejoExtintores.Core.Servicios
 
         public async Task<EmpleadoBase> CrearEmpleado(EmpleadoBase empleadob)  
         {
-            var empleado = _mapper.Map<Empleado>(empleadob);
+            var empleado = _mapper.Map<Empleados>(empleadob);
             await _repositorio.Crear(empleado);
             empleadob = _mapper.Map<EmpleadoBase>(empleado);
             return empleadob;

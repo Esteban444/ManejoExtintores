@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Manejo_Extintores.Infraestructura.Data.Configuracion
 {
-    public class Configuracion_Clientes : IEntityTypeConfiguration<Cliente>
+    public class Configuracion_Clientes : IEntityTypeConfiguration<Clientes>
     {
-        public void Configure(EntityTypeBuilder<Cliente> builder)
+        public void Configure(EntityTypeBuilder<Clientes> builder)
         {
             builder.ToTable("Clientes");
 

@@ -37,19 +37,33 @@ namespace ManejoExtintores.Infraestructura.Extensiones
         }
         public static IServiceCollection AgregarServicios(this IServiceCollection services) 
         {
-            services.AddScoped(typeof(IRepositorio<Cliente>), typeof(RepositorioBase<Cliente>));
+            services.AddScoped(typeof(IRepositorio<Clientes>), typeof(RepositorioBase<Clientes>));
             services.AddTransient<IRepositorioClientes, RepositorioClientes>();
-            services.AddScoped(typeof(IRepositorio<DetalleServicio>), typeof(RepositorioBase<DetalleServicio>));
-            services.AddScoped(typeof(IRepositorio<Empresa>), typeof(RepositorioBase<Empresa>));
-            services.AddScoped(typeof(IRepositorio<Empleado>), typeof(RepositorioBase<Empleado>));
+
+            services.AddScoped(typeof(IRepositorio<DetalleServicios>), typeof(RepositorioBase<DetalleServicios>));
+
+            services.AddScoped(typeof(IRepositorio<Empresas>), typeof(RepositorioBase<Empresas>));
+
+            services.AddScoped(typeof(IRepositorio<Empleados>), typeof(RepositorioBase<Empleados>));
             services.AddTransient<IRepositorioEmpleado, RepositorioEmpleado>();
-            services.AddScoped(typeof(IRepositorio<Gasto>), typeof(RepositorioBase<Gasto>));
-            services.AddScoped(typeof(IRepositorio<Inventario>), typeof(RepositorioBase<Inventario>));
-            services.AddScoped(typeof(IRepositorio<PesoExtintor>), typeof(RepositorioBase<PesoExtintor>));
-            services.AddScoped(typeof(IRepositorio<Precio>), typeof(RepositorioBase<Precio>));
-            services.AddScoped(typeof(IRepositorio<Producto>), typeof(RepositorioBase<Producto>));
-            services.AddScoped(typeof(IRepositorio<TipoExtintor>), typeof(RepositorioBase<TipoExtintor>));
-            services.AddScoped(typeof(IRepositorio<Servicio>), typeof(RepositorioBase<Servicio>));
+
+            services.AddScoped(typeof(IRepositorio<Gastos>), typeof(RepositorioBase<Gastos>));
+            services.AddTransient<IRepositorioGastos, RepositorioGastos>();
+
+            services.AddScoped(typeof(IRepositorio<Inventarios>), typeof(RepositorioBase<Inventarios>));
+            services.AddTransient<IRepositorioInventario, RepositorioInventario>();
+
+            services.AddScoped(typeof(IRepositorio<PesoExtintors>), typeof(RepositorioBase<PesoExtintors>));
+
+            services.AddScoped(typeof(IRepositorio<Precios>), typeof(RepositorioBase<Precios>));
+            services.AddTransient<IRepositorioPrecios, RepositorioPrecios>();
+
+            services.AddScoped(typeof(IRepositorio<Productos>), typeof(RepositorioBase<Productos>));
+            services.AddTransient<IRepositorioProducto, RepositorioProductos>();
+
+            services.AddScoped(typeof(IRepositorio<TipoExtintors>), typeof(RepositorioBase<TipoExtintors>));
+
+            services.AddScoped(typeof(IRepositorio<Servicios>), typeof(RepositorioBase<Servicios>));
             services.AddTransient<IRepositorioServicio, RepositorioServicio>();
 
             services.AddTransient<IValidator<ClientesBase>, ValidacionClientes>();

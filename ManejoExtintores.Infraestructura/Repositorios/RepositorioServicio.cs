@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Infraestructura.Repositorios 
 {
-    public class RepositorioServicio: RepositorioBase<Servicio>, IRepositorioServicio
+    public class RepositorioServicio: RepositorioBase<Servicios>, IRepositorioServicio
     {
         public ManejoExtintoresContext ExtintoresContext { get; set; }
         private readonly IMapper _mapper;
@@ -19,14 +19,14 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             _mapper = mapper;
         }
 
-        public async Task<Servicio> CrearServicioDetalle(ServicioBase servicio)
+        public async Task<Servicios> CrearServicioDetalle(ServicioBase servicio)
         {
             using var transaction = ExtintoresContext.Database.BeginTransaction();
 
-            var tablaservicio = new Servicio();
+            var tablaservicio = new Servicios();
             try
             {
-                tablaservicio = _mapper.Map<Servicio>(servicio);
+                tablaservicio = _mapper.Map<Servicios>(servicio);
 
 
                 ExtintoresContext.Servicios.Add(tablaservicio);
@@ -34,7 +34,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
 
                 foreach (var item in servicio.DetalleServicios)
                 {
-                    var detalle = _mapper.Map<DetalleServicio>(item);
+                    var detalle = _mapper.Map<DetalleServicios>(item);
 
                     detalle.IdServicio = tablaservicio.IdServicios;
                     ExtintoresContext.DetalleServicios.Add(detalle);

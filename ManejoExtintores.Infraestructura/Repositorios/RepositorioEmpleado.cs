@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Infraestructura.Repositorios
 {
-    public class RepositorioEmpleado : RepositorioBase<Empleado>, IRepositorioEmpleado
+    public class RepositorioEmpleado : RepositorioBase<Empleados>, IRepositorioEmpleado
     {
         private readonly IMapper _mapper;
         public ManejoExtintoresContext ExtintoresContext { get; set; }
@@ -19,7 +19,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             ExtintoresContext = context;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<Empleado>> ConsultaData(FiltroEmpleados filtro)
+        public async Task<IEnumerable<Empleados>> ConsultaData(FiltroEmpleados filtro)
         {
             var empleados = await ExtintoresContext.Empleados.Include(x => x.Empresa).ToListAsync();
 

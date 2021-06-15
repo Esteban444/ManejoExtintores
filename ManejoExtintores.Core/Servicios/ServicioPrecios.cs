@@ -12,14 +12,14 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioPrecios : IServicioPrecios
     {
-        private readonly IRepositorio<Precio> _repositorio;
+        private readonly IRepositorio<Precios> _repositorio;
 
-        public ServicioPrecios(IRepositorio<Precio> repositorio) 
+        public ServicioPrecios(IRepositorio<Precios> repositorio) 
         {
             _repositorio = repositorio;
         }
         
-        public IEnumerable<Precio> GetPrecios(FiltroPrecios filtro)
+        public IEnumerable<Precios> GetPrecios(FiltroPrecios filtro)
         {
             var precios = _repositorio.Consultas();
 
@@ -31,7 +31,7 @@ namespace ManejoExtintores.Core.Servicios
             return precios;
         }
 
-        public Precio GetPrecio(int id)
+        public Precios GetPrecio(int id)
         {
             var precio = _repositorio.ConsultaPorId(p => p.IdPrecios == id);
             if (precio != null)
@@ -44,13 +44,13 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearPrecio(Precio precio)
+        public async Task CrearPrecio(Precios precio)
         {
             await _repositorio.Crear(precio);
         }
 
 
-        public async Task<bool> ActualizarPrecio(Precio precio)
+        public async Task<bool> ActualizarPrecio(Precios precio)
         {
             var precios = _repositorio.ConsultaPorId(p => p.IdPrecios == precio.IdPrecios);
             if (precios != null)

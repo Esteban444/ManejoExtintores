@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +16,10 @@ namespace ManejoExtintores.Api.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly IServicioCliente _servicioCliente;
-        private readonly IMapper _mapper;
         private readonly IValidator<ClientesBase> _validator;
-        public ClientesController(IServicioCliente cliente, IMapper mapper,IValidator<ClientesBase> validator)
+        public ClientesController(IServicioCliente cliente,IValidator<ClientesBase> validator)
         {
             _servicioCliente = cliente;
-            _mapper = mapper;
             _validator = validator;
         }
 
@@ -38,7 +34,6 @@ namespace ManejoExtintores.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Consulta(int id)
         {
-
             var cliente =  _servicioCliente.GetCliente(id);
             var response = new Respuesta<ClienteDTO>(cliente);
             return Ok(response);

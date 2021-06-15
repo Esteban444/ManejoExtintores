@@ -1,4 +1,5 @@
-﻿using ManejoExtintores.Core.Modelos;
+﻿using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Modelos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,10 +7,10 @@ namespace ManejoExtintores.Core.Interfaces
 {
     public interface IServicioPesoExtintor
     {
-        IEnumerable<PesoExtintor> GetPesoExts();
-        PesoExtintor GetPesoExt(int id); 
-        Task CrearPesoExt(PesoExtintor peso);
-        Task<bool> ActualizarPesoExt(PesoExtintor peso);
-        Task<bool> EliminarPesoExt(int id); 
+        IEnumerable<PesoExtintorDTO> ConsultaPesoExtintor(); 
+        PesoExtintorDTO ConsultaPorId(int id);   
+        Task<PesoExtintorBase> CrearPesoExtintor(PesoExtintorBase peso);
+        Task<PesoExtintorBase> ActualizarPesoExtintor(int id,PesoExtintorBase peso);
+        Task<PesoExtintorDTO> EliminarPesoExtintor(int id);  
     }
 }

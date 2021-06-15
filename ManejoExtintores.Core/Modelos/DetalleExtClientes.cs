@@ -1,9 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManejoExtintores.Core.Modelos  
 {
-    public partial class DetalleExtCliente
+    public class DetalleExtClientes
     {
         public int IdDetalleCliente { get; set; }
         public int? IdClientes { get; set; }
@@ -15,7 +14,7 @@ namespace ManejoExtintores.Core.Modelos
         public DateTime? FechaMantenimiento { get; set; }
         public int? IdServicio { get; set; }
 
-        public virtual Cliente Clientes { get; set; }
-        public virtual Servicio Servicios { get; set; }  
+        public Clientes Clientes { get; set; }
+        public Servicios Servicios { get; set; }  
     }
 }

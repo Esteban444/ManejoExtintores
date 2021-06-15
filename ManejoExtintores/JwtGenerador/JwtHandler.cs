@@ -18,8 +18,8 @@ namespace ManejoExtintores.JwtGenerador
 		private readonly IConfiguration _configuracion; 
 		private readonly IConfigurationSection _jwtConfiguracion; 
 		private readonly IConfigurationSection _goolgeSettings;
-		private readonly UserManager<Usuario> _userManager;
-		public JwtHandler(IConfiguration configuracion, UserManager<Usuario> userManager)
+		private readonly UserManager<Usuarios> _userManager;
+		public JwtHandler(IConfiguration configuracion, UserManager<Usuarios> userManager)
 		{
 			_userManager = userManager;
 			_configuracion = configuracion;
@@ -35,7 +35,7 @@ namespace ManejoExtintores.JwtGenerador
 			return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
 		}
 
-		private async Task<List<Claim>> ObtenerClaims(Usuario usuario) 
+		private async Task<List<Claim>> ObtenerClaims(Usuarios usuario) 
 		{
 			var claims = new List<Claim>
 			{
@@ -63,7 +63,7 @@ namespace ManejoExtintores.JwtGenerador
 			return tokenOptions;
 		}
 
-		public async Task<string> GenerarToken(Usuario user) 
+		public async Task<string> GenerarToken(Usuarios user) 
 		{
 			var firmacredenciales = ObtenerFirmaCredenciales();
 			var claims = await ObtenerClaims(user);

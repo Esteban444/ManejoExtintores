@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Infraestructura.Repositorios
 {
-    public class RepositorioClientes : RepositorioBase<Cliente>, IRepositorioClientes
+    public class RepositorioClientes : RepositorioBase<Clientes>, IRepositorioClientes
     {
 
 
@@ -21,7 +21,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             ExtintoresContext = context;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<Cliente>> ConsultaData(FiltroClientes filtro)
+        public async Task<IEnumerable<Clientes>> ConsultaData(FiltroClientes filtro)
         {
             var clientes = await ExtintoresContext.Clientes.ToListAsync();
 

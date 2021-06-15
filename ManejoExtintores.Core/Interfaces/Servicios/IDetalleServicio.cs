@@ -6,10 +6,10 @@ namespace ManejoExtintores.Core.Interfaces
 {
     public interface IDetalleServicio
     {
-        IEnumerable<DetalleServicio> GetDetalles();
-        DetalleServicio GetDetalle(int id);
-        Task CrearDetalle(DetalleServicio detalle); 
-        Task<bool> ActualizarDetalle(DetalleServicio detalle);
+        IEnumerable<DetalleServicios> GetDetalles();
+        DetalleServicios GetDetalle(int id);
+        Task CrearDetalle(DetalleServicios detalle); 
+        Task<bool> ActualizarDetalle(DetalleServicios detalle);
         Task<bool> EliminarDetalle(int id);
     }
 }

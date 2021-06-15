@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Manejo_Extintores.Infraestructura.Data.Configuracion
 {
-    public class Configuracion_DetalleServicio : IEntityTypeConfiguration<DetalleServicio>
+    public class Configuracion_DetalleServicio : IEntityTypeConfiguration<DetalleServicios>
     {
-        public void Configure(EntityTypeBuilder<DetalleServicio> builder)
+        public void Configure(EntityTypeBuilder<DetalleServicios> builder)
         {
 
             builder.HasKey(e => e.IdDetalleServ);

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManejoExtintores.Infraestructura.Data.Configuracion 
 {
-    class Configuracion_Servicios : IEntityTypeConfiguration<Servicio>
+    class Configuracion_Servicios : IEntityTypeConfiguration<Servicios>
     {
-        public void Configure(EntityTypeBuilder<Servicio> builder)
+        public void Configure(EntityTypeBuilder<Servicios> builder)
         {
             builder.ToTable("Servicios");
 
@@ -32,12 +32,12 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasColumnType("decimal(18, 0)")
                 .HasColumnName("valor");
 
-            builder.HasOne(d => d.Clientes)
+            builder.HasOne(d => d.Cliente)
                 .WithMany(p => p.Servicios)
                 .HasForeignKey(d => d.IdClientes)
                 .HasConstraintName("fk_serviciosC");
 
-            builder.HasOne(d => d.Empleados)
+            builder.HasOne(d => d.Empleado)
                 .WithMany(p => p.Servicios)
                 .HasForeignKey(d => d.IdEmpleados)
                 .HasConstraintName("fk_serviciosE");

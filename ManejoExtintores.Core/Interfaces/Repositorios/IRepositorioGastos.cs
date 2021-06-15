@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Interfaces.Repositorios
 {
-    public interface IRepositorioClientes: IRepositorio<Clientes>
+    public interface IRepositorioGastos : IRepositorio<Gastos>
     {
-        Task<IEnumerable<Clientes>> ConsultaData(FiltroClientes filtro);
+        Task<IEnumerable<Gastos>> ConsultaData(FiltrosGastos filtro);
     }
 }

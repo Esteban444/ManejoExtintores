@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ManejoExtintores.Infraestructura.Data.Configuracion 
 {
-    public class Configuracion_TipoEntintor : IEntityTypeConfiguration<TipoExtintor>
+    public class Configuracion_TipoEntintor : IEntityTypeConfiguration<TipoExtintors>
     {
-        public void Configure(EntityTypeBuilder<TipoExtintor> builder)
+        public void Configure(EntityTypeBuilder<TipoExtintors> builder)
         {
             builder.ToTable("TipoExtintors");
 
@@ -17,7 +17,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.DetalleServ)
+            builder.HasOne(d => d.DetalleServicio)
                 .WithMany(p => p.TipoExtintors)
                 .HasForeignKey(d => d.IdDetalleServ)
                 .HasConstraintName("fk_TipoExtintor");

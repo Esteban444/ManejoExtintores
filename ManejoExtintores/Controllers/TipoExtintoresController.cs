@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,38 +15,32 @@ namespace Manejo_Extintores.Api.Controllers
     public class TipoExtintoresController : ControllerBase
     {
         private readonly IServicioTipoExtintor _servicioTExtintor; 
-        private readonly IMapper _mapper;
         private readonly IValidator<TipoExtintorBase> _validator;
 
-        public TipoExtintoresController(IServicioTipoExtintor servicioTipo, IMapper mapper,IValidator<TipoExtintorBase> validator) 
+        public TipoExtintoresController(IServicioTipoExtintor servicioTipo,IValidator<TipoExtintorBase> validator) 
         {
             _servicioTExtintor = servicioTipo;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
         public IActionResult Consultas()
         {
-            var tipos = _servicioTExtintor.GetTipoExts();
-            var tipoDTO = _mapper.Map<IEnumerable<TipoExtintorDTO>>(tipos);
-            var response = new Respuesta<IEnumerable<TipoExtintorDTO>>(tipoDTO);
+            var tipos = _servicioTExtintor.ConsultaTipoExtintor();
+            var response = new Respuesta<IEnumerable<TipoExtintorDTO>>(tipos);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult ConsultaTipoExtPorId(int id) 
         {
-
-            var tipo =  _servicioTExtintor.GetTipoExt(id);
-            var tipoDTO = _mapper.Map<TipoExtintorDTO>(tipo);
-
-            var response = new Respuesta<TipoExtintorDTO>(tipoDTO);
+            var tipo =  _servicioTExtintor.ConsultaTipoId(id);
+            var response = new Respuesta<TipoExtintorDTO>(tipo);
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(TipoExtintorBase tipobase)
+        public async Task<IActionResult> CrearTipoExtintor(TipoExtintorBase tipobase)
         {
             var Validacion = _validator.Validate(tipobase);
             if (!Validacion.IsValid)
@@ -59,11 +51,7 @@ namespace Manejo_Extintores.Api.Controllers
             }
             else
             {
-                var tipo = _mapper.Map<TipoExtintor>(tipobase);
-
-                await _servicioTExtintor.CrearTipoExt(tipo);
-
-                tipobase = _mapper.Map<TipoExtintorBase>(tipo);
+                await _servicioTExtintor.CrearTipoExtintor(tipobase);
                 var response = new Respuesta<TipoExtintorBase>(tipobase);
                 return Ok(response);
             }
@@ -81,19 +69,17 @@ namespace Manejo_Extintores.Api.Controllers
             }
             else
             {
-                var tipo = _mapper.Map<TipoExtintor>(actualizar);
-                tipo.IdTipoExtintor = id;
-                var result = await _servicioTExtintor.ActualizarTipoExt(tipo);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioTExtintor.ActualizarTipoExtintor(id,actualizar);
+                var response = new Respuesta<TipoExtintorBase>(result);
                 return Ok(response);
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int id)
+        public async Task<IActionResult> EliminarTipoExt(int id) 
         {
-            var result = await _servicioTExtintor.EliminarTipoExt(id);
-            var response = new Respuesta<bool>(result);
+            var result = await _servicioTExtintor.EliminarTipoExtintor(id);
+            var response = new Respuesta<TipoExtintorDTO>(result);
             return Ok(response);
 
         }

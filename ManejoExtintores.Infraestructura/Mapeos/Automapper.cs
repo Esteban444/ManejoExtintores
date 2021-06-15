@@ -9,41 +9,43 @@ namespace ManejoExtintores.Infraestructura.Mapeos
     {
         public Automapper()
         {
-            CreateMap<Usuario, RegistroUsuarioDTO >().ReverseMap();
+            CreateMap<Usuarios, RegistroUsuarioDTO >().ReverseMap();
 
-            CreateMap<Cliente, ClienteDTO>().ReverseMap();
-            CreateMap<Cliente, ClientesBase>().ReverseMap();
+            CreateMap<Clientes, ClienteDTO>().ReverseMap();
+            CreateMap<Clientes, ClientesBase>().ReverseMap();
 
-            CreateMap<DetalleServicio, DetalleServicioDTO>().ReverseMap();
-            CreateMap<DetalleServicio, DetalleServicioBase>().ReverseMap(); 
+            CreateMap<DetalleServicios, DetalleServicioDTO>().ReverseMap();
+            CreateMap<DetalleServicios, DetalleServicioBase>().ReverseMap(); 
 
-            CreateMap<Empresa, EmpresaDTO>().ReverseMap();
-            CreateMap<Empresa, EmpresaBase>().ReverseMap();
+            CreateMap<Empresas, EmpresaDTO>().ReverseMap();
+            CreateMap<Empresas, EmpresaBase>().ReverseMap();
 
-            CreateMap<Empleado, EmpleadosDTO>().ReverseMap();
-            CreateMap<Empleado, EmpleadoBase>().ReverseMap();
+            CreateMap<Empleados, EmpleadosDTO>().ReverseMap();
+            CreateMap<Empleados, EmpleadoBase>().ReverseMap();
 
-            CreateMap<Inventario, InventarioDTO>().ReverseMap();
-            CreateMap<Inventario, InventarioBase>().ReverseMap();
+            CreateMap<Inventarios, InventarioDTO>().ReverseMap();
+            CreateMap<Inventarios, InventarioBase>().ReverseMap();
 
 
-            CreateMap<Gasto, GastosBase>().ReverseMap();
-            CreateMap<Gasto, GastosDTO>().ReverseMap();
+            CreateMap<Gastos, GastosBase>().ReverseMap();
+            CreateMap<Gastos, GastosDTO>().ReverseMap();
 
-            CreateMap<Precio, PrecioBase>().ReverseMap(); 
-            CreateMap<Precio, PrecioDTO>().ReverseMap();
+            CreateMap<Precios, PrecioBase>().ReverseMap(); 
+            CreateMap<Precios, PrecioDTO>().ReverseMap();
 
-            CreateMap<Producto, ProductoBase>().ReverseMap(); 
-            CreateMap<Producto, ProductoDTO>().ReverseMap();
+            CreateMap<Productos, ProductoBase>().ReverseMap(); 
+            CreateMap<Productos, ProductoDTO>()
+                .ForMember(x => x.TipoExtintors,y => y.MapFrom(z => z.TipoExtintor))
+                .ForMember(x => x.PesoExtintors,y => y.MapFrom(z => z.PesoExtintor));
 
-            CreateMap<PesoExtintor, PesoExtintorBase>().ReverseMap();
-            CreateMap<PesoExtintor, PesoExtintorDTO>().ReverseMap();
+            CreateMap<PesoExtintors, PesoExtintorBase>().ReverseMap();
+            CreateMap<PesoExtintors, PesoExtintorDTO>().ReverseMap();
 
-            CreateMap<TipoExtintor, TipoExtintorBase>().ReverseMap();
-            CreateMap<TipoExtintor, TipoExtintorDTO>().ReverseMap();
+            CreateMap<TipoExtintors, TipoExtintorBase>().ReverseMap();
+            CreateMap<TipoExtintors, TipoExtintorDTO>().ReverseMap();
 
-            CreateMap<Servicio, ServicioBase>().ReverseMap();
-            CreateMap<Servicio, ServicioDTO>().ReverseMap();
+            CreateMap<Servicios, ServicioBase>().ReverseMap();
+            CreateMap<Servicios, ServicioDTO>().ReverseMap();
         }
     }
 }

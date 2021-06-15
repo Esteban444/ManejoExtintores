@@ -1,4 +1,6 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System;
@@ -10,25 +12,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioTipoExtintor : IServicioTipoExtintor
     {
-        private readonly IRepositorio<TipoExtintor> _repositorio;
-
-        public ServicioTipoExtintor(IRepositorio<TipoExtintor> repositorio) 
+        private readonly IRepositorio<TipoExtintors> _repositorio;
+        private readonly IMapper _mapper;
+        public ServicioTipoExtintor(IRepositorio<TipoExtintors> repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<TipoExtintor> GetTipoExts()
+        public IEnumerable<TipoExtintorDTO> ConsultaTipoExtintor() 
         {
             var tipos = _repositorio.Consultas();
-            return tipos;
+            var tiposdt = _mapper.Map<IEnumerable<TipoExtintorDTO>>(tipos);
+            return tiposdt;
         }
 
-        public TipoExtintor GetTipoExt(int id)
+        public TipoExtintorDTO ConsultaTipoId(int id)  
         {
-            var tipo = _repositorio.ConsultaPorId(t => t.IdTipoExtintor == id);
-            if (tipo != null)
+            var tipobd = _repositorio.ConsultaPorId(t => t.IdTipoExtintor == id);
+            if (tipobd != null)
             {
-                return tipo;
+                return _mapper.Map<TipoExtintorDTO>(tipobd);
             }
             else
             {
@@ -36,24 +40,25 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearTipoExt(TipoExtintor tipo)
+        public async Task<TipoExtintorBase> CrearTipoExtintor(TipoExtintorBase tipob)
         {
-            
-             await _repositorio.Crear(tipo);
-            
+            var tipo = _mapper.Map<TipoExtintors>(tipob);
+            await _repositorio.Crear(tipo);
+            var tipoba = _mapper.Map<TipoExtintorBase>(tipo);
+            return tipoba;
         }
 
-        public async Task<bool> ActualizarTipoExt(TipoExtintor tipo)
+        public async Task<TipoExtintorBase> ActualizarTipoExtintor(int id,TipoExtintorBase tipo)
         {
-            var tipos = _repositorio.ConsultaPorId(t => t.IdTipoExtintor == tipo.IdTipoExtintor);
-            if (tipos != null)
+            var tipobd = _repositorio.ConsultaPorId(t => t.IdTipoExtintor == id);
+            if (tipobd != null)
             {
-                //tipos.IdDetalleServ = tipo.IdDetalleServ;
-                tipos.Tipo_Extintor = tipo.Tipo_Extintor;
+                //tipobd.IdDetalleServ = tipo.IdDetalleServ;
+                tipobd.Tipo_Extintor = tipo.Tipo_Extintor;
 
-                await _repositorio.Actualizar(tipos);
-                
-                return true;
+                await _repositorio.Actualizar(tipobd);
+                var tipoAct = _mapper.Map<TipoExtintorBase>(tipobd);
+                return tipoAct;
             }
             else
             {
@@ -62,7 +67,7 @@ namespace ManejoExtintores.Core.Servicios
         }
 
 
-        public async Task<bool> EliminarTipoExt(int id)
+        public async Task<TipoExtintorDTO> EliminarTipoExtintor(int id) 
         {
             var tipobd = _repositorio.ConsultaPorId(t => t.IdTipoExtintor == id);
             if (tipobd != null)
@@ -70,7 +75,8 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorio.Eliminar(tipobd);
-                    return true;
+                    var tipoEli = _mapper.Map<TipoExtintorDTO>(tipobd);
+                    return tipoEli;
                 }
                 catch (Exception)
                 {

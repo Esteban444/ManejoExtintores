@@ -1,12 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace ManejoExtintores.Core.DTOs 
 {
     public class InventarioBase
     {
+        public int IdInventario { get; set; }
         public int? IdProductos { get; set; }
-        [DataType(DataType.Date)]
         public DateTime? Fecha { get; set; }
         public string Descripcion { get; set; }
         public string Tipo { get; set; }

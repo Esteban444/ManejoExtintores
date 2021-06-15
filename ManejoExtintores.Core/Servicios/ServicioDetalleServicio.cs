@@ -10,14 +10,14 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioDetalleServicio : IDetalleServicio
     {
-        private readonly IRepositorio<DetalleServicio> _repositorio;
+        private readonly IRepositorio<DetalleServicios> _repositorio;
 
-        public ServicioDetalleServicio(IRepositorio<DetalleServicio> repositorio) 
+        public ServicioDetalleServicio(IRepositorio<DetalleServicios> repositorio) 
         {
            _repositorio = repositorio;
         }
         
-        public IEnumerable<DetalleServicio> GetDetalles()
+        public IEnumerable<DetalleServicios> GetDetalles()
         {
             var detalles = _repositorio.Consultas();
 
@@ -29,7 +29,7 @@ namespace ManejoExtintores.Core.Servicios
             return detalles;
         }
 
-        public DetalleServicio GetDetalle(int id)
+        public DetalleServicios GetDetalle(int id)
         {
             var detalle = _repositorio.ConsultaPorId(d => d.IdDetalleServ == id);
             if (detalle != null)
@@ -42,13 +42,13 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearDetalle(DetalleServicio detalle)
+        public async Task CrearDetalle(DetalleServicios detalle)
         {
             
             await _repositorio.Crear(detalle);
         }
 
-        public async Task<bool> ActualizarDetalle(DetalleServicio detalle)
+        public async Task<bool> ActualizarDetalle(DetalleServicios detalle)
         {
             var detalles = _repositorio.ConsultaPorId(d => d.IdDetalleServ == detalle.IdDetalleServ);
             if (detalles != null)

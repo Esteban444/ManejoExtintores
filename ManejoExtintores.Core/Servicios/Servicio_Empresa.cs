@@ -12,10 +12,10 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class Servicio_Empresa : IServicio_Empresa
     {
-        private readonly IRepositorio<Empresa> _repositorio;
+        private readonly IRepositorio<Empresas> _repositorio;
         private readonly IMapper _mapper;
 
-        public Servicio_Empresa(IRepositorio<Empresa> repositorio,IMapper mapper)  
+        public Servicio_Empresa(IRepositorio<Empresas> repositorio,IMapper mapper)  
         {
             _repositorio = repositorio;
             _mapper = mapper;
@@ -43,7 +43,7 @@ namespace ManejoExtintores.Core.Servicios
 
         public async Task<EmpresaBase> CrearEmpresa(EmpresaBase empresabase)
         {
-            var empresa = _mapper.Map<Empresa>(empresabase);
+            var empresa = _mapper.Map<Empresas>(empresabase);
             await _repositorio.Crear(empresa);
             empresabase = _mapper.Map<EmpresaBase>(empresa);
             return empresabase;

@@ -45,7 +45,7 @@ namespace ManejoExtintores.Core.Servicios
 
         public async Task<ClientesBase> CrearCliente(ClientesBase clienteb) 
         {
-            var cliente = _mapper.Map<Cliente>(clienteb);
+            var cliente = _mapper.Map<Clientes>(clienteb);
             await _repositorio.Crear(cliente);
             clienteb = _mapper.Map<ClientesBase>(cliente);
             return clienteb;

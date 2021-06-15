@@ -1,6 +1,9 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
@@ -12,45 +15,28 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioInventario : IServicioInventario
     {
-        private readonly IRepositorio<Inventario> _repositorio;
+        private readonly IMapper _mapper;
+        private readonly IRepositorioInventario _repositorio;
 
-        public ServicioInventario(IRepositorio<Inventario> repositorio) 
+        public ServicioInventario(IRepositorioInventario repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Inventario> GetInventarios(FiltroInventario filtro)
+        public async Task<IEnumerable<InventarioDTO>> ConsultaInventarios(FiltroInventario filtro) 
         {
-            var inventario = _repositorio.Consultas();
-
-            if (filtro.Fecha != null)
-            {
-                inventario = inventario.Where(x => x.Fecha == filtro.Fecha);
-            }
-
-            if (filtro.Descripcion != null)
-            {
-                inventario = inventario.Where(x => x.Descripcion.ToLower().Contains(filtro.Descripcion.ToLower()));
-            }
-
-            if (filtro.Tipo != null)
-            {
-                inventario = inventario.Where(x => x.Tipo.ToLower().Contains(filtro.Tipo.ToLower()));
-            }
-
-            if (filtro.FechaVencimiento != null)
-            {
-                inventario = inventario.Where(x => x.FechaVencimiento == filtro.FechaVencimiento);
-            }
-            return inventario;
+            var inventarios = await _repositorio.ConsultaData(filtro); 
+            var inventariosdt = _mapper.Map<IEnumerable<InventarioDTO>>(inventarios);
+            return inventariosdt;
         }
 
-        public Inventario GetInventario(int id)
+        public InventarioDTO ConsultaInventarioPorId(int id) 
         {
             var inventario = _repositorio.ConsultaPorId(i => i.IdInventario == id);
             if (inventario != null)
             {
-                return inventario;
+                return _mapper.Map<InventarioDTO>( inventario);
             }
             else
             {
@@ -58,15 +44,17 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearInventario(Inventario inventario)
+        public async Task<InventarioBase> CrearInventario(InventarioBase inventario)
         {
-            
-           await _repositorio.Crear(inventario);
+            var invent = _mapper.Map<Inventarios>(inventario);
+            await _repositorio.Crear(invent);
+            var inventariob = _mapper.Map<InventarioBase>(invent);
+            return inventariob;
         }
 
-        public async Task<bool> ActualizarInventario(Inventario inventario)
+        public async Task<InventarioBase> ActualizarInventario(int id,InventarioBase inventario)
         {
-            var inventarios = _repositorio.ConsultaPorId(i => i.IdInventario == inventario.IdInventario);
+            var inventarios = _repositorio.ConsultaPorId(i => i.IdInventario == id);
             if (inventarios != null)
             {
                 inventarios.IdProductos = inventario.IdProductos;
@@ -78,8 +66,8 @@ namespace ManejoExtintores.Core.Servicios
                 inventarios.FechaVencimiento = inventario.FechaVencimiento;
 
                 await _repositorio.Actualizar(inventarios);
-                
-                return true;
+                var inventariAct = _mapper.Map<InventarioBase>(inventarios);
+                return inventariAct;
             }
             else
             {
@@ -87,7 +75,7 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<bool> EliminarInventario(int id)
+        public async Task<InventarioBase> EliminarInventario(int id)
         {
             var inventariobd = _repositorio.ConsultaPorId(i => i.IdInventario == id);
             if (inventariobd != null)
@@ -95,7 +83,8 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorio.Eliminar(inventariobd);
-                    return true;
+                    var inventarioE = _mapper.Map<InventarioBase>(inventariobd);
+                    return inventarioE;
                 }
                 catch (Exception)
                 {

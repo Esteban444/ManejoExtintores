@@ -1,10 +1,7 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ManejoExtintores.Core.Modelos   
 {
-    public class Precio 
+    public class Precios 
     {
         public int IdPrecios { get; set; }
         public int? IdProductos { get; set; }
@@ -13,7 +10,7 @@ namespace ManejoExtintores.Core.Modelos
         public decimal? Valor { get; set; }
         public decimal? Iva { get; set; }
 
-        public virtual DetalleServicio DetalleServ{ get; set; }
-        public virtual Producto Productos { get; set; } 
+        public DetalleServicios DetalleServicio { get; set; }
+        public Productos Producto { get; set; }  
     }
 }

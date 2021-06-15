@@ -2,7 +2,7 @@
 
 namespace ManejoExtintores.Core.Modelos   
 {
-    public class DetalleServicio
+    public class DetalleServicios
     {
         public int IdDetalleServ { get; set; }
         public int? IdServicio { get; set; } 
@@ -13,10 +13,10 @@ namespace ManejoExtintores.Core.Modelos
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
 
-        public  Servicio Servicios { get; set; } 
-        public  ICollection<PesoExtintor> PesoExtintors { get; set; }
-        public  ICollection<Precio> Precios { get; set; }
-        public  ICollection<TipoExtintor> TipoExtintors { get; set; }
-        public virtual ICollection<Inventario> Inventario { get; set; }
+        public  Servicios Servicios { get; set; } 
+        public  ICollection<PesoExtintors> PesoExtintors { get; set; }
+        public  ICollection<Precios> Precios { get; set; }
+        public  ICollection<TipoExtintors> TipoExtintors { get; set; }
+        public  ICollection<Inventarios> Inventario { get; set; }
     }
 }

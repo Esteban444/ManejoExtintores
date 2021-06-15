@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ManejoExtintores.Core.Modelos   
 {
-    public partial class CreditoServicio
+    public class CreditoServicios
     {
         public int IdCreditos { get; set; }
         public int? IdServicios { get; set; }
@@ -12,6 +10,6 @@ namespace ManejoExtintores.Core.Modelos
         public decimal? Deuda { get; set; }
         public DateTime? Fecha { get; set; }
 
-        public virtual Servicio Servicios { get; set; } 
+        public Servicios Servicios { get; set; } 
     }
 }

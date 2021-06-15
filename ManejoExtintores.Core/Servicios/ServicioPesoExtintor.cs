@@ -1,4 +1,6 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Interfaces;
 using ManejoExtintores.Core.Modelos;
 using System;
@@ -10,25 +12,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioPesoExtintor : IServicioPesoExtintor
     {
-        private readonly IRepositorio<PesoExtintor> _repositorio;
-
-        public ServicioPesoExtintor(IRepositorio<PesoExtintor> repositorio) 
+        private readonly IRepositorio<PesoExtintors> _repositorio;
+        private readonly IMapper _mapper;
+        public ServicioPesoExtintor(IRepositorio<PesoExtintors> repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<PesoExtintor> GetPesoExts()
+        public IEnumerable<PesoExtintorDTO> ConsultaPesoExtintor()
         {
-            var peso = _repositorio.Consultas(); 
-            return peso;
+            var peso =  _repositorio.Consultas();
+            var pesodt = _mapper.Map<IEnumerable<PesoExtintorDTO>>(peso);
+            return pesodt;
         }
 
-        public PesoExtintor GetPesoExt(int id)
+        public PesoExtintorDTO ConsultaPorId(int id) 
         {
-            var peso = _repositorio.ConsultaPorId(p => p.IdPesoExtintor == id);
-            if (peso != null)
+            var pesobd = _repositorio.ConsultaPorId(p => p.IdPesoExtintor == id);
+            if (pesobd != null)
             {
-                return peso;
+                return _mapper.Map<PesoExtintorDTO>(pesobd); ;
             }
             else
             {
@@ -36,21 +40,25 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearPesoExt(PesoExtintor peso)
-        {   
-          await _repositorio.Crear(peso);
+        public async Task<PesoExtintorBase> CrearPesoExtintor(PesoExtintorBase pesobase)
+        {
+            var peso = _mapper.Map<PesoExtintors>(pesobase);
+            await _repositorio.Crear(peso);
+            pesobase = _mapper.Map<PesoExtintorBase>(peso);
+            return pesobase;
         }
 
-        public async Task<bool> ActualizarPesoExt(PesoExtintor peso)
+        public async Task<PesoExtintorBase> ActualizarPesoExtintor(int id,PesoExtintorBase pesoba)
         {
-            var pesos = _repositorio.ConsultaPorId(p => p.IdPesoExtintor == peso.IdPesoExtintor);
-            if (pesos != null)
+            var pesobd = _repositorio.ConsultaPorId(p => p.IdPesoExtintor == id);
+            if (pesobd != null)
             {
-                //pesos.IdDetalleServ = peso.IdDetalleServ;
-                pesos.PesoXlibras   = peso.PesoXlibras;
+                //pesobd.IdDetalleServ = pesoba.IdDetalleServ;
+                pesobd.PesoXlibras   = pesoba.PesoXlibras;
 
-                await _repositorio.Actualizar(pesos);
-                return true;
+                await _repositorio.Actualizar(pesobd);
+                var pesoA = _mapper.Map<PesoExtintorBase>(pesobd);
+                return pesoA;
             }
             else
             {
@@ -59,7 +67,7 @@ namespace ManejoExtintores.Core.Servicios
         }
 
 
-        public async Task<bool> EliminarPesoExt(int id)
+        public async Task<PesoExtintorDTO> EliminarPesoExtintor(int id) 
         {
             var pesobd = _repositorio.ConsultaPorId(p => p.IdPesoExtintor == id);
             if (pesobd != null)
@@ -67,7 +75,8 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorio.Eliminar(pesobd);
-                    return true;
+                    var pesoE = _mapper.Map<PesoExtintorDTO>(pesobd);
+                    return pesoE;
                 }
                 catch (Exception)
                 {

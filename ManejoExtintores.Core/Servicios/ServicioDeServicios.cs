@@ -12,14 +12,14 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioDeServicios : IServicioDeServicios
     {
-        private readonly IRepositorio<Servicio> _repositorio;
+        private readonly IRepositorio<Modelos.Servicios> _repositorio;
 
-        public ServicioDeServicios(IRepositorio<Servicio> repositorio) 
+        public ServicioDeServicios(IRepositorio<Modelos.Servicios> repositorio) 
         {
             _repositorio = repositorio;
         }
 
-        public IEnumerable<Servicio> GetServicios(FiltroServicios filtros)
+        public IEnumerable<Modelos.Servicios> GetServicios(FiltroServicios filtros)
         {
             var servicios = _repositorio.Consultas();
 
@@ -31,7 +31,7 @@ namespace ManejoExtintores.Core.Servicios
             return servicios;
         }
 
-        public Servicio GetServicio(int id)
+        public Modelos.Servicios GetServicio(int id)
         {
             var servicio = _repositorio.ConsultaPorId(s => s.IdServicios == id);
             if (servicio != null)
@@ -44,19 +44,19 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<Servicio> CrearServicioDetalle(Servicio servicio) 
+        public async Task<Modelos.Servicios> CrearServicioDetalle(Modelos.Servicios servicio) 
         {
             await _repositorio.Crear(servicio);
             
             return servicio;
         }
 
-        public async Task CrearServicios(Servicio servicio)
+        public async Task CrearServicios(Modelos.Servicios servicio)
         { 
            await _repositorio.Crear(servicio);
         }
 
-        public async Task<bool> ActualizarServicios(Servicio servicio)
+        public async Task<bool> ActualizarServicios(Modelos.Servicios servicio)
         {
             var servicios = _repositorio.ConsultaPorId(s => s.IdServicios == servicio.IdServicios);
             if (servicios != null)

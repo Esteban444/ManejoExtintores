@@ -23,14 +23,14 @@ namespace ManejoExtintores.Controllers
 
     public class UsuariosController : ControllerBase
     {
-		private readonly UserManager<Usuario> _userManager;
+		private readonly UserManager<Usuarios> _userManager;
 		private readonly IMapper _mapper;
 		private readonly JwtHandler _jwtHandler;
 		private readonly IEmailSender _emailSender;
 		private readonly IValidator<AutenticacionUsuarioDTO> _validatorAuten;
 		private readonly IValidator<VerificacionDosPasosDTO> _validatorVerif; 
 
-		public UsuariosController(UserManager<Usuario> userManager, IMapper mapper, JwtHandler
+		public UsuariosController(UserManager<Usuarios> userManager, IMapper mapper, JwtHandler
 			jwtHandler, IEmailSender emailSender,IValidator<AutenticacionUsuarioDTO> validatoraut,
 			IValidator<VerificacionDosPasosDTO> validatorVerif)
 		{
@@ -48,7 +48,7 @@ namespace ManejoExtintores.Controllers
 			if (registroUsuario == null || !ModelState.IsValid) 
 				return BadRequest();
 			registroUsuario.Discriminador = "Usuario";
-			var user = _mapper.Map<Usuario>(registroUsuario);
+			var user = _mapper.Map<Usuarios>(registroUsuario);
 
 			var result = await _userManager.CreateAsync(user, registroUsuario.Password);
 			if (!result.Succeeded)
@@ -119,7 +119,7 @@ namespace ManejoExtintores.Controllers
 			return Ok(new AuthRespuestaDTO { AuthExitosa = true, Token = token });
 		}
 
-		private async Task<IActionResult> GenerarOTPDeVerificacionEnDosPasos(Usuario usuario)  
+		private async Task<IActionResult> GenerarOTPDeVerificacionEnDosPasos(Usuarios usuario)  
 		{
 			var proveedor = await _userManager.GetValidTwoFactorProvidersAsync(usuario);
 			if (!proveedor.Contains("Email"))
@@ -237,7 +237,7 @@ namespace ManejoExtintores.Controllers
 				{
 					var json = JsonSerializer.Serialize(payload);
 
-					user = new Usuario { Email = payload.Email, UserName = payload.Email, Nombres = externaDTO.Apellidos, Apellidos = externaDTO.Nombres, Discriminador = "Usuario", JoinDate = DateTime.Now };
+					user = new Usuarios { Email = payload.Email, UserName = payload.Email, Nombres = externaDTO.Apellidos, Apellidos = externaDTO.Nombres, Discriminador = "Usuario", JoinDate = DateTime.Now };
 					if (externaDTO.Proveedor == "GOOGLE")
 					{
 						user.Google = json;

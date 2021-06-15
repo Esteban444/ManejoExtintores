@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
@@ -16,13 +15,11 @@ namespace ManejoExtintores.Api.Controllers
     public class EmpresasController : ControllerBase
     {
         private readonly IServicio_Empresa _servicioEmpresa; 
-        private readonly IMapper _mapper;
         private readonly IValidator<EmpresaBase> _validator;
 
-        public EmpresasController(IServicio_Empresa servicioEmpresa, IMapper mapper,IValidator<EmpresaBase> validator) 
+        public EmpresasController(IServicio_Empresa servicioEmpresa,IValidator<EmpresaBase> validator) 
         {
             _servicioEmpresa = servicioEmpresa;
-            _mapper = mapper;
             _validator = validator;
         }
 

@@ -39,7 +39,7 @@ namespace ManejoExtintores
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddIdentity<Usuario, IdentityRole>(opt =>
+            services.AddIdentity<Usuarios, IdentityRole>(opt =>
             {
                 opt.Password.RequiredLength = 7;
                 opt.Password.RequireDigit = false;
@@ -90,7 +90,7 @@ namespace ManejoExtintores
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ManejoExtintores", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Manejo Extintores", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Bearer",

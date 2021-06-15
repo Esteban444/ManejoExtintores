@@ -45,7 +45,7 @@ namespace ManejoExtintores.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(DetalleServicioBase detalleb)
         {
-            var detalle = _mapper.Map<DetalleServicio>(detalleb);
+            var detalle = _mapper.Map<DetalleServicios>(detalleb);
 
             await _servicioDetalle.CrearDetalle(detalle);
 
@@ -57,7 +57,7 @@ namespace ManejoExtintores.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarDetalles(int id, DetalleServicioBase actualizar)
         {
-            var detalle = _mapper.Map<DetalleServicio>(actualizar);
+            var detalle = _mapper.Map<DetalleServicios>(actualizar);
             detalle.IdDetalleServ = id;
             var result = await _servicioDetalle.ActualizarDetalle(detalle);
             var response = new Respuesta<bool>(result);

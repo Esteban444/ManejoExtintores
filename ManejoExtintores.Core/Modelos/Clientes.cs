@@ -2,7 +2,7 @@
 
 namespace ManejoExtintores.Core.Modelos    
 {
-    public class Cliente
+    public class Clientes 
     {
         public int IdCliente { get; set; }
         public decimal? DocCliente { get; set; }
@@ -14,7 +14,7 @@ namespace ManejoExtintores.Core.Modelos
         public string Email { get; set; }
         public string Nit { get; set; }
 
-        public ICollection<DetalleExtCliente> DetalleExtClientes { get; set; }
-        public ICollection<Servicio> Servicios { get; set; }
+        public ICollection<DetalleExtClientes> DetalleExtClientes { get; set; }
+        public ICollection<Servicios> Servicios { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,40 +17,34 @@ namespace ManejoExtintores.Api.Controllers
     public class ProductosController : ControllerBase
     {
         private readonly IServicioProducto _servicioProducto;
-        private readonly IMapper _mapper;
         private readonly IValidator<ProductoBase> _validator;
 
-        public ProductosController(IServicioProducto servicioProducto, IMapper mapper,IValidator<ProductoBase> validator)  
+        public ProductosController(IServicioProducto servicioProducto,IValidator<ProductoBase> validator)  
         {
             _servicioProducto = servicioProducto;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroProductos filtros)
+        public async Task<IActionResult> ConsultaProductos([FromQuery] FiltroProductos filtros)
         {
-            var productos = _servicioProducto.GetProductos(filtros);
-            var productoDTO = _mapper.Map<IEnumerable<ProductoDTO>>(productos);
-            var response = new Respuesta<IEnumerable<ProductoDTO>>(productoDTO);
+            var productos = await _servicioProducto.ConsultaProductos(filtros);
+            var response = new Respuesta<IEnumerable<ProductoDTO>>(productos);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult ConsultaProductoPorId(int id) 
         {
-
-            var producto = _servicioProducto.GetProducto(id);
-            var productoDTO = _mapper.Map<ProductoDTO>(producto);
-
-            var response = new Respuesta<ProductoDTO>(productoDTO); 
+            var producto = _servicioProducto.ConsultaPorId(id);
+            var response = new Respuesta<ProductoDTO>(producto); 
             return Ok(response);
         }
         
         [HttpPost]
-        public async Task<IActionResult> Crear(ProductoBase productobase) 
+        public async Task<IActionResult> CrearProductos(ProductoBase productobase) 
         {
-            var Validacion = _validator.Validate(productobase);
+            var Validacion = _validator.Validate(productobase); 
             if (!Validacion.IsValid)
             {
                 var errors = Validacion.Errors.Select(e => e.ErrorMessage);
@@ -60,18 +53,14 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var producto = _mapper.Map<Producto>(productobase);
-
-                await _servicioProducto.CrearProducto(producto);
-
-                productobase = _mapper.Map<ProductoBase>(producto);
+                await _servicioProducto.CrearProducto(productobase);
                 var response = new Respuesta<ProductoBase>(productobase);
                 return Ok(response);
             }
         }
-
+         
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarProducto(int id, ProductoBase actualizar) 
+        public async Task<IActionResult> ActualizarProductos(int id, ProductoBase actualizar) 
         {
             var Validacion = _validator.Validate(actualizar);
             if (!Validacion.IsValid)
@@ -82,10 +71,8 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var producto = _mapper.Map<Producto>(actualizar);
-                producto.IdProductos = id;
-                var result = await _servicioProducto.ActualizarProducto(producto);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioProducto.ActualizarProducto(id,actualizar);
+                var response = new Respuesta<ProductoBase>(result);
                 return Ok(response);
             }
         }
@@ -94,7 +81,7 @@ namespace ManejoExtintores.Api.Controllers
         public async Task<IActionResult> Eliminar(int id)
         {
             var result = await _servicioProducto.EliminarProducto(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<ProductoBase>(result);
             return Ok(response);
 
         }

@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,33 +16,28 @@ namespace ManejoExtintores.Api.Controllers
     public class InventariosController : ControllerBase
     {
         private readonly IServicioInventario _servicioInventario;
-        private readonly IMapper _mapper;
         private readonly IValidator<InventarioBase> _validator;
 
-        public InventariosController(IServicioInventario servicioInventario, IMapper mapper,IValidator<InventarioBase> validator) 
+        public InventariosController(IServicioInventario servicioInventario,IValidator<InventarioBase> validator) 
         {
             _servicioInventario = servicioInventario;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroInventario filtro)
+        public async Task<IActionResult> ConsultaInventarios([FromQuery] FiltroInventario filtro)
         {
-            var inventarios = _servicioInventario.GetInventarios(filtro);
-            var consulta = _mapper.Map<IEnumerable<InventarioDTO>>(inventarios);
-            var response = new Respuesta<IEnumerable<InventarioDTO>>(consulta);
+            var inventarios = await _servicioInventario.ConsultaInventarios(filtro);
+            var response = new Respuesta<IEnumerable<InventarioDTO>>(inventarios);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult ConsultaPorId(int id) 
         {
 
-            var inventario =  _servicioInventario.GetInventario(id);
-            var inventarioDTO = _mapper.Map<InventarioDTO>(inventario);
-
-            var response = new Respuesta<InventarioDTO>(inventarioDTO);
+            var inventario =  _servicioInventario.ConsultaInventarioPorId(id);
+            var response = new Respuesta<InventarioDTO>(inventario);
             return Ok(response);
         }
 
@@ -60,11 +53,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var invent = _mapper.Map<Inventario>(inventariob);
-
-                await _servicioInventario.CrearInventario(invent);
-
-                inventariob = _mapper.Map<InventarioBase>(invent);
+                await _servicioInventario.CrearInventario(inventariob);
                 var response = new Respuesta<InventarioBase>(inventariob);
                 return Ok(response);
             }
@@ -82,10 +71,8 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var inventario = _mapper.Map<Inventario>(actualizar);
-                inventario.IdInventario = id;
-                var result = await _servicioInventario.ActualizarInventario(inventario);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioInventario.ActualizarInventario(id,actualizar);
+                var response = new Respuesta<InventarioBase>(result);
                 return Ok(response);
             }
         }
@@ -94,7 +81,7 @@ namespace ManejoExtintores.Api.Controllers
         public async Task<IActionResult> Eliminar(int id)
         {
             var result = await _servicioInventario.EliminarInventario(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<InventarioBase>(result);
             return Ok(response);
 
         }

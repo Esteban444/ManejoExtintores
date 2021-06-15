@@ -2,7 +2,7 @@
 
 namespace ManejoExtintores.Core.Modelos   
 {
-    public class Gasto
+    public class Gastos 
     {
         public int IdGastos { get; set; }
         public string Descripcion { get; set; }

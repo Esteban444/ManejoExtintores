@@ -1,5 +1,5 @@
-﻿using ManejoExtintores.Core.Filtros_Busqueda;
-using ManejoExtintores.Core.Modelos;
+﻿using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Filtros_Busqueda;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,11 +7,11 @@ namespace ManejoExtintores.Core.Interfaces
 {
     public  interface IServicioGasto
     {
-        IEnumerable<Gasto> GetGastos(Filtros_Cargos filtros);
-        Task<Gasto> GetGasto(int id);
-        Task CrearGasto(Gasto gasto);
-        Task<bool> ActualizarGasto(Gasto gasto); 
-        Task<bool> EliminarGasto(int id);
+        Task<IEnumerable<GastosDTO>> GetGastos(FiltrosGastos filtros);
+        GastosDTO GetGasto(int id);
+        Task<GastosBase> CrearGasto(GastosBase gasto);
+        Task<GastosBase> ActualizarGasto(int id,GastosBase gasto); 
+        Task<GastosDTO> EliminarGasto(int id);
 
     }
 }
