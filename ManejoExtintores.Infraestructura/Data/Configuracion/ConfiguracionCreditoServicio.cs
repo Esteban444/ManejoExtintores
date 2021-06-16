@@ -28,11 +28,11 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
                 .HasColumnType("date")
                 .HasColumnName("fecha");
 
-            builder.Property(e => e.IdServicios).HasColumnName("idServicios");
+            builder.Property(e => e.IdServicio).HasColumnName("idServicio");
 
             builder.HasOne(d => d.Servicios)
                 .WithMany(p => p.CreditoServicios)
-                .HasForeignKey(d => d.IdServicios)
+                .HasForeignKey(d => d.IdServicio)
                 .HasConstraintName("fk_Creditos");
         }
     }

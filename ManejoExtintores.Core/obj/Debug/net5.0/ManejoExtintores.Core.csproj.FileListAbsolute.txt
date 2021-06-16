@@ -4,6 +4,7 @@ D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\bin\De
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\bin\Debug\net5.0\ManejoExtintores.Core.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\bin\Debug\net5.0\ref\ManejoExtintores.Core.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\bin\Debug\net5.0\ManejoExtintores.Core.pdb
+D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.csproj.AssemblyReference.cache
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.GeneratedMSBuildEditorConfig.editorconfig
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.AssemblyInfoInputs.cache
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.AssemblyInfo.cs
@@ -12,4 +13,3 @@ D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\De
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ref\ManejoExtintores.Core.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.pdb
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.genruntimeconfig.cache
-D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores.Core\obj\Debug\net5.0\ManejoExtintores.Core.csproj.AssemblyReference.cache

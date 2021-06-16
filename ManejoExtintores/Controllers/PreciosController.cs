@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,40 +16,34 @@ namespace ManejoExtintores.Api.Controllers
     public class PreciosController : ControllerBase
     {
         private readonly IServicioPrecios _servicioPrecios;
-        private readonly IMapper _mapper;
         private readonly IValidator<PrecioBase> _validator;
 
-        public PreciosController(IServicioPrecios servicioPrecio, IMapper mapper,IValidator<PrecioBase> validator) 
+        public PreciosController(IServicioPrecios servicioPrecio,IValidator<PrecioBase> validator) 
         {
             _servicioPrecios = servicioPrecio;
-            _mapper = mapper;
             _validator = validator;
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroPrecios filtro)
+        public async Task<IActionResult> ConsultasPrecios([FromQuery] FiltroPrecios filtro)
         {
-            var precios = _servicioPrecios.GetPrecios(filtro);
-            var precio = _mapper.Map<IEnumerable<PrecioDTO>>(precios);
-            var response = new Respuesta<IEnumerable<PrecioDTO>>(precio);
+            var precios =  await _servicioPrecios.ConsultaPrecios(filtro); 
+            var response = new Respuesta<IEnumerable<PrecioDTO>>(precios);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult ConsultaPrecio(int id)   
         {
-
-            var precio = _servicioPrecios.GetPrecio(id);
-            var precioDTO = _mapper.Map<PrecioDTO>(precio);
-
-            var response = new Respuesta<PrecioDTO>(precioDTO);
+            var precio = _servicioPrecios.ConsultaPor(id);
+            var response = new Respuesta<PrecioDTO>(precio);
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Crear(PrecioBase preciobase)
+        public async Task<IActionResult> CrearPrecios(PrecioBase preciobase)
         {
-            var Validacion = _validator.Validate(preciobase);
+            var Validacion = _validator.Validate(preciobase); 
             if (!Validacion.IsValid)
             {
                 var errors = Validacion.Errors.Select(e => e.ErrorMessage);
@@ -60,11 +52,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var precio = _mapper.Map<Precios>(preciobase);
-
-                await _servicioPrecios.CrearPrecio(precio);
-
-                preciobase = _mapper.Map<PrecioBase>(precio);
+                await _servicioPrecios.CrearPrecio(preciobase);
                 var response = new Respuesta<PrecioBase>(preciobase);
                 return Ok(response);
             }
@@ -82,19 +70,17 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var precio = _mapper.Map<Precios>(actualizar);
-                precio.IdPrecios = id;
-                var result = await _servicioPrecios.ActualizarPrecio(precio);
-                var response = new Respuesta<bool>(result);
+                var result = await _servicioPrecios.ActualizarPrecio(id,actualizar);
+                var response = new Respuesta<PrecioBase>(result);
                 return Ok(response);
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int id)
+        public async Task<IActionResult> EliminarPrecios(int id) 
         {
             var result = await _servicioPrecios.EliminarPrecio(id);
-            var response = new Respuesta<bool>(result);
+            var response = new Respuesta<PrecioDTO>(result);
             return Ok(response);
 
         }

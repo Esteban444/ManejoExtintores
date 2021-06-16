@@ -3,7 +3,6 @@ namespace ManejoExtintores.Core.DTOs
 {
     public class ClientesBase
     {
-        public int IdCliente { get; set; }
         public decimal? DocCliente { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }

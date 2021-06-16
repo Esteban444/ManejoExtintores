@@ -1,15 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace ManejoExtintores.Core.Modelos   
+namespace ManejoExtintores.Core.DTOs.Request
 {
-    public class CreditoServicios
+    public class CreditoServicioBase
     {
-        public int IdCreditos { get; set; }
         public int? IdServicio { get; set; } 
         public decimal? Abono { get; set; }
         public decimal? Deuda { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? Fecha { get; set; }
-
-        public Servicios Servicios { get; set; } 
     }
 }

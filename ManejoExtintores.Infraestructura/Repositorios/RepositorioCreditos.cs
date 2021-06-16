@@ -9,24 +9,22 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Infraestructura.Repositorios
 {
-    public class RepositorioPrecios : RepositorioBase<Precios>, IRepositorioPrecios
+    public class RepositorioCreditos : RepositorioBase<CreditoServicios>, IRepositorioCreditos
     {
         public ManejoExtintoresContext ExtintoresContext { get; set; }
-
-        public RepositorioPrecios(ManejoExtintoresContext context): base(context)
+        public RepositorioCreditos(ManejoExtintoresContext context): base(context)
         {
             ExtintoresContext = context;
         }
-        public async Task<IEnumerable<Precios>> ConsultaData(FiltroPrecios filtro)
+        public async Task<IEnumerable<CreditoServicios>> ConsultaData(FiltroCreditos filtro)
         {
-            var precios = await ExtintoresContext.Precios.Include(x => x.Producto).ToListAsync();
+            var creditos = await ExtintoresContext.CreditoServicios.ToListAsync();
 
-            if (filtro.Descripcion != null)
+            if (filtro.Fecha != null)
             {
-                precios = precios.Where(x => x.Descripcion.ToLower().Contains(filtro.Descripcion.ToLower())).ToList();
+                creditos = creditos.Where(x => x.Fecha == filtro.Fecha).ToList();
             }
-
-            return precios;
+            return creditos;
         }
     }
 }

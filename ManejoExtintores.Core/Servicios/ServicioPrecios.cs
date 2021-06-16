@@ -1,10 +1,12 @@
-﻿using ManejoExtintores.Core.Excepciones;
+﻿using AutoMapper;
+using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using ManejoExtintores.Core.Interfaces.Repositorios;
 using ManejoExtintores.Core.Modelos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,31 +14,27 @@ namespace ManejoExtintores.Core.Servicios
 {
     public class ServicioPrecios : IServicioPrecios
     {
-        private readonly IRepositorio<Precios> _repositorio;
-
-        public ServicioPrecios(IRepositorio<Precios> repositorio) 
+        private readonly IRepositorioPrecios _repositorio;
+        private readonly IMapper _mapper;
+        public ServicioPrecios(IRepositorioPrecios repositorio,IMapper mapper) 
         {
             _repositorio = repositorio;
+            _mapper = mapper;
         }
         
-        public IEnumerable<Precios> GetPrecios(FiltroPrecios filtro)
+        public async Task<IEnumerable<PrecioDTO>> ConsultaPrecios(FiltroPrecios filtro)
         {
-            var precios = _repositorio.Consultas();
-
-            if (filtro.Descripcion != null)
-            {
-                precios = precios.Where(x => x.Descripcion.ToLower().Contains(filtro.Descripcion.ToLower()));
-            }
-
-            return precios;
+            var precios = await _repositorio.ConsultaData(filtro); 
+            var preciodt = _mapper.Map<IEnumerable<PrecioDTO>>(precios);
+            return preciodt;
         }
 
-        public Precios GetPrecio(int id)
+        public PrecioDTO ConsultaPor(int id)  
         {
-            var precio = _repositorio.ConsultaPorId(p => p.IdPrecios == id);
-            if (precio != null)
+            var preciobd = _repositorio.ConsultaPorId(p => p.IdPrecios == id);
+            if (preciobd != null)
             {
-                return precio;
+                return _mapper.Map<PrecioDTO>(preciobd); 
             }
             else
             {
@@ -44,33 +42,36 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task CrearPrecio(Precios precio)
+        public async Task<PrecioBase> CrearPrecio(PrecioBase preciobase)
         {
+            var precio = _mapper.Map<Precios>(preciobase); 
             await _repositorio.Crear(precio);
+            preciobase = _mapper.Map<PrecioBase>(precio);
+            return preciobase;
         }
 
 
-        public async Task<bool> ActualizarPrecio(Precios precio)
+        public async Task<PrecioBase> ActualizarPrecio(int id,PrecioBase precioAct)
         {
-            var precios = _repositorio.ConsultaPorId(p => p.IdPrecios == precio.IdPrecios);
+            var precios = _repositorio.ConsultaPorId(p => p.IdPrecios == id);
             if (precios != null)
             {
-                precios.IdProductos = precio.IdProductos;
-                precios.Descripcion = precio.Descripcion;
-                precios.Valor = precio.Valor;
-                precios.Iva = precio.Iva;
+                precios.IdProductos = precioAct.IdProductos;
+                precios.Descripcion = precioAct.Descripcion;
+                precios.Valor = precioAct.Valor;
+                precios.Iva = precioAct.Iva;
                 
-
                 await _repositorio.Actualizar(precios);
-                return true;
+                precioAct = _mapper.Map<PrecioBase>(precios);
+                return precioAct;
             }
             else
             {
                 throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El precio que desea actualizar no existe en la base de datos" });
             }
         }
-
-        public async Task<bool> EliminarPrecio(int id)
+         
+        public async Task<PrecioDTO> EliminarPrecio(int id) 
         {
             var preciobd = _repositorio.ConsultaPorId(p => p.IdPrecios == id);
             if (preciobd != null)
@@ -78,7 +79,8 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorio.Eliminar(preciobd);
-                    return true;
+                    var precioE = _mapper.Map<PrecioDTO>(preciobd);
+                    return precioE;
                 }
                 catch (Exception)
                 {

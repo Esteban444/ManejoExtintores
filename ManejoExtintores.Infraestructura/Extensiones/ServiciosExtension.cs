@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ManejoExtintores.Core.DTOs.Request;
 using ManejoExtintores.Core.Interfaces.Repositorios;
+using ManejoExtintores.Core.Interfaces.Servicios;
 
 namespace ManejoExtintores.Infraestructura.Extensiones
 {
@@ -40,6 +41,9 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddScoped(typeof(IRepositorio<Clientes>), typeof(RepositorioBase<Clientes>));
             services.AddTransient<IRepositorioClientes, RepositorioClientes>();
 
+            services.AddScoped(typeof(IRepositorio<CreditoServicios>), typeof(RepositorioBase<CreditoServicios>));
+            services.AddTransient<IRepositorioCreditos, RepositorioCreditos>();
+
             services.AddScoped(typeof(IRepositorio<DetalleServicios>), typeof(RepositorioBase<DetalleServicios>));
 
             services.AddScoped(typeof(IRepositorio<Empresas>), typeof(RepositorioBase<Empresas>));
@@ -67,6 +71,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IRepositorioServicio, RepositorioServicio>();
 
             services.AddTransient<IValidator<ClientesBase>, ValidacionClientes>();
+            services.AddTransient<IValidator<CreditoServicioBase>, ValidacionCreditos>();
             services.AddTransient<IValidator<EmpresaBase>, ValidacionesEmpresas>();
             services.AddTransient<IValidator<EmpleadoBase>, ValidacionEmpleados>();
             services.AddTransient<IValidator<GastosBase>, ValidacionesGastos>();
@@ -80,6 +85,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IValidator<VerificacionDosPasosDTO>, ValidacionVerificacionDosPasos>();   
 
             services.AddTransient<IServicioCliente, ServicioCliente>();
+            services.AddTransient<IServicioCreditos, ServicioCreditos>();
             services.AddTransient<IDetalleServicio, ServicioDetalleServicio>();
             services.AddTransient<IServicioGasto, ServicioGasto>();
             services.AddTransient<IServicio_Empresa, Servicio_Empresa>();

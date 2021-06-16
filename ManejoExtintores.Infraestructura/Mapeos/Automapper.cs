@@ -14,6 +14,9 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<Clientes, ClienteDTO>().ReverseMap();
             CreateMap<Clientes, ClientesBase>().ReverseMap();
 
+            CreateMap<CreditoServicios, CreditoServicioBase>().ReverseMap();
+            CreateMap<CreditoServicios, CreditoServiciosDTO>().ReverseMap();
+
             CreateMap<DetalleServicios, DetalleServicioDTO>().ReverseMap();
             CreateMap<DetalleServicios, DetalleServicioBase>().ReverseMap(); 
 
@@ -23,7 +26,8 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<Empleados, EmpleadosDTO>().ReverseMap();
             CreateMap<Empleados, EmpleadoBase>().ReverseMap();
 
-            CreateMap<Inventarios, InventarioDTO>().ReverseMap();
+            CreateMap<Inventarios, InventarioDTO>()
+                .ForMember(x => x.Produto, y => y.MapFrom(z => z.Producto));
             CreateMap<Inventarios, InventarioBase>().ReverseMap();
 
 
