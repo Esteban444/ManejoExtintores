@@ -45,6 +45,9 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IRepositorioCreditos, RepositorioCreditos>();
 
             services.AddScoped(typeof(IRepositorio<DetalleServicios>), typeof(RepositorioBase<DetalleServicios>));
+            
+            services.AddScoped(typeof(IRepositorio<DetalleExtClientes>), typeof(RepositorioBase<DetalleExtClientes>));
+            services.AddTransient<IRepositorioDetalleExtClientes,RepositorioDetalleExtClientes>();
 
             services.AddScoped(typeof(IRepositorio<Empresas>), typeof(RepositorioBase<Empresas>));
 
@@ -67,11 +70,12 @@ namespace ManejoExtintores.Infraestructura.Extensiones
 
             services.AddScoped(typeof(IRepositorio<TipoExtintors>), typeof(RepositorioBase<TipoExtintors>));
 
-            services.AddScoped(typeof(IRepositorio<Servicios>), typeof(RepositorioBase<Servicios>));
+            services.AddScoped(typeof(IRepositorio<Servicio>), typeof(RepositorioBase<Servicio>));
             services.AddTransient<IRepositorioServicio, RepositorioServicio>();
 
             services.AddTransient<IValidator<ClientesBase>, ValidacionClientes>();
             services.AddTransient<IValidator<CreditoServicioBase>, ValidacionCreditos>();
+            services.AddTransient<IValidator<DetalleExtClienteBase>, ValidacionDetalleExtintorClientes>();
             services.AddTransient<IValidator<EmpresaBase>, ValidacionesEmpresas>();
             services.AddTransient<IValidator<EmpleadoBase>, ValidacionEmpleados>();
             services.AddTransient<IValidator<GastosBase>, ValidacionesGastos>();
@@ -87,6 +91,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IServicioCliente, ServicioCliente>();
             services.AddTransient<IServicioCreditos, ServicioCreditos>();
             services.AddTransient<IDetalleServicio, ServicioDetalleServicio>();
+            services.AddTransient<IServicioDetalleExtClientes, ServicioDetalleExtClientes>();
             services.AddTransient<IServicioGasto, ServicioGasto>();
             services.AddTransient<IServicio_Empresa, Servicio_Empresa>();
             services.AddTransient<IServicioEmpleado, ServicioEmpleado>();

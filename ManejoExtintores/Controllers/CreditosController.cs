@@ -42,9 +42,9 @@ namespace ManejoExtintores.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearCredito(CreditoServicioBase creditobc)
+        public async Task<IActionResult> CrearCredito(CreditoServicioBase crearcredito)
         {
-            var Validacion = _validator.Validate(creditobc);
+            var Validacion = _validator.Validate(crearcredito);
             if (!Validacion.IsValid)
             {
                 var errors = Validacion.Errors.Select(e => e.ErrorMessage);
@@ -53,7 +53,7 @@ namespace ManejoExtintores.Controllers
             }
             else
             {
-                var creditoC = await _serviciCreditos.CrearCredito(creditobc);
+                var creditoC = await _serviciCreditos.CrearCredito(crearcredito);
                 var respueta = new Respuesta<CreditoServicioBase>(creditoC);
                 return Ok(respueta);
             }
@@ -62,9 +62,19 @@ namespace ManejoExtintores.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarCredito(int id, CreditoServicioBase actualizar)
         {
-            var creditoAc = await _serviciCreditos.ActualizarCredito(id, actualizar);
-            var creditoAdt = new Respuesta<CreditoServicioBase>(creditoAc);
-            return Ok(creditoAdt);
+            var Validacion = _validator.Validate(actualizar);
+            if (!Validacion.IsValid)
+            {
+                var errors = Validacion.Errors.Select(e => e.ErrorMessage);
+
+                return BadRequest(new RespuestaCredito { Errors = errors });
+            }
+            else
+            {
+                var creditoAc = await _serviciCreditos.ActualizarCredito(id, actualizar);
+                var creditoAdt = new Respuesta<CreditoServicioBase>(creditoAc);
+                return Ok(creditoAdt);
+            }
         }
 
         [HttpDelete("{id}")]

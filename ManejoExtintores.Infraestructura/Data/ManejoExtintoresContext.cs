@@ -24,7 +24,7 @@ namespace ManejoExtintores.Infraestructura.Data
         public DbSet<PesoExtintors> PesoExtintors { get; set; }
         public DbSet<Precios> Precios { get; set; }
         public DbSet<Productos> Productos { get; set; }
-        public DbSet<Servicios> Servicios { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
         public DbSet<TipoExtintors> TipoExtintors { get; set; }
 
 

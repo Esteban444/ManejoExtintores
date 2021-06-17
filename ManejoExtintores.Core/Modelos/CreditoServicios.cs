@@ -10,6 +10,6 @@ namespace ManejoExtintores.Core.Modelos
         public decimal? Deuda { get; set; }
         public DateTime? Fecha { get; set; }
 
-        public Servicios Servicios { get; set; } 
+        public Servicio Servicios { get; set; } 
     }
 }

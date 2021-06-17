@@ -32,22 +32,18 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Consultas([FromQuery] FiltroServicios filtros)
+        public async Task<IActionResult> ConsultaServicios([FromQuery] FiltroServicios filtros)
         {
-            var servicios = _serviciodeServicio.GetServicios(filtros);
-            var servicioDTO = _mapper.Map<IEnumerable<ServicioDTO>>(servicios);
-            var response = new Respuesta<IEnumerable<ServicioDTO>>(servicioDTO);
+            var servicios = await _serviciodeServicio.ConsultarServicios(filtros);  
+            var response = new Respuesta<IEnumerable<ServicioDTO>>(servicios);
             return Ok(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Consulta(int id)
+        public IActionResult ConsultaPorId(int id)  
         {
-
-            var servicio =  _serviciodeServicio.GetServicio(id);
-            var servicioDTO = _mapper.Map<ServicioDTO>(servicio);
-
-            var response = new Respuesta<ServicioDTO>(servicioDTO);
+            var servicio =  _serviciodeServicio.ConsultaServicio(id);
+            var response = new Respuesta<ServicioDTO>(servicio);
             return Ok(response);
         }
 
@@ -57,16 +53,15 @@ namespace ManejoExtintores.Api.Controllers
             var Validacion = _validator.Validate(serviciobase);
             if (!Validacion.IsValid)
             {
-                var errors = Validacion.Errors.Select(e => e.ErrorMessage);
+                var errors = Validacion.Errors.Select(e => e.ErrorMessage); 
 
                 return BadRequest(new RespuestaServicios { Errors = errors });
             }
             else
             {
-                //var serviciodetalle =  _mapper.Map<Servicio>(serviciobase);
-                await _Repositorioservicio.CrearServicioDetalle(serviciobase);
-
-                return Ok(serviciobase);
+                await _serviciodeServicio.CrearServicioDetalle(serviciobase);
+                var respuesta = new Respuesta<ServicioBase>(serviciobase);
+                return Ok(respuesta);
             }
         }
 
@@ -82,11 +77,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var servicio = _mapper.Map<Servicios>(serviciob);
-
-                await _serviciodeServicio.CrearServicios(servicio);
-
-                serviciob = _mapper.Map<ServicioBase>(servicio);
+                await _serviciodeServicio.CrearServicios(serviciob);
                 var response = new Respuesta<ServicioBase>(serviciob);
                 return Ok(response);
             }
@@ -104,21 +95,18 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                var servicio = _mapper.Map<Servicios>(actualizar);
-                servicio.IdServicios = id;
-                var result = await _serviciodeServicio.ActualizarServicios(servicio);
-                var response = new Respuesta<bool>(result);
-                return Ok(response);
+                var resultado = await _serviciodeServicio.ActualizarServicios(id,actualizar);
+                var respuesta = new Respuesta<ServicioBase>(resultado);
+                return Ok(respuesta);
             }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
-            var result = await _serviciodeServicio.EliminarServicios(id);
-            var response = new Respuesta<bool>(result);
-            return Ok(response);
-
+            var resultado = await _serviciodeServicio.EliminarServicios(id);
+            var respuesta = new Respuesta<ServicioDTO>(resultado);
+            return Ok(respuesta);
         }
     }
 }

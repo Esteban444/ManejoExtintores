@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ManejoExtintores.Core.Modelos  
+namespace ManejoExtintores.Core.DTOs.Request
 {
-    public class DetalleExtClientes
+    public class DetalleExtClienteBase 
     {
-        public int IdDetalleCliente { get; set; }
         public int? IdClientes { get; set; }
         public string TipoExtintor { get; set; }
         public string Pesoextintor { get; set; }
@@ -13,8 +12,5 @@ namespace ManejoExtintores.Core.Modelos
         public DateTime? FechaVencimiento { get; set; }
         public DateTime? FechaMantenimiento { get; set; }
         public int? IdServicio { get; set; }
-
-        public Clientes Clientes { get; set; }
-        public Servicio Servicios { get; set; }  
     }
 }

@@ -13,6 +13,6 @@ namespace ManejoExtintores.Core.Modelos
         public string Email { get; set; }
 
         public Empresas Empresa { get; set; } 
-        public ICollection<Servicios> Servicios { get; set; }
+        public ICollection<Servicio> Servicios { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
     {
         public void Configure(EntityTypeBuilder<DetalleExtClientes> builder)
         {
-            builder.ToTable("DetalleExtCliente");
+            builder.ToTable("DetalleExtClientes");
 
             builder.HasKey(e => e.IdDetalleCliente)
                      .HasName("PK__DetalleE__E0CA4893B1C20026");

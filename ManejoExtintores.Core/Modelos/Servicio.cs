@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ManejoExtintores.Core.Modelos   
+namespace ManejoExtintores.Core.Modelos  
 {
-    public class Servicios
+    public class Servicio
     {
         public int IdServicios { get; set; }
         public int? IdClientes { get; set; }

@@ -13,7 +13,7 @@ namespace ManejoExtintores.Core.Modelos
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
 
-        public  Servicios Servicios { get; set; } 
+        public  Servicio Servicios { get; set; } 
         public  ICollection<PesoExtintors> PesoExtintors { get; set; }
         public  ICollection<Precios> Precios { get; set; }
         public  ICollection<TipoExtintors> TipoExtintors { get; set; }

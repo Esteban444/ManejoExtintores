@@ -1,11 +1,14 @@
 ﻿using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Modelos;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Interfaces 
 {
-    public interface IRepositorioServicio: IRepositorio<Modelos.Servicios>
+    public interface IRepositorioServicio: IRepositorio<Servicio>
     {
-        public Task<Modelos.Servicios> CrearServicioDetalle(ServicioBase servicio);
+        Task<IEnumerable<Servicio>> ConsultaData(FiltroServicios filtro);
+        public Servicio CrearServicioDetalle(ServicioBase servicio);
     }
 }

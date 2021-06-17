@@ -20,6 +20,9 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<DetalleServicios, DetalleServicioDTO>().ReverseMap();
             CreateMap<DetalleServicios, DetalleServicioBase>().ReverseMap(); 
 
+            CreateMap<DetalleExtClientes, DetalleExtClienteBase>().ReverseMap(); 
+            CreateMap<DetalleExtClientes, DetalleExtClienteDTO>().ReverseMap(); 
+
             CreateMap<Empresas, EmpresaDTO>().ReverseMap();
             CreateMap<Empresas, EmpresaBase>().ReverseMap();
 
@@ -48,8 +51,10 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<TipoExtintors, TipoExtintorBase>().ReverseMap();
             CreateMap<TipoExtintors, TipoExtintorDTO>().ReverseMap();
 
-            CreateMap<Servicios, ServicioBase>().ReverseMap();
-            CreateMap<Servicios, ServicioDTO>().ReverseMap();
+            CreateMap<Servicio, ServicioBase>().ReverseMap();
+            CreateMap<Servicio, ServicioDTO>()
+                .ForMember(x => x.Clientes,y => y.MapFrom(z => z.Cliente))
+                .ForMember(x => x.Empleados, y => y.MapFrom(z => z.Empleado));
         }
     }
 }
