@@ -56,9 +56,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
                     detalle.IdServicio = tablaservicio.IdServicios;
                     ExtintoresContext.DetalleServicios.Add(detalle);
                 }
-                //DatabaseContext.SaveChanges();
                 transaction.Commit();
-
             }
             catch (Exception ex)
             {
@@ -66,7 +64,6 @@ namespace ManejoExtintores.Infraestructura.Repositorios
                 throw new Exception("No se guardaron los cambios",ex);
             }
             return tablaservicio;
-
         }
     }
 }

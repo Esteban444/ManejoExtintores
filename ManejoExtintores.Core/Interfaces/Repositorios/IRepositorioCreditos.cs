@@ -7,6 +7,7 @@ namespace ManejoExtintores.Core.Interfaces.Repositorios
 {
     public interface IRepositorioCreditos: IRepositorio<CreditoServicios>
     {
-        Task<IEnumerable<CreditoServicios>> ConsultaData(FiltroCreditos filtro);
+        Task<List<CreditoServicios>> ConsultaData(FiltroCreditos filtro);
+        Task<CreditoServicios> ConsultaDataPorId(int id);
     }
 }

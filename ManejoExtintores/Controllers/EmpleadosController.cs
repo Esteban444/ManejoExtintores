@@ -33,9 +33,9 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult ConsultaEmpleadoPorId(int id) 
+        public async Task<IActionResult> ConsultaEmpleadoPorId(int id) 
         {
-            var empleado =   _servicioEmpleado.ConsultaEmpleadoPorId(id);
+            var empleado =   await _servicioEmpleado.ConsultaEmpleadoPorId(id);
             var response = new Respuesta<EmpleadosDTO>(empleado);
             return Ok(response);
         }

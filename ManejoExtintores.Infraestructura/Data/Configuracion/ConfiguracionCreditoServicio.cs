@@ -30,7 +30,7 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
 
             builder.Property(e => e.IdServicio).HasColumnName("idServicio");
 
-            builder.HasOne(d => d.Servicios)
+            builder.HasOne(d => d.Servicio)
                 .WithMany(p => p.CreditoServicios)
                 .HasForeignKey(d => d.IdServicio)
                 .HasConstraintName("fk_Creditos");

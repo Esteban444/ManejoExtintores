@@ -7,6 +7,7 @@ namespace ManejoExtintores.Core.Interfaces.Repositorios
 {
     public interface IRepositorioDetalleExtClientes: IRepositorio<DetalleExtClientes>
     {
-        Task<IEnumerable<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro);
+        Task<List<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro);
+        Task<DetalleExtClientes> ConsultaDataPorId(int id); 
     }
 }

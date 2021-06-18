@@ -27,9 +27,9 @@ namespace ManejoExtintores.Core.Servicios
             return _mapper.Map<IEnumerable<EmpleadosDTO>>(empleado);
         }
 
-        public EmpleadosDTO ConsultaEmpleadoPorId(int id)  
+        public async Task<EmpleadosDTO> ConsultaEmpleadoPorId(int id)  
         {
-            var empleado = _repositorio.ConsultaPorId(e => e.IdEmpleados == id);
+            var empleado = await _repositorio.ConsultaDataPorId( id);
             if (empleado != null)
             {
                 return  _mapper.Map<EmpleadosDTO>(empleado);

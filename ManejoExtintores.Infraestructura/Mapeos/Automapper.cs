@@ -15,22 +15,27 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<Clientes, ClientesBase>().ReverseMap();
 
             CreateMap<CreditoServicios, CreditoServicioBase>().ReverseMap();
-            CreateMap<CreditoServicios, CreditoServiciosDTO>().ReverseMap();
+            CreateMap<CreditoServicios, CreditoServiciosDTO>()
+                .ForMember(x => x.Servicio, y => y.MapFrom(z => z.Servicio)); 
 
             CreateMap<DetalleServicios, DetalleServicioDTO>().ReverseMap();
             CreateMap<DetalleServicios, DetalleServicioBase>().ReverseMap(); 
 
-            CreateMap<DetalleExtClientes, DetalleExtClienteBase>().ReverseMap(); 
-            CreateMap<DetalleExtClientes, DetalleExtClienteDTO>().ReverseMap(); 
+            CreateMap<DetalleExtClientes, DetalleExtClienteBase>().ReverseMap();
+            CreateMap<DetalleExtClientes, DetalleExtClienteDTO>()
+                .ForMember(x => x.Cliente, y => y.MapFrom(z => z.Clientes))
+                .ForMember(x => x.Servicio, y => y.MapFrom(z => z.Servicios));
+            
 
             CreateMap<Empresas, EmpresaDTO>().ReverseMap();
             CreateMap<Empresas, EmpresaBase>().ReverseMap();
 
-            CreateMap<Empleados, EmpleadosDTO>().ReverseMap();
+            CreateMap<Empleados, EmpleadosDTO>()
+                .ForMember(x => x.Empresa,y =>y.MapFrom(z => z.Empresa));
             CreateMap<Empleados, EmpleadoBase>().ReverseMap();
 
             CreateMap<Inventarios, InventarioDTO>()
-                .ForMember(x => x.Produto, y => y.MapFrom(z => z.Producto));
+                .ForMember(x => x.Producto, y => y.MapFrom(z => z.Producto));
             CreateMap<Inventarios, InventarioBase>().ReverseMap();
 
 
@@ -38,12 +43,13 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<Gastos, GastosDTO>().ReverseMap();
 
             CreateMap<Precios, PrecioBase>().ReverseMap(); 
-            CreateMap<Precios, PrecioDTO>().ReverseMap();
+            CreateMap<Precios, PrecioDTO>()
+                .ForMember(x => x.Producto, y => y.MapFrom(z => z.Producto));
 
             CreateMap<Productos, ProductoBase>().ReverseMap(); 
             CreateMap<Productos, ProductoDTO>()
-                .ForMember(x => x.TipoExtintors,y => y.MapFrom(z => z.TipoExtintor))
-                .ForMember(x => x.PesoExtintors,y => y.MapFrom(z => z.PesoExtintor));
+                .ForMember(x => x.TipoExtintor,y => y.MapFrom(z => z.TipoExtintor))
+                .ForMember(x => x.PesoExtintor,y => y.MapFrom(z => z.PesoExtintor));
 
             CreateMap<PesoExtintors, PesoExtintorBase>().ReverseMap();
             CreateMap<PesoExtintors, PesoExtintorDTO>().ReverseMap();
@@ -53,8 +59,8 @@ namespace ManejoExtintores.Infraestructura.Mapeos
 
             CreateMap<Servicio, ServicioBase>().ReverseMap();
             CreateMap<Servicio, ServicioDTO>()
-                .ForMember(x => x.Clientes,y => y.MapFrom(z => z.Cliente))
-                .ForMember(x => x.Empleados, y => y.MapFrom(z => z.Empleado));
+                .ForMember(x => x.Cliente,y => y.MapFrom(z => z.Cliente))
+                .ForMember(x => x.Empleado, y => y.MapFrom(z => z.Empleado));
         }
     }
 }

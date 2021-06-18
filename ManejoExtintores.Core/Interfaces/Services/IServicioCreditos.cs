@@ -7,8 +7,8 @@ namespace ManejoExtintores.Core.Interfaces.Servicios
 {
     public interface IServicioCreditos
     {
-        Task<IEnumerable<CreditoServiciosDTO>> ConsultaCreditos(FiltroCreditos filtros);
-        CreditoServiciosDTO ConsultaCreditoPorId(int id);
+        Task<List<CreditoServiciosDTO>> ConsultaCreditos(FiltroCreditos filtros);
+        Task<CreditoServiciosDTO> ConsultaCreditoPorId(int id);
         Task<CreditoServicioBase> CrearCredito(CreditoServicioBase credito);
         Task<CreditoServicioBase> ActualizarCredito(int id, CreditoServicioBase credito);
         Task<CreditoServiciosDTO> EliminarCredito(int id); 

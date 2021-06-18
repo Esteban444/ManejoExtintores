@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
-using ManejoExtintores.Core.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +15,12 @@ namespace ManejoExtintores.Api.Controllers
     [ApiController]
     public class ServiciosController : ControllerBase
     {
-        private readonly IRepositorioServicio _Repositorioservicio; 
         private readonly IServicioDeServicios _serviciodeServicio;
-        private readonly IMapper _mapper;
         private readonly IValidator<ServicioBase> _validator;
 
-        public ServiciosController(IServicioDeServicios serviciodeservicio, IMapper mapper,IRepositorioServicio repositorioServicio,
-             IValidator<ServicioBase> validator ) 
+        public ServiciosController(IServicioDeServicios serviciodeservicio,IValidator<ServicioBase> validator ) 
         {
-            _Repositorioservicio = repositorioServicio;
             _serviciodeServicio = serviciodeservicio;
-            _mapper = mapper;
             _validator = validator;
         }
 
@@ -48,7 +41,7 @@ namespace ManejoExtintores.Api.Controllers
         }
 
         [HttpPost("Crear-Servicio-Detalle")]
-        public async Task<IActionResult> CreacionDetalleServicio(ServicioBase serviciobase)  
+        public IActionResult CreacionDetalleServicio(ServicioBase serviciobase)  
         {
             var Validacion = _validator.Validate(serviciobase);
             if (!Validacion.IsValid)
@@ -59,7 +52,7 @@ namespace ManejoExtintores.Api.Controllers
             }
             else
             {
-                await _serviciodeServicio.CrearServicioDetalle(serviciobase);
+                 _serviciodeServicio.CrearServicioDetalle(serviciobase);
                 var respuesta = new Respuesta<ServicioBase>(serviciobase);
                 return Ok(respuesta);
             }

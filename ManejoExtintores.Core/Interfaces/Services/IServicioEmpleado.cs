@@ -8,7 +8,7 @@ namespace ManejoExtintores.Core.Interfaces
     public interface IServicioEmpleado
     {
         Task<IEnumerable<EmpleadosDTO>> ConsultaEmpleados( FiltroEmpleados filtros); 
-        EmpleadosDTO ConsultaEmpleadoPorId(int id); 
+        Task<EmpleadosDTO> ConsultaEmpleadoPorId(int id); 
         Task<EmpleadoBase> CrearEmpleado(EmpleadoBase empleado);
         Task<EmpleadoBase> ActualizarEmpleado(int id,EmpleadoBase empleado );
         Task<EmpleadosDTO> EliminarEmpleado(int id); 

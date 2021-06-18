@@ -4,9 +4,7 @@ using ManejoExtintores.Core.DTOs.Request;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces.Servicios;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,14 +27,14 @@ namespace ManejoExtintores.Controllers
         public async Task<IActionResult> ConsultaCreditos([FromQuery] FiltroCreditos filtro)
         {
             var creditos =   await _serviciCreditos.ConsultaCreditos(filtro);
-            var respuesta = new Respuesta<IEnumerable<CreditoServiciosDTO>>(creditos);
+            var respuesta = new Respuesta<List<CreditoServiciosDTO>>(creditos);
             return Ok(respuesta);
         }
 
         [HttpGet("{id}")]
-        public IActionResult ConsultaporId(int id) 
+        public async Task<IActionResult> ConsultaporId(int id) 
         {
-            var credito = _serviciCreditos.ConsultaCreditoPorId(id);
+            var credito =  await _serviciCreditos.ConsultaCreditoPorId(id);
             var respuesta = new Respuesta<CreditoServiciosDTO>(credito);
             return Ok(respuesta);
         }

@@ -22,16 +22,16 @@ namespace ManejoExtintores.Core.Servicios
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CreditoServiciosDTO>> ConsultaCreditos(FiltroCreditos filtros)
+        public async Task<List<CreditoServiciosDTO>> ConsultaCreditos(FiltroCreditos filtros)
         {
             var creditos =  await _repositorio.ConsultaData(filtros);
-            var creditosdt = _mapper.Map<IEnumerable<CreditoServiciosDTO>>(creditos);
+            var creditosdt = _mapper.Map<List<CreditoServiciosDTO>>(creditos);
             return creditosdt;
         }
 
-        public CreditoServiciosDTO ConsultaCreditoPorId(int id)
+        public async Task<CreditoServiciosDTO> ConsultaCreditoPorId(int id)
         {
-            var creditobd = _repositorio.ConsultaPorId(x => x.IdCreditos == id);
+            var creditobd =  await _repositorio.ConsultaDataPorId(id);
             if(creditobd != null)
             {
                 return _mapper.Map<CreditoServiciosDTO>(creditobd);

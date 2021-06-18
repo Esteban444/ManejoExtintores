@@ -10,7 +10,7 @@ namespace ManejoExtintores.Core.Interfaces
         Task<IEnumerable<ServicioDTO>> ConsultarServicios(FiltroServicios filtros); 
         ServicioDTO ConsultaServicio(int id);  
         Task<ServicioBase> CrearServicios(ServicioBase servicio);
-        Task<ServicioBase> CrearServicioDetalle(ServicioBase servicio);   
+        ServicioBase CrearServicioDetalle(ServicioBase servicio);   
         Task<ServicioBase> ActualizarServicios(int id,ServicioBase servicio);
         Task<ServicioDTO> EliminarServicios(int id); 
     }

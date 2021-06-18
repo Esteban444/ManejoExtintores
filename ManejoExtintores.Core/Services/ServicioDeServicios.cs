@@ -42,10 +42,9 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<ServicioBase> CrearServicioDetalle(ServicioBase serviciob) 
+        public ServicioBase CrearServicioDetalle(ServicioBase serviciob) 
         {
-            var serviciodetalle = _mapper.Map<Servicio>(serviciob);
-            await _repositorio.Crear(serviciodetalle);
+             var serviciodetalle = _repositorio.CrearServicioDetalle(serviciob);
             serviciob = _mapper.Map<ServicioBase>(serviciodetalle);
             return serviciob;
         }

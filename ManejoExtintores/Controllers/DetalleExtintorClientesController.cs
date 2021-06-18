@@ -28,14 +28,14 @@ namespace ManejoExtintores.Controllers
         public async Task<IActionResult> ConsultaDetalleExtClientes([FromQuery]FiltroDetalleExtClientes filtro)
         {
             var detalleextintorclientes = await _servicioDetalleExtClientes.ConsultaDetalleClientes(filtro);
-            var resultado = new Respuesta<IEnumerable<DetalleExtClienteDTO>>(detalleextintorclientes);
+            var resultado = new Respuesta<List<DetalleExtClienteDTO>>(detalleextintorclientes);
             return Ok(resultado); 
         }
 
         [HttpGet("{id}")]
-        public IActionResult ConsultaDetalleExtclientePorId(int id)
+        public async Task<IActionResult> ConsultaDetalleExtclientePorId(int id)
         {
-            var detalleExtintorCliente = _servicioDetalleExtClientes.ConsultaDetalleExtClientePorId(id);
+            var detalleExtintorCliente =  await _servicioDetalleExtClientes.ConsultaDetalleExtClientePorId(id);
             var resultado = new Respuesta<DetalleExtClienteDTO>(detalleExtintorCliente);
             return Ok(resultado);
         }

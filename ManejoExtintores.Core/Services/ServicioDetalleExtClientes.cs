@@ -22,16 +22,16 @@ namespace ManejoExtintores.Core.Servicios
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DetalleExtClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro)
+        public async Task<List<DetalleExtClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro)
         {
             var detalleextClientes =  await _repositorioDetalleExtClientes.ConsultaData(filtro);
-            var detalleextclientesdt = _mapper.Map<IEnumerable<DetalleExtClienteDTO>>(detalleextClientes);
+            var detalleextclientesdt = _mapper.Map<List<DetalleExtClienteDTO>>(detalleextClientes);
             return detalleextclientesdt;
         }
 
-        public DetalleExtClienteDTO ConsultaDetalleExtClientePorId(int id)
+        public async Task<DetalleExtClienteDTO> ConsultaDetalleExtClientePorId(int id)
         {
-            var detalleextintorCliente = _repositorioDetalleExtClientes.ConsultaPorId(x => x.IdDetalleCliente == id);
+            var detalleextintorCliente = await _repositorioDetalleExtClientes.ConsultaDataPorId(id);
             if(detalleextintorCliente != null)
             {
                 return _mapper.Map<DetalleExtClienteDTO>(detalleextintorCliente);

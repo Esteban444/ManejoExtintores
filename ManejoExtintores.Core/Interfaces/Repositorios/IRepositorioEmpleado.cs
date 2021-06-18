@@ -8,5 +8,6 @@ namespace ManejoExtintores.Core.Interfaces
     public interface IRepositorioEmpleado: IRepositorio<Empleados>
     {
         Task<IEnumerable<Empleados>> ConsultaData(FiltroEmpleados filtro); 
+        Task<Empleados> ConsultaDataPorId(int id);  
     }
 }

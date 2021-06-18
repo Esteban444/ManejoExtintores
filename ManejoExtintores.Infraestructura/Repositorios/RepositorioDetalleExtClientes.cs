@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ManejoExtintores.Core.Excepciones;
+using System.Net;
 
 namespace ManejoExtintores.Infraestructura.Repositorios
 {
@@ -17,9 +19,10 @@ namespace ManejoExtintores.Infraestructura.Repositorios
         {
             ExtintoresContext = context;
         }
-        public async Task<IEnumerable<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro)
+        public async Task<List<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro)
         {
-            var detalleextclientes = await ExtintoresContext.DetalleExtClientes.ToListAsync();
+            var detalleextclientes = await ExtintoresContext.DetalleExtClientes
+                .Include(x => x.Clientes).Include(z => z.Servicios).ToListAsync();
 
             if (filtro.TipoExtintor != null)
             {
@@ -39,6 +42,11 @@ namespace ManejoExtintores.Infraestructura.Repositorios
                 detalleextclientes = detalleextclientes.Where(x => x.FechaVencimiento == filtro.FechaVencimiento).ToList();
             }
             return detalleextclientes;
+        }
+
+        public Task<DetalleExtClientes> ConsultaDataPorId(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
