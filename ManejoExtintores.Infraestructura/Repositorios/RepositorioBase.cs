@@ -48,10 +48,10 @@ namespace ManejoExtintores.Infraestructura.Repositorios
 
         public async Task Eliminar(T modelo)
         {
-            var actulizarEli = modelo.GetType().GetProperty("Estado");
+            var actulizarEli = modelo.GetType().GetProperty("IsDeleted");
             if(actulizarEli != null)
             {
-                modelo.GetType().GetProperty("Estado").SetValue(modelo, true);
+                modelo.GetType().GetProperty("IsDeleted").SetValue(modelo, true);
 
                 var actualizar = modelo.GetType().GetProperty("TiempoEli");
                 if (actualizar != null) modelo.GetType().GetProperty("TiempoEli").SetValue(modelo, DateTime.Now);

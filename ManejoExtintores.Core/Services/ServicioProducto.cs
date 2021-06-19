@@ -58,8 +58,6 @@ namespace ManejoExtintores.Core.Servicios
                 productosbd.IdTipoExtintor = productobs.IdTipoExtintor;
                 productosbd.IdPesoExtintor = productobs.IdPesoExtintor;
                 productosbd.TipoProducto = productobs.TipoProducto;
-                productosbd.PesoXlibras = productobs.PesoXlibras;
-                productosbd.PesoXlibras = productobs.PesoXlibras;
 
                 await _repositorio.Actualizar(productosbd);
                 productobs = _mapper.Map<ProductoBase>(productosbd);

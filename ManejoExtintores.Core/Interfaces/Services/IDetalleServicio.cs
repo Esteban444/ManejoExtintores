@@ -1,4 +1,5 @@
-﻿using ManejoExtintores.Core.Modelos;
+﻿using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.Filtros_Busqueda;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,10 +7,10 @@ namespace ManejoExtintores.Core.Interfaces
 {
     public interface IDetalleServicio
     {
-        IEnumerable<DetalleServicios> GetDetalles();
-        DetalleServicios GetDetalle(int id);
-        Task CrearDetalle(DetalleServicios detalle); 
-        Task<bool> ActualizarDetalle(DetalleServicios detalle);
-        Task<bool> EliminarDetalle(int id);
+        Task<List<DetalleServicioDTO>> ConsultaDetalles(FiltroDetalleServicio filtro); 
+        DetalleServicioDTO ConsultaDetallePorId(int id); 
+        Task<DetalleServicioBase> CrearDetalles(DetalleServicioBase detalle);  
+        Task<DetalleServicioBase> ActualizarDetalle(int id,DetalleServicioBase detalle);
+        Task<DetalleServicioDTO> EliminarDetalle(int id);
     }
 }

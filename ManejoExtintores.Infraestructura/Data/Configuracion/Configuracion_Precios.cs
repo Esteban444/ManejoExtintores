@@ -10,8 +10,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Precios");
 
-            builder.HasKey(e => e.IdPrecios)
-                    .HasName("PK__Precios__C65E7C9ACF75FE56");
+            builder.HasKey(e => e.IdPrecios);
 
             builder.Property(e => e.IdPrecios).HasColumnName("idPrecios");
 
@@ -20,16 +19,12 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .IsUnicode(false)
                 .HasColumnName("descripcion");
 
-            builder.Property(e => e.IdDetalleServ).HasColumnName("idDetalleServ");
-
-            builder.Property(e => e.IdProductos).HasColumnName("idProductos");
-
             builder.Property(e => e.Iva)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("iva");
 
             builder.Property(e => e.Valor)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("valor");
 
             builder.HasOne(d => d.DetalleServicio)

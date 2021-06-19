@@ -19,7 +19,8 @@ namespace ManejoExtintores.Infraestructura.Repositorios
         }
         public async Task<IEnumerable<Inventarios>> ConsultaData(FiltroInventario filtro)
         {
-            var inventarios = await ExtintoresContext.Inventarios.Include(x => x.Producto).ToListAsync();
+            var inventarios = await ExtintoresContext.Inventarios.Include(x => x.Producto)
+                .Include(x => x.PesoExtintor).Include(x => x.TipoExtintor).ToListAsync();
             if (filtro.Fecha != null)
             {
                 inventarios = inventarios.Where(x => x.Fecha == filtro.Fecha).ToList();

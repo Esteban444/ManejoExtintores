@@ -45,6 +45,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
             services.AddTransient<IRepositorioCreditos, RepositorioCreditos>();
 
             services.AddScoped(typeof(IRepositorio<DetalleServicios>), typeof(RepositorioBase<DetalleServicios>));
+            services.AddTransient<IRepositorioDetalleServicio, RepositorioDetalleServicio>();
             
             services.AddScoped(typeof(IRepositorio<DetalleExtClientes>), typeof(RepositorioBase<DetalleExtClientes>));
             services.AddTransient<IRepositorioDetalleExtClientes,RepositorioDetalleExtClientes>();
@@ -90,7 +91,7 @@ namespace ManejoExtintores.Infraestructura.Extensiones
 
             services.AddTransient<IServicioCliente, ServicioCliente>();
             services.AddTransient<IServicioCreditos, ServicioCreditos>();
-            services.AddTransient<IDetalleServicio, ServicioDetalleServicio>();
+            services.AddTransient<IDetalleServicio, ServicioDetalleServicios>();
             services.AddTransient<IServicioDetalleExtClientes, ServicioDetalleExtClientes>();
             services.AddTransient<IServicioGasto, ServicioGasto>();
             services.AddTransient<IServicio_Empresa, Servicio_Empresa>();

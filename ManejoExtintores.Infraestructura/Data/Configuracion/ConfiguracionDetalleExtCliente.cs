@@ -11,23 +11,22 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("DetalleExtClientes");
 
-            builder.HasKey(e => e.IdDetalleCliente)
-                     .HasName("PK__DetalleE__E0CA4893B1C20026");
+            builder.HasKey(e => e.IdDetalleCliente);
 
             builder.Property(e => e.IdDetalleCliente).HasColumnName("idDetalleCliente");
 
             builder.Property(e => e.Cantidad).HasColumnName("cantidad");
 
             builder.Property(e => e.FechaMantenimiento)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("fechaMantenimiento");
 
             builder.Property(e => e.FechaServicio)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("fechaServicio");
 
             builder.Property(e => e.FechaVencimiento)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("fechaVencimiento");
 
             builder.Property(e => e.IdClientes).HasColumnName("idClientes");
@@ -47,7 +46,7 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
             builder.HasOne(d => d.Clientes)
                 .WithMany(p => p.DetalleExtClientes)
                 .HasForeignKey(d => d.IdClientes)
-                .HasConstraintName("fk_DetalleCliente");
+                .HasConstraintName("FK_DetalleExtClientes_Clientes");
 
             builder.HasOne(d => d.Servicios)
                 .WithMany(p => p.DetalleExtClientes)

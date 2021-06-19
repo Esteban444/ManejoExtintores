@@ -22,19 +22,25 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
 
             builder.Property(e => e.FechaVencimiento).HasColumnType("datetime");
 
-            builder.Property(e => e.Tipo)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-
             builder.HasOne(d => d.DetalleServ)
-                .WithMany(p => p.Inventario)
+                .WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.DetalleServId)
-                .HasConstraintName("FK_Inventario_DetalleServicio");
+                .HasConstraintName("FK_Inventarios_DetalleServicios");
+
+            builder.HasOne(d => d.PesoExtintor)
+                .WithMany(p => p.Inventarios)
+                .HasForeignKey(d => d.IdPesoExtintor)
+                .HasConstraintName("FK_Inventarios_PesoExtintors");
 
             builder.HasOne(d => d.Producto)
                 .WithMany(p => p.Inventarios)
                 .HasForeignKey(d => d.IdProductos)
                 .HasConstraintName("fk_Inventario");
+
+            builder.HasOne(d => d.TipoExtintor)
+                .WithMany(p => p.Inventarios)
+                .HasForeignKey(d => d.IdTipoExtintor)
+                .HasConstraintName("FK_Inventarios_TipoExtintors");
         }
     }
 }

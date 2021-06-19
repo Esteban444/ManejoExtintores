@@ -10,8 +10,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Gastos");
 
-            builder.HasKey(e => e.IdGastos) 
-                    .HasName("PK__Gastos__9C14561A356457B5");
+            builder.HasKey(e => e.IdGastos);
 
             builder.Property(e => e.IdGastos).HasColumnName("idGastos");
 
@@ -26,7 +25,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasColumnType("date")
                 .HasColumnName("fecha");
 
-            builder.Property(e => e.Total).HasColumnType("decimal(18, 0)");
+            builder.Property(e => e.Total).HasColumnType("decimal(18, 4)");
         }
     }
 }

@@ -10,8 +10,8 @@ namespace ManejoExtintores.Core.Modelos
         [DataType(DataType.Date)]
         public DateTime? Fecha { get; set; }
         public string Descripcion { get; set; } 
-        public string Tipo { get; set; }
-        public int? PesoXlibras { get; set; }
+        public int? IdTipoExtintor { get; set; } 
+        public int? IdPesoExtintor { get; set; } 
         public int? Cantidad { get; set; }
         [DataType(DataType.Date)]
         public DateTime? FechaVencimiento { get; set; }
@@ -19,5 +19,7 @@ namespace ManejoExtintores.Core.Modelos
 
         public Productos Producto { get; set; } 
         public DetalleServicios DetalleServ { get; set; }
+        public PesoExtintors PesoExtintor { get; set; }
+        public TipoExtintors TipoExtintor { get; set; } 
     }
 }

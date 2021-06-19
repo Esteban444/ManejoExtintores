@@ -5,18 +5,18 @@ namespace ManejoExtintores.Core.Modelos
     public class DetalleServicios
     {
         public int IdDetalleServ { get; set; }
-        public int? IdServicio { get; set; } 
+        public int? IdServicios { get; set; }  
         public string Descripcion { get; set; }
-        public string TipoExtintor { get; set; }
-        public int? PesoXlibras { get; set; }
+        public int? IdTipoExtintor { get; set; } 
+        public int? IdPesoExtintor { get; set; } 
         public decimal? Valor { get; set; }
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
 
         public  Servicio Servicios { get; set; } 
-        public  ICollection<PesoExtintors> PesoExtintors { get; set; }
+        public  PesoExtintors PesoExtintor { get; set; } 
         public  ICollection<Precios> Precios { get; set; }
-        public  ICollection<TipoExtintors> TipoExtintors { get; set; }
-        public  ICollection<Inventarios> Inventario { get; set; }
+        public  TipoExtintors TipoExtintors { get; set; }  
+        public  ICollection<Inventarios> Inventarios { get; set; } 
     }
 }

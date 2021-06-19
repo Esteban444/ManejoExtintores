@@ -8,7 +8,6 @@ namespace ManejoExtintores.Core.Modelos
         public int? IdTipoExtintor { get; set; }
         public int? IdPesoExtintor { get; set; }
         public string TipoProducto { get; set; }
-        public int? PesoXlibras { get; set; }
 
         public PesoExtintors PesoExtintor { get; set; } 
         public TipoExtintors TipoExtintor { get; set; } 

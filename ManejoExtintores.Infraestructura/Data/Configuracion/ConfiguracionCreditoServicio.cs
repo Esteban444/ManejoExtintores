@@ -11,21 +11,20 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("CreditoServicios");
 
-            builder.HasKey(e => e.IdCreditos)
-                    .HasName("PK__CreditoS__BEF75FDA31E31A30");
+            builder.HasKey(e => e.IdCreditos);
 
             builder.Property(e => e.IdCreditos).HasColumnName("idCreditos");
 
             builder.Property(e => e.Abono)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("abono");
 
             builder.Property(e => e.Deuda)
-                .HasColumnType("decimal(18, 0)")
+                .HasColumnType("decimal(18, 4)")
                 .HasColumnName("deuda");
 
             builder.Property(e => e.Fecha)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("fecha");
 
             builder.Property(e => e.IdServicio).HasColumnName("idServicio");
@@ -33,6 +32,7 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
             builder.HasOne(d => d.Servicio)
                 .WithMany(p => p.CreditoServicios)
                 .HasForeignKey(d => d.IdServicio)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("fk_Creditos");
         }
     }

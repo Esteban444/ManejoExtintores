@@ -60,8 +60,8 @@ namespace ManejoExtintores.Core.Servicios
                 inventarios.IdProductos = inventario.IdProductos;
                 inventarios.Fecha = inventario.Fecha;
                 inventarios.Descripcion = inventario.Descripcion;
-                inventarios.Tipo = inventario.Tipo;
-                inventarios.PesoXlibras = inventario.PesoXlibras;
+                inventarios.IdTipoExtintor = inventario.IdTipoExtintor;
+                inventarios.IdPesoExtintor = inventario.IdPesoExtintor; 
                 inventarios.Cantidad = inventario.Cantidad;
                 inventarios.FechaVencimiento = inventario.FechaVencimiento;
 

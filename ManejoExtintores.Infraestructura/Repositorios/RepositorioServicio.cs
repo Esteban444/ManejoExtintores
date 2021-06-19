@@ -53,7 +53,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
                 {
                     var detalle = _mapper.Map<DetalleServicios>(item);
 
-                    detalle.IdServicio = tablaservicio.IdServicios;
+                    detalle.IdServicios = tablaservicio.IdServicios;
                     ExtintoresContext.DetalleServicios.Add(detalle);
                 }
                 transaction.Commit();

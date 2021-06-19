@@ -10,16 +10,9 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Productos");
 
-            builder.HasKey(e => e.IdProductos)
-                    .HasName("PK__Producto__A26E462D14299951");
+            builder.HasKey(e => e.IdProductos);
 
             builder.Property(e => e.IdProductos).HasColumnName("idProductos");
-
-            builder.Property(e => e.IdPesoExtintor).HasColumnName("idPesoExtintor");
-
-            builder.Property(e => e.IdTipoExtintor).HasColumnName("idTipoExtintor");
-
-            builder.Property(e => e.PesoXlibras).HasColumnName("pesoXLibras");
 
             builder.Property(e => e.TipoProducto)
                 .HasMaxLength(80)

@@ -16,11 +16,6 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasColumnName("Tipo_Extintor")
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
-            builder.HasOne(d => d.DetalleServicio)
-                .WithMany(p => p.TipoExtintors)
-                .HasForeignKey(d => d.IdDetalleServ)
-                .HasConstraintName("fk_TipoExtintor");
         }
     }
 }

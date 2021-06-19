@@ -11,37 +11,27 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Empleados");
 
-            builder.HasKey(e => e.IdEmpleados)
-                   .HasName("PK__Empleado__42034B0E6EB4FAAF");
-
-            builder.Property(e => e.IdEmpleados).HasColumnName("idEmpleados");
+            builder.HasKey(e => e.IdEmpleados);
 
             builder.Property(e => e.Apellido)
-                .HasMaxLength(80)
-                .IsUnicode(false)
-                .HasColumnName("apellido");
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.Direccion)
-                .HasMaxLength(45)
-                .IsUnicode(false)
-                .HasColumnName("direccion");
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("email");
-
-            builder.Property(e => e.IdEmpresa).HasColumnName("idEmpresa");
+                .HasMaxLength(150)
+                .IsUnicode(false);
 
             builder.Property(e => e.Nombre)
-                .HasMaxLength(80)
-                .IsUnicode(false)
-                .HasColumnName("nombre");
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.Telefono)
-                .HasMaxLength(30)
-                .IsUnicode(false)
-                .HasColumnName("telefono");
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.HasOne(d => d.Empresa)
                 .WithMany(p => p.Empleados)

@@ -10,8 +10,7 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
         {
             builder.ToTable("Empresas");
 
-            builder.HasKey(e => e.IdEmpresa)
-                    .HasName("PK__Empresas__75D2CED42B78AACA");
+            builder.HasKey(e => e.IdEmpresa);
 
             builder.Property(e => e.IdEmpresa).HasColumnName("idEmpresa");
 
@@ -31,12 +30,12 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
                 .HasColumnName("nit");
 
             builder.Property(e => e.Nombre)
-                .HasMaxLength(1000)
+                .HasMaxLength(250)
                 .IsUnicode(false)
                 .HasColumnName("nombre");
 
             builder.Property(e => e.Telefono)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("telefono");
         }
