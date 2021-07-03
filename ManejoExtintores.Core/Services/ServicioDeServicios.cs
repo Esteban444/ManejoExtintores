@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.DTOs.Request;
 using ManejoExtintores.Core.Excepciones;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
@@ -55,6 +56,23 @@ namespace ManejoExtintores.Core.Servicios
             await _repositorio.Crear(crearservicios);
             var serviciob = _mapper.Map<ServicioBase>(crearservicios);
             return serviciob;
+        }
+
+        public async Task<ModificarEstado> ActualizarEstado(int id, ModificarEstado modificar)
+        {
+             var serviciobd = _repositorio.ConsultaPorId(s => s.IdServicios == id);
+            if (serviciobd != null)
+            {
+                serviciobd.Estado = modificar.Estado ?? serviciobd.Estado;
+                
+                await _repositorio.Actualizar(serviciobd);
+                var servicioAct = _mapper.Map<ModificarEstado>(serviciobd);
+                return servicioAct;
+            }
+            else
+            {
+                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El servicio que desea actualizarle el estado no existe en la base de datos" });
+            }
         }
 
         public async Task<ServicioBase> ActualizarServicios(int id,ServicioBase servicio)

@@ -2,14 +2,13 @@ using ManejoExtintores.Core.Modelos;
 using ManejoExtintores.Infraestructura.Data;
 using ManejoExtintores.Infraestructura.Extensiones;
 using ManejoExtintores.Infraestructura.Middleware;
+using ManejoExtintores.Infraestructura.Reporte;
 using ManejoExtintores.Infraestructura.ServiciosEmail;
 using ManejoExtintores.JwtGenerador;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,6 +32,11 @@ namespace ManejoExtintores
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCronJob<ReporteCron>(c =>
+            {
+                c.ZonaHoraria = TimeZoneInfo.Local;
+                c.CronExpresion = @"00 12 * * *";
+            });
             services.AgregarOpsiones(Configuration);
             services.AgregarContexto(Configuration);
             services.AgregarServicios();
@@ -84,10 +88,7 @@ namespace ManejoExtintores
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
 
-            services.AddControllers(c=> {
-                //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-               // c.Filters.Add(new AuthorizeFilter(policy));
-            });
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Manejo Extintores", Version = "v1" });

@@ -44,8 +44,6 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             try
             {
                 tablaservicio = _mapper.Map<Servicio>(servicio);
-
-
                 ExtintoresContext.Servicios.Add(tablaservicio);
                 ExtintoresContext.SaveChanges();
 

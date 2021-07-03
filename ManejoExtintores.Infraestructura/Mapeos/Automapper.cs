@@ -64,6 +64,7 @@ namespace ManejoExtintores.Infraestructura.Mapeos
             CreateMap<TipoExtintors, TipoExtintorDTO>().ReverseMap();
 
             CreateMap<Servicio, ServicioBase>().ReverseMap();
+            CreateMap<Servicio, ModificarEstado>().ReverseMap();
             CreateMap<Servicio, ServicioDTO>()
                 .ForMember(x => x.Cliente,y => y.MapFrom(z => z.Cliente))
                 .ForMember(x => x.Empleado, y => y.MapFrom(z => z.Empleado));

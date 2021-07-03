@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using ManejoExtintores.Api.Respuestas;
 using ManejoExtintores.Core.DTOs;
+using ManejoExtintores.Core.DTOs.Request;
 using ManejoExtintores.Core.DTOs.Responce;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
@@ -74,6 +75,14 @@ namespace ManejoExtintores.Api.Controllers
                 var response = new Respuesta<ServicioBase>(serviciob);
                 return Ok(response);
             }
+        }
+
+        [HttpPut ("modificar-estado")]
+        public async Task<IActionResult> ModificarEstado(int id, ModificarEstado modificar)
+        {
+           var resultado = await _serviciodeServicio.ActualizarEstado(id, modificar);
+            var respuesta = new Respuesta<ModificarEstado>(resultado);
+            return Ok(respuesta);
         }
 
         [HttpPut("{id}")]

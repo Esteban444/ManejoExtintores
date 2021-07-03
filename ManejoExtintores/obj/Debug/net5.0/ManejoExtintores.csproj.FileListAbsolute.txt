@@ -90,3 +90,4 @@ D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\n
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ref\ManejoExtintores.dll
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.pdb
 D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\obj\Debug\net5.0\ManejoExtintores.genruntimeconfig.cache
+D:\PROGRAMACION\ProyectoExtintores\ManejoExtintores\ManejoExtintores\bin\Debug\net5.0\Cronos.dll

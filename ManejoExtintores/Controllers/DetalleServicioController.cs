@@ -2,6 +2,7 @@
 using ManejoExtintores.Core.DTOs;
 using ManejoExtintores.Core.Filtros_Busqueda;
 using ManejoExtintores.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ManejoExtintores.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DetalleServicioController : ControllerBase
     {
         private readonly IDetalleServicio _servicioDetalle; 
