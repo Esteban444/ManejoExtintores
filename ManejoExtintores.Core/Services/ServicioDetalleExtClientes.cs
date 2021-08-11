@@ -22,19 +22,19 @@ namespace ManejoExtintores.Core.Servicios
             _mapper = mapper;
         }
 
-        public async Task<List<DetalleExtClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro)
+        public async Task<List<DetalleExtintorClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro)
         {
             var detalleextClientes =  await _repositorioDetalleExtClientes.ConsultaData(filtro);
-            var detalleextclientesdt = _mapper.Map<List<DetalleExtClienteDTO>>(detalleextClientes);
+            var detalleextclientesdt = _mapper.Map<List<DetalleExtintorClienteDTO>>(detalleextClientes);
             return detalleextclientesdt;
         }
 
-        public async Task<DetalleExtClienteDTO> ConsultaDetalleExtClientePorId(int id)
+        public async Task<DetalleExtintorClienteDTO> ConsultaDetalleExtClientePorId(int id)
         {
             var detalleextintorCliente = await _repositorioDetalleExtClientes.ConsultaDataPorId(id);
             if(detalleextintorCliente != null)
             {
-                return _mapper.Map<DetalleExtClienteDTO>(detalleextintorCliente);
+                return _mapper.Map<DetalleExtintorClienteDTO>(detalleextintorCliente);
             }
             else
             {
@@ -42,30 +42,28 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<DetalleExtClienteBase> CrearDetalleExtCliente(DetalleExtClienteBase detalleExtCliente)
+        public async Task<DetalleExtintorClienteBase> CrearDetalleExtCliente(DetalleExtintorClienteBase detalleExtCliente)
         {
-            var detalleextintorcliente = _mapper.Map<DetalleExtClientes>(detalleExtCliente);
+            var detalleextintorcliente = _mapper.Map<DetalleExtintorClientes>(detalleExtCliente);
             await _repositorioDetalleExtClientes.Crear(detalleextintorcliente); ;
-            detalleExtCliente = _mapper.Map<DetalleExtClienteBase>(detalleextintorcliente);
+            detalleExtCliente = _mapper.Map<DetalleExtintorClienteBase>(detalleextintorcliente);
             return detalleExtCliente;
         }
 
-        public async Task<DetalleExtClienteBase> ActualizarDetalleExtCliente(int id, DetalleExtClienteBase detalleExtCliente)
+        public async Task<DetalleExtintorClienteBase> ActualizarDetalleExtCliente(int id, DetalleExtintorClienteBase detalleExtCliente)
         {
             var detalleactualizarbd = _repositorioDetalleExtClientes.ConsultaPorId(x => x.IdDetalleCliente == id);
             if(detalleactualizarbd != null)
             {
                 detalleactualizarbd.IdClientes = detalleExtCliente.IdClientes;
-                detalleactualizarbd.IdServicio = detalleExtCliente.IdServicio;
                 detalleactualizarbd.TipoExtintor = detalleExtCliente.TipoExtintor ?? detalleactualizarbd.TipoExtintor;
                 detalleactualizarbd.Pesoextintor = detalleExtCliente.Pesoextintor ?? detalleactualizarbd.Pesoextintor;
                 detalleactualizarbd.Cantidad = detalleExtCliente.Cantidad ?? detalleactualizarbd.Cantidad;
-                detalleactualizarbd.FechaServicio = detalleExtCliente.FechaServicio ?? detalleactualizarbd.FechaServicio;
                 detalleactualizarbd.FechaMantenimiento = detalleExtCliente.FechaMantenimiento ?? detalleactualizarbd.FechaMantenimiento;
                 detalleactualizarbd.FechaVencimiento = detalleExtCliente.FechaVencimiento ?? detalleactualizarbd.FechaVencimiento;
 
                 await _repositorioDetalleExtClientes.Actualizar(detalleactualizarbd);
-                var detalleExtclienteactualizado = _mapper.Map<DetalleExtClienteBase>(detalleactualizarbd);
+                var detalleExtclienteactualizado = _mapper.Map<DetalleExtintorClienteBase>(detalleactualizarbd);
                 return detalleExtclienteactualizado;
             }
             else
@@ -74,7 +72,7 @@ namespace ManejoExtintores.Core.Servicios
             }
         }
 
-        public async Task<DetalleExtClienteDTO> EliminarDetalleExtCliente(int id)
+        public async Task<DetalleExtintorClienteDTO> EliminarDetalleExtCliente(int id)
         {
             var detalleExtclientebd =   _repositorioDetalleExtClientes.ConsultaPorId(e => e.IdDetalleCliente == id);
             if (detalleExtclientebd != null)
@@ -82,7 +80,7 @@ namespace ManejoExtintores.Core.Servicios
                 try
                 {
                     await _repositorioDetalleExtClientes.Eliminar(detalleExtclientebd);
-                    var detalleExtClienteE = _mapper.Map<DetalleExtClienteDTO>(detalleExtclientebd);
+                    var detalleExtClienteE = _mapper.Map<DetalleExtintorClienteDTO>(detalleExtclientebd);
                     return detalleExtClienteE;
                 }
                 catch (Exception)

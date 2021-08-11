@@ -18,9 +18,9 @@ namespace ManejoExtintores.Controllers
     public class DetalleExtintorClientesController : ControllerBase
     {
         private readonly IServicioDetalleExtClientes _servicioDetalleExtClientes;
-        private readonly IValidator<DetalleExtClienteBase> _validator;
+        private readonly IValidator<DetalleExtintorClienteBase> _validator;
         public DetalleExtintorClientesController( IServicioDetalleExtClientes servicioDetalleExtClientes,
-            IValidator<DetalleExtClienteBase> validator)
+            IValidator<DetalleExtintorClienteBase> validator)
         {
             _servicioDetalleExtClientes = servicioDetalleExtClientes;
             _validator = validator;
@@ -30,7 +30,7 @@ namespace ManejoExtintores.Controllers
         public async Task<IActionResult> ConsultaDetalleExtClientes([FromQuery]FiltroDetalleExtClientes filtro)
         {
             var detalleextintorclientes = await _servicioDetalleExtClientes.ConsultaDetalleClientes(filtro);
-            var resultado = new Respuesta<List<DetalleExtClienteDTO>>(detalleextintorclientes);
+            var resultado = new Respuesta<List<DetalleExtintorClienteDTO>>(detalleextintorclientes);
             return Ok(resultado); 
         }
 
@@ -38,12 +38,12 @@ namespace ManejoExtintores.Controllers
         public async Task<IActionResult> ConsultaDetalleExtclientePorId(int id)
         {
             var detalleExtintorCliente =  await _servicioDetalleExtClientes.ConsultaDetalleExtClientePorId(id);
-            var resultado = new Respuesta<DetalleExtClienteDTO>(detalleExtintorCliente);
+            var resultado = new Respuesta<DetalleExtintorClienteDTO>(detalleExtintorCliente);
             return Ok(resultado);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearDetalleExtintorCliente([FromBody] DetalleExtClienteBase crear) 
+        public async Task<IActionResult> CrearDetalleExtintorCliente([FromBody] DetalleExtintorClienteBase crear) 
         {
             var Validacion = _validator.Validate(crear);
             if (!Validacion.IsValid)
@@ -55,13 +55,13 @@ namespace ManejoExtintores.Controllers
             else
             {
                 var creardetalleExtintorcliente = await _servicioDetalleExtClientes.CrearDetalleExtCliente(crear);
-                var resultado = new Respuesta<DetalleExtClienteBase>(creardetalleExtintorcliente);
+                var resultado = new Respuesta<DetalleExtintorClienteBase>(creardetalleExtintorcliente);
                 return Ok(resultado);
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarCredito(int id, DetalleExtClienteBase actualizar)
+        public async Task<IActionResult> ActualizarCredito(int id, DetalleExtintorClienteBase actualizar)
         {
             var Validacion = _validator.Validate(actualizar);
             if (!Validacion.IsValid)
@@ -73,7 +73,7 @@ namespace ManejoExtintores.Controllers
             else
             {
                 var actualizardetalleextintorcliente = await _servicioDetalleExtClientes.ActualizarDetalleExtCliente(id, actualizar);
-                var detalleextCliAct = new Respuesta<DetalleExtClienteBase>(actualizardetalleextintorcliente);
+                var detalleextCliAct = new Respuesta<DetalleExtintorClienteBase>(actualizardetalleextintorcliente);
                 return Ok(detalleextCliAct);
             }
         }
@@ -82,7 +82,7 @@ namespace ManejoExtintores.Controllers
         public async Task<IActionResult> EliminarCredito(int id)
         {
             var resultado = await _servicioDetalleExtClientes.EliminarDetalleExtCliente(id);
-            var respuesta = new Respuesta<DetalleExtClienteDTO>(resultado);
+            var respuesta = new Respuesta<DetalleExtintorClienteDTO>(resultado);
             return Ok(respuesta);
         }
 

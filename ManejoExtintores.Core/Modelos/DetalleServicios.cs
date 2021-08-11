@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ManejoExtintores.Models;
+using System.Collections.Generic;
 
 namespace ManejoExtintores.Core.Modelos   
 {
@@ -17,6 +18,7 @@ namespace ManejoExtintores.Core.Modelos
         public  PesoExtintors PesoExtintor { get; set; } 
         public  ICollection<Precios> Precios { get; set; }
         public  TipoExtintors TipoExtintors { get; set; }  
-        public  ICollection<Inventarios> Inventarios { get; set; } 
+        public  ICollection<Inventarios> Inventarios { get; set; }
+        public ICollection<DetalleServicioDetalleClientes> DetalleServicioDetalleClientes { get; set; }
     }
 }

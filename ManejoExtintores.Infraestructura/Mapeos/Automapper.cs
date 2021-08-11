@@ -25,11 +25,9 @@ namespace ManejoExtintores.Infraestructura.Mapeos
                 .ForMember(x => x.TipoExtintor, y => y.MapFrom(z => z.TipoExtintors));
             CreateMap<DetalleServicios, DetalleServicioBase>().ReverseMap(); 
 
-            CreateMap<DetalleExtClientes, DetalleExtClienteBase>().ReverseMap();
-            CreateMap<DetalleExtClientes, DetalleExtClienteDTO>()
-                .ForMember(x => x.Cliente, y => y.MapFrom(z => z.Clientes))
-                .ForMember(x => x.Servicio, y => y.MapFrom(z => z.Servicios));
-            
+            CreateMap<DetalleExtintorClientes, DetalleExtintorClienteBase>().ReverseMap();
+            CreateMap<DetalleExtintorClientes, DetalleExtintorClienteDTO>()
+                .ForMember(x => x.Cliente, y => y.MapFrom(z => z.Clientes));
 
             CreateMap<Empresas, EmpresaDTO>().ReverseMap();
             CreateMap<Empresas, EmpresaBase>().ReverseMap();

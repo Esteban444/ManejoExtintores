@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ManejoExtintores.Core.Interfaces.Repositorios
 {
-    public interface IRepositorioDetalleExtClientes: IRepositorio<DetalleExtClientes>
+    public interface IRepositorioDetalleExtClientes: IRepositorio<DetalleExtintorClientes>
     {
-        Task<List<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro);
-        Task<DetalleExtClientes> ConsultaDataPorId(int id); 
+        Task<List<DetalleExtintorClientes>> ConsultaData(FiltroDetalleExtClientes filtro);
+        Task<DetalleExtintorClientes> ConsultaDataPorId(int id); 
     }
 }

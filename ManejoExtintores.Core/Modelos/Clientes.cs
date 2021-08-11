@@ -14,7 +14,7 @@ namespace ManejoExtintores.Core.Modelos
         public string Email { get; set; }
         public string Nit { get; set; }
 
-        public ICollection<DetalleExtClientes> DetalleExtClientes { get; set; }
+        public ICollection<DetalleExtintorClientes> DetalleExtClientes { get; set; }
         public ICollection<Servicio> Servicios { get; set; }
     }
 }

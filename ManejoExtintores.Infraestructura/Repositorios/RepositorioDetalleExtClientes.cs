@@ -11,7 +11,7 @@ using System.Net;
 
 namespace ManejoExtintores.Infraestructura.Repositorios
 {
-    public class RepositorioDetalleExtClientes : RepositorioBase<DetalleExtClientes>, IRepositorioDetalleExtClientes
+    public class RepositorioDetalleExtClientes : RepositorioBase<DetalleExtintorClientes>, IRepositorioDetalleExtClientes
     {
         public ManejoExtintoresContext ExtintoresContext { get; set; }
 
@@ -19,20 +19,16 @@ namespace ManejoExtintores.Infraestructura.Repositorios
         {
             ExtintoresContext = context;
         }
-        public async Task<List<DetalleExtClientes>> ConsultaData(FiltroDetalleExtClientes filtro)
+        public async Task<List<DetalleExtintorClientes>> ConsultaData(FiltroDetalleExtClientes filtro)
         {
             var detalleextclientes = await ExtintoresContext.DetalleExtClientes
-                .Include(x => x.Clientes).Include(z => z.Servicios).ToListAsync();
+                .Include(x => x.Clientes).ToListAsync();
 
             if (filtro.TipoExtintor != null)
             {
                 detalleextclientes = detalleextclientes.Where(x => x.TipoExtintor.ToLower().Contains(filtro.TipoExtintor.ToLower())).ToList();
             }
 
-            if (filtro.FechaServicio != null)
-            {
-                detalleextclientes = detalleextclientes.Where(x => x.FechaServicio == filtro.FechaServicio).ToList();
-            }
             if (filtro.FechaMantenimiento != null)
             {
                 detalleextclientes = detalleextclientes.Where(x => x.FechaMantenimiento == filtro.FechaMantenimiento).ToList();
@@ -44,7 +40,7 @@ namespace ManejoExtintores.Infraestructura.Repositorios
             return detalleextclientes;
         }
 
-        public Task<DetalleExtClientes> ConsultaDataPorId(int id)
+        public Task<DetalleExtintorClientes> ConsultaDataPorId(int id)
         {
             throw new System.NotImplementedException();
         }

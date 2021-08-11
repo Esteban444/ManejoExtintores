@@ -7,10 +7,10 @@ namespace ManejoExtintores.Core.Interfaces.Servicios
 {
     public interface IServicioDetalleExtClientes
     {
-        Task<List<DetalleExtClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro);
-        Task<DetalleExtClienteDTO> ConsultaDetalleExtClientePorId(int id); 
-        Task<DetalleExtClienteBase> CrearDetalleExtCliente(DetalleExtClienteBase detalleExtCliente);
-        Task<DetalleExtClienteBase> ActualizarDetalleExtCliente(int id, DetalleExtClienteBase detalleExtCliente);
-        Task<DetalleExtClienteDTO> EliminarDetalleExtCliente(int id); 
+        Task<List<DetalleExtintorClienteDTO>> ConsultaDetalleClientes(FiltroDetalleExtClientes filtro);
+        Task<DetalleExtintorClienteDTO> ConsultaDetalleExtClientePorId(int id); 
+        Task<DetalleExtintorClienteBase> CrearDetalleExtCliente(DetalleExtintorClienteBase detalleExtCliente);
+        Task<DetalleExtintorClienteBase> ActualizarDetalleExtCliente(int id, DetalleExtintorClienteBase detalleExtCliente);
+        Task<DetalleExtintorClienteDTO> EliminarDetalleExtCliente(int id); 
     }
 }

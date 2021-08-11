@@ -1,4 +1,5 @@
 ﻿using ManejoExtintores.Core.Modelos;
+using ManejoExtintores.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -15,7 +16,8 @@ namespace ManejoExtintores.Infraestructura.Data
 
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<CreditoServicios> CreditoServicios { get; set; }
-        public DbSet<DetalleExtClientes> DetalleExtClientes { get; set; }
+        public DbSet<DetalleExtintorClientes> DetalleExtClientes { get; set; }
+        public DbSet<DetalleServicioDetalleClientes> DetalleServicioDetalleClientes { get; set; }
         public DbSet<DetalleServicios> DetalleServicios { get; set; }
         public DbSet<Empleados> Empleados { get; set; }
         public DbSet<Empresas> Empresas { get; set; }

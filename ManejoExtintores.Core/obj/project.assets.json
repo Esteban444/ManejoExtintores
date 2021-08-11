@@ -3121,7 +3121,6 @@
       "path": "system.appcontext/4.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5517,7 +5516,6 @@
       "path": "system.runtime.interopservices.runtimeinformation/4.0.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6812,8 +6810,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrador1\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Juane\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6821,15 +6818,11 @@
       "projectUniqueName": "D:\\PROGRAMACION\\ProyectoExtintores\\ManejoExtintores\\ManejoExtintores.Core\\ManejoExtintores.Core.csproj",
       "projectName": "ManejoExtintores.Core",
       "projectPath": "D:\\PROGRAMACION\\ProyectoExtintores\\ManejoExtintores\\ManejoExtintores.Core\\ManejoExtintores.Core.csproj",
-      "packagesPath": "C:\\Users\\Administrador1\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Juane\\.nuget\\packages\\",
       "outputPath": "D:\\PROGRAMACION\\ProyectoExtintores\\ManejoExtintores\\ManejoExtintores.Core\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Administrador1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Juane\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6907,7 +6900,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -15,7 +15,6 @@ namespace ManejoExtintores.Core.Modelos
         public  Clientes Cliente { get; set; } 
         public  Empleados Empleado { get; set; }  
         public  ICollection<CreditoServicios> CreditoServicios { get; set; }
-        public  ICollection<DetalleExtClientes> DetalleExtClientes { get; set; }
         public  ICollection<DetalleServicios> DetalleServicios { get; set; }
     }
 }

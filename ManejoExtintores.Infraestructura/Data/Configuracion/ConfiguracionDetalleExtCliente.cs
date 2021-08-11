@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Manejo_Extintores.Infraestructura.Data.Configuracion
 {
-    public class ConfiguracionDetalleExtCliente : IEntityTypeConfiguration<DetalleExtClientes>
+    public class ConfiguracionDetalleExtCliente : IEntityTypeConfiguration<DetalleExtintorClientes>
     {
-        public void Configure(EntityTypeBuilder<DetalleExtClientes> builder)
+        public void Configure(EntityTypeBuilder<DetalleExtintorClientes> builder)
         {
-            builder.ToTable("DetalleExtClientes");
+            builder.ToTable("DetalleExtintorClientes");
 
             builder.HasKey(e => e.IdDetalleCliente);
 
@@ -21,17 +21,11 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
                 .HasColumnType("datetime")
                 .HasColumnName("fechaMantenimiento");
 
-            builder.Property(e => e.FechaServicio)
-                .HasColumnType("datetime")
-                .HasColumnName("fechaServicio");
-
             builder.Property(e => e.FechaVencimiento)
                 .HasColumnType("datetime")
                 .HasColumnName("fechaVencimiento");
 
             builder.Property(e => e.IdClientes).HasColumnName("idClientes");
-
-            builder.Property(e => e.IdServicio).HasColumnName("idServicio");
 
             builder.Property(e => e.Pesoextintor)
                 .HasMaxLength(50)
@@ -47,11 +41,6 @@ namespace Manejo_Extintores.Infraestructura.Data.Configuracion
                 .WithMany(p => p.DetalleExtClientes)
                 .HasForeignKey(d => d.IdClientes)
                 .HasConstraintName("FK_DetalleExtClientes_Clientes");
-
-            builder.HasOne(d => d.Servicios)
-                .WithMany(p => p.DetalleExtClientes)
-                .HasForeignKey(d => d.IdServicio)
-                .HasConstraintName("FK_DetalleExtCliente_Servicios");
         }
     }
 }

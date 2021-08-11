@@ -20,7 +20,9 @@ namespace ManejoExtintores.Infraestructura.Repositorios
         }
         public async Task<List<CreditoServicios>> ConsultaData(FiltroCreditos filtro)
         {
-            var creditos = await ExtintoresContext.CreditoServicios.Include(x => x.Servicio).Where(z => z.Servicio.Estado == "Pendiente").ToListAsync();
+            var creditos = await ExtintoresContext.CreditoServicios.Include(x => x.Servicio)
+                .Where(z => z.Servicio.Estado == "Pendiente")
+                .OrderBy(x => x.IdServicio).ThenBy(x => x.IdCreditos).ToListAsync();
 
             if (filtro.Fecha != null)
             {
