@@ -132,6 +132,11 @@ namespace ManejoExtintores
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(builder => {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+
             app.UseAuthentication();
 
             app.UseRouting();

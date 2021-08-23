@@ -20,6 +20,8 @@ namespace ManejoExtintores.Infraestructura.Data.Configuracion
 
             builder.Property(e => e.Valor).HasColumnType("decimal(18, 4)");
 
+            builder.Property(e => e.Abono).HasColumnType("decimal(18, 4)");
+
             builder.HasOne(d => d.Cliente)
                 .WithMany(p => p.Servicios)
                 .HasForeignKey(d => d.IdClientes)

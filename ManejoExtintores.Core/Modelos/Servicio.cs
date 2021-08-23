@@ -11,6 +11,9 @@ namespace ManejoExtintores.Core.Modelos
         public DateTime? FechaServicio { get; set; }
         public decimal? Valor { get; set; }
         public string Estado { get; set; }
+        public DateTime? FechaVencimiento { get; set; }
+        public DateTime? FechaMantenimiento { get; set; }
+        public decimal? Abono { get; set; } 
 
         public  Clientes Cliente { get; set; } 
         public  Empleados Empleado { get; set; }  
