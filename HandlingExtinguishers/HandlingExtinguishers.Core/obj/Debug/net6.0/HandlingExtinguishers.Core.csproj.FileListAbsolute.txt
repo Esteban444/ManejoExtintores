@@ -1,0 +1,17 @@
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.Core.deps.json
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.Core.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.Core.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.Contracts.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.DTO.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.Contracts.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\bin\Debug\net6.0\HandlingExtinguishers.DTO.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.csproj.AssemblyReference.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.AssemblyInfoInputs.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.AssemblyInfo.cs
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.csproj.CoreCompileInputs.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.csproj.CopyComplete
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\refint\HandlingExtinguishers.Core.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\HandlingExtinguishers.Core.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.Core\obj\Debug\net6.0\ref\HandlingExtinguishers.Core.dll
