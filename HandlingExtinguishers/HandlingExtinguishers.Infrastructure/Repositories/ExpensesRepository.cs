@@ -17,7 +17,7 @@ namespace HandlingExtinguishers.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Expenses>> ConsultData(FilterExpenses filter) 
         {
-            var expenses = await handlingExtinguishersDbContext.Expenses.ToListAsync();
+            var expenses = await handlingExtinguishersDbContext.Expenses!.ToListAsync();
             if (filter.Description != null)
             {
                 expenses = expenses.Where(x => (x.Description!.ToLower().Contains(filter.Description.ToLower()))).ToList();

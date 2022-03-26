@@ -1,5 +1,7 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Filters;
+using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -18,63 +20,55 @@ namespace HandlingExtinguishers.WebApi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         public async Task<IActionResult> ConsultExpenses([FromQuery] FilterExpenses filter) 
         {
             var expenses = await _serviceExpenses.GetExpenses(filter);
             return Ok(expenses);
         }
 
-        /*[HttpGet("{id}")]
-        public IActionResult ConsultaGastoPorId(int id)
+        [HttpGet("{expenseId}")]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        public async Task<IActionResult> ConsultExpenseById(Guid expenseId) 
         {
-            var gasto = _servicioGasto.GetGasto(id);
-            var response = new Respuesta<GastosDTO>(gasto);
-            return Ok(response);
+            var expense = await _serviceExpenses.GetExpense(expenseId);
+            return Ok(expense);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearGasto(GastosBase gastosbase)
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        public async Task<IActionResult> AddAsync( ExpensesRequestDto expenseRequest) 
         {
-            var Validacion = _validator.Validate(gastosbase);
-            if (!Validacion.IsValid)
-            {
-                var errors = Validacion.Errors.Select(e => e.ErrorMessage);
-
-                return BadRequest(new RespuestaGasto { Errors = errors });
-            }
-            else
-            {
-                await _servicioGasto.CrearGasto(gastosbase);
-                var response = new Respuesta<GastosBase>(gastosbase);
-                return Ok(response);
-            }
+            var response = await _serviceExpenses.AddAsync(expenseRequest);
+            return Ok(response); 
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarGasto(int id, GastosBase actualizar)
+        [HttpPut("{expenseId}")]
+        public async Task<IActionResult> UpdateExpenses(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
-            var Validacion = _validator.Validate(actualizar);
-            if (!Validacion.IsValid)
-            {
-                var errors = Validacion.Errors.Select(e => e.ErrorMessage);
-
-                return BadRequest(new RespuestaGasto { Errors = errors });
-            }
-            else
-            {
-                var result = await _servicioGasto.ActualizarGasto(id, actualizar);
-                var response = new Respuesta<GastosBase>(result);
-                return Ok(response);
-            }
+           var result = await _serviceExpenses.UpdateExpense(expenseId,expenseRequest); 
+           return Ok(result);
+            
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Eliminar(int id)
+        [HttpPatch("{expenseId}")]
+        public async Task<IActionResult> UpdateExpensesField(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
-            var result = await _servicioGasto.EliminarGasto(id);
-            var response = new Respuesta<GastosDTO>(result);
-            return Ok(response);
+            var result = await _serviceExpenses.UpdateExpenseField(expenseId, expenseRequest);
+            return Ok(result);
 
-        }*/
+        }
+
+        [HttpDelete("{expenseId}")]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        public async Task<IActionResult> Delete(Guid expenseId)
+        {
+            var result = await _serviceExpenses.DeleteExpenses(expenseId);
+            return Ok(result);
+        }
+    }
+
+    internal class HttpPachAttribute : Attribute
+    {
     }
 }

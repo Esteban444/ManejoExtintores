@@ -1,8 +1,13 @@
 ﻿using AutoMapper;
 using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
 using HandlingExtinguishers.Contracts.Interfaces.Services;
+using HandlingExtinguishers.Core.Helpers;
 using HandlingExtinguishers.DTO.Filters;
+using HandlingExtinguishers.DTO.Models;
+using HandlingExtinguishers.DTO.Request;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace HandlingExtinguishers.Core.Services
 {
@@ -23,61 +28,69 @@ namespace HandlingExtinguishers.Core.Services
             return expensesdt;
         }
 
-        /*public GastosDTO GetGasto(int id)
+        public async Task<ExpenseResponseDto> GetExpense(Guid expenseId) 
         {
-            var gastobd = _repositorio.ConsultaPorId(c => c.IdGastos == id);
-            if (gastobd != null)
+            var expensebd =  await _repositoryExpenses.FindBy(c => c.IdExpense ==expenseId).FirstOrDefaultAsync();
+            if (expensebd != null)
             {
-                return _mapper.Map<GastosDTO>(gastobd);
+                return _mapper.Map<ExpenseResponseDto>(expensebd);
             }
             else
             {
-                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El registro de gasto no existe en la base de datos" });
+                throw new Exception("El registro de gasto no existe en la base de datos" );
             }
         }
 
-        public async Task<GastosBase> CrearGasto(GastosBase gastobs)
+        public async Task<ExpenseResponseDto> AddAsync(ExpensesRequestDto expenseRequest) 
         {
-            var gasto = _mapper.Map<Gastos>(gastobs);
-            await _repositorio.Crear(gasto);
-            gastobs = _mapper.Map<GastosBase>(gasto);
-            return gastobs;
+            var expense = _mapper.Map<Expenses>(expenseRequest);
+            await _repositoryExpenses.Add(expense);
+            var newexpense = _mapper.Map<ExpenseResponseDto>(expense);
+            return newexpense;
         }
 
-        public async Task<GastosBase> ActualizarGasto(int id, GastosBase gastoac)
+        public async Task<ExpenseResponseDto> UpdateExpense(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
-            var gastobd = _repositorio.ConsultaPorId(c => c.IdGastos == id);
-            if (gastobd != null)
+            var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync(); 
+            if (expensebd != null)
             {
-                gastobd.Descripcion = gastoac.Descripcion;
-                gastobd.Fecha = gastoac.Fecha;
-                gastobd.Cantidad = gastoac.Cantidad;
-                gastobd.Total = gastoac.Total;
+                _mapper.Map(expenseRequest, expensebd);
 
-                await _repositorio.Actualizar(gastobd);
-                var gastoA = _mapper.Map<GastosBase>(gastobd);
-                return gastoA;
+                await _repositoryExpenses.Update(expensebd);
+                var response = _mapper.Map<ExpenseResponseDto>(expensebd);
+                return response;
             }
             else
             {
-                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El registro de gasto que desea actualizar no existe en la base de datos" });
+                throw new Exception("El registro de gasto que desea actualizar no existe en la base de datos" );
             }
         }
 
-        public async Task<GastosDTO> EliminarGasto(int id)
+        public async Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestDto expenseRequest)
         {
-            var gastobd = _repositorio.ConsultaPorId(c => c.IdGastos == id);
-            if (gastobd != null)
+            var expense = await _repositoryExpenses.FindBy(x => x.IdExpense == expenseId).FirstOrDefaultAsync(); 
+
+            var properties = new UpdateMapperProperties<Expenses, ExpensesRequestDto>();
+            var updateExpense =  await properties.MapperUpdate(expense!, expenseRequest);
+            await _repositoryExpenses.Update(updateExpense);
+            var response = _mapper.Map<ExpenseResponseDto>(updateExpense);
+            return response;
+        }
+
+        public async Task<ExpenseResponseDto> DeleteExpenses(Guid expenseId) 
+        {
+            var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync();
+            if (expensebd != null)
             {
-                await _repositorio.Eliminar(gastobd);
-                var gastoE = _mapper.Map<GastosDTO>(gastobd);
-                return gastoE;
+                await _repositoryExpenses.Delete(expensebd);
+                var expenseDeleted = _mapper.Map<ExpenseResponseDto>(expensebd);
+                return expenseDeleted;
             }
             else
             {
-                throw new ManejoExcepciones(HttpStatusCode.NotFound, new { Mensaje = "El gasto no existe en la base de datos" });
+                throw new Exception("El gasto no existe en la base de datos" );
             }
-        }*/
+        }
 
     }
 }

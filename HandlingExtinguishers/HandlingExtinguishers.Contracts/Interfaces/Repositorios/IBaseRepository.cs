@@ -5,11 +5,14 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Repositorios
 {
     public interface IBaseRepository<T>
     {
-        IQueryable<T> Consultas();
-        T ConsultaPorId(Expression<Func<T, bool>> predicado);
-        IQueryable<T> ConsultaPor(Expression<Func<T, bool>> predicado);
-        Task Crear(T modelo);
-        Task Actualizar(T modelo);
-        Task Eliminar(T modelo);
+        IQueryable<T> GetAll();  
+        T GetSingle(Expression<Func<T, bool>> predicate);  
+        IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
+        Task Add(T entity);  
+        Task AddRange(List<T> entity);
+        Task Update(T entity);
+        Task UpdateRange(List<T> entity);
+        Task Delete(T entity);
+        Task DeleteRange(List<T> entity);
     }
 }

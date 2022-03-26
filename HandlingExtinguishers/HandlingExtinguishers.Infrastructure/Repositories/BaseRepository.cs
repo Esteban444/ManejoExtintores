@@ -13,52 +13,67 @@ namespace HandlingExtinguishers.Infrastructure.Repositories
             DatabaseContext = context;
         }
 
-        public IQueryable<T> Consultas()
+        public virtual IQueryable<T> GetAll() 
         {
-            var modeloset = DatabaseContext.Set<T>();
-            return modeloset.AsQueryable();
+            var entityset = DatabaseContext.Set<T>();
+            return entityset.AsQueryable();
         }
-        public T ConsultaPorId(Expression<Func<T, bool>> predicado)
+        public virtual T GetSingle(Expression<Func<T, bool>> predicate)  
         {
-            return Consultas().FirstOrDefault(predicado);
+            return GetAll().FirstOrDefault(predicate);
         }
 
-        public async Task Crear(T modelo)
+        public async Task Add(T entity)
         {
-            await DatabaseContext.AddAsync(modelo);
+            await DatabaseContext.AddAsync(entity);
             await DatabaseContext.SaveChangesAsync();
 
         }
 
-        public IQueryable<T> ConsultaPor(Expression<Func<T, bool>> predicado)
+        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate) 
         {
-            return Consultas().Where(predicado);
+            return GetAll().Where(predicate);
         }
-        public async Task Actualizar(T modelo)
+        public async Task Update(T entity) 
         {
-            var actualizarT = modelo.GetType().GetProperty("TiempoModi");
-            if (actualizarT != null) modelo.GetType().GetProperty("TiempoModi")?.SetValue(modelo, DateTime.Now);
-            DatabaseContext.Update(modelo);
+            var updateT = entity.GetType().GetProperty("TimeMod");
+            if (updateT != null) entity.GetType().GetProperty("TimeMod")?.SetValue(entity, DateTime.Now);
+            DatabaseContext.Update(entity);
             await DatabaseContext.SaveChangesAsync();
 
         }
 
-        public async Task Eliminar(T modelo)
+        public async Task Delete(T entity) 
         {
-            var actulizarEli = modelo.GetType().GetProperty("IsDeleted");
-            if (actulizarEli != null)
+            var updateDele = entity.GetType().GetProperty("IsDeleted");
+            if (updateDele != null)
             {
-                modelo.GetType().GetProperty("IsDeleted")?.SetValue(modelo, true);
+                entity.GetType().GetProperty("IsDeleted")?.SetValue(entity, true);
 
-                var actualizar = modelo.GetType().GetProperty("TiempoEli");
-                if (actualizar != null) modelo.GetType().GetProperty("TiempoEli")?.SetValue(modelo, DateTime.Now);
-                DatabaseContext.Update(modelo);
+                var update = entity.GetType().GetProperty("TimeDele");
+                if (update != null) entity.GetType().GetProperty("TimeDele")?.SetValue(entity, DateTime.Now);
+                DatabaseContext.Update(entity);
             }
             else
             {
-                DatabaseContext.Remove(modelo);
+                DatabaseContext.Remove(entity);
             }
             await DatabaseContext.SaveChangesAsync();
+        }
+
+        public Task AddRange(List<T> entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateRange(List<T> entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteRange(List<T> entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
