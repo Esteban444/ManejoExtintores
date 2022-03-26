@@ -7,7 +7,7 @@ using HandlingExtinguishers.DTO.Models;
 using HandlingExtinguishers.DTO.Request;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.EntityFrameworkCore;
-
+using System.Net;
 
 namespace HandlingExtinguishers.Core.Services
 {
@@ -31,14 +31,9 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<ExpenseResponseDto> GetExpense(Guid expenseId) 
         {
             var expensebd =  await _repositoryExpenses.FindBy(c => c.IdExpense ==expenseId).FirstOrDefaultAsync();
-            if (expensebd != null)
-            {
-                return _mapper.Map<ExpenseResponseDto>(expensebd);
-            }
-            else
-            {
-                throw new Exception("El registro de gasto no existe en la base de datos" );
-            }
+            if (expensebd == null) throw new GlobalException("The expense record does not exist in the database.", HttpStatusCode.NotFound);
+            
+            return _mapper.Map<ExpenseResponseDto>(expensebd); 
         }
 
         public async Task<ExpenseResponseDto> AddAsync(ExpensesRequestDto expenseRequest) 
@@ -51,27 +46,23 @@ namespace HandlingExtinguishers.Core.Services
 
         public async Task<ExpenseResponseDto> UpdateExpense(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
-            var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync(); 
-            if (expensebd != null)
-            {
-                _mapper.Map(expenseRequest, expensebd);
+            var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync();
+            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.BadRequest);
 
-                await _repositoryExpenses.Update(expensebd);
-                var response = _mapper.Map<ExpenseResponseDto>(expensebd);
-                return response;
-            }
-            else
-            {
-                throw new Exception("El registro de gasto que desea actualizar no existe en la base de datos" );
-            }
+            _mapper.Map(expenseRequest, expensebd);
+
+            await _repositoryExpenses.Update(expensebd);
+            var response = _mapper.Map<ExpenseResponseDto>(expensebd);
+            return response;
         }
 
         public async Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestDto expenseRequest)
         {
-            var expense = await _repositoryExpenses.FindBy(x => x.IdExpense == expenseId).FirstOrDefaultAsync(); 
+            var expensebd = await _repositoryExpenses.FindBy(x => x.IdExpense == expenseId).FirstOrDefaultAsync();
+            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.BadRequest);
 
             var properties = new UpdateMapperProperties<Expenses, ExpensesRequestDto>();
-            var updateExpense =  await properties.MapperUpdate(expense!, expenseRequest);
+            var updateExpense =  await properties.MapperUpdate(expensebd!, expenseRequest);
             await _repositoryExpenses.Update(updateExpense);
             var response = _mapper.Map<ExpenseResponseDto>(updateExpense);
             return response;
@@ -80,16 +71,11 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<ExpenseResponseDto> DeleteExpenses(Guid expenseId) 
         {
             var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync();
-            if (expensebd != null)
-            {
-                await _repositoryExpenses.Delete(expensebd);
-                var expenseDeleted = _mapper.Map<ExpenseResponseDto>(expensebd);
-                return expenseDeleted;
-            }
-            else
-            {
-                throw new Exception("El gasto no existe en la base de datos" );
-            }
+            if (expensebd == null) throw new GlobalException("The expense record you are trying to delete does not exist in the database.", HttpStatusCode.NotFound);
+            await _repositoryExpenses.Delete(expensebd);
+            var expenseDeleted = _mapper.Map<ExpenseResponseDto>(expensebd);
+            return expenseDeleted;
+            
         }
 
     }

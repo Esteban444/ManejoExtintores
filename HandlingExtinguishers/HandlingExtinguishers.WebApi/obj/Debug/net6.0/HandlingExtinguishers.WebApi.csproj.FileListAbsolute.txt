@@ -72,3 +72,6 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\ref\HandlingExtinguishers.WebApi.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.Core.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.Core.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\FluentValidation.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

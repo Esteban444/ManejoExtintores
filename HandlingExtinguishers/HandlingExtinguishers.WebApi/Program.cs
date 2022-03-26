@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using HandlingExtinguishers.DTO.Models;
 using HandlingExtinguishers.Infrastructure;
 using HandlingExtinguishers.WebApi.Configurations;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -45,6 +46,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseExceptionHandler(HandlingExceptions.UseAPIErrorHandling);
 
 app.UseCors("api");
 

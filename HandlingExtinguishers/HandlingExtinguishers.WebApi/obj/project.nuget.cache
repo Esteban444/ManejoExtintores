@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "9IBsDE3ohGTjfmApHV62fe8WZkNZN4u4+HGGXuBud18n2crbssRz/66lVNHyJlf4RJVdX8BQtx84xWZaS7LIWg==",
+  "dgSpecHash": "0JkINjz1SAHHNAwgRFOdiRjTW75vD0TFkT3MK9iKaccXZ2On4k2kQLyRO9TK6MV3rkv5KxvsUbyI/PIFH4EkIA==",
   "success": true,
   "projectFilePath": "C:\\Mas\\ManejoExtintores\\HandlingExtinguishers\\HandlingExtinguishers.WebApi\\HandlingExtinguishers.WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\juan.alvarez\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\juan.alvarez\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\juan.alvarez\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
+    "C:\\Users\\juan.alvarez\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.4.0\\fluentvalidation.aspnetcore.10.4.0.nupkg.sha512",
+    "C:\\Users\\juan.alvarez\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
     "C:\\Users\\juan.alvarez\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.3\\microsoft.aspnetcore.cryptography.internal.6.0.3.nupkg.sha512",
     "C:\\Users\\juan.alvarez\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.3\\microsoft.aspnetcore.cryptography.keyderivation.6.0.3.nupkg.sha512",
     "C:\\Users\\juan.alvarez\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.3\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.3.nupkg.sha512",

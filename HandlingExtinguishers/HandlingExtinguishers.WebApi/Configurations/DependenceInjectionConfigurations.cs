@@ -1,7 +1,10 @@
-﻿using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
+﻿using FluentValidation;
+using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
 using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.Core.Services;
+using HandlingExtinguishers.DTO.Request;
 using HandlingExtinguishers.Infrastructure.Repositories;
+using HandlingExtinguishers.WebApi.Configurations.Validations;
 
 namespace HandlingExtinguishers.WebApi.Configurations
 {
@@ -18,7 +21,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             #endregion End Services
 
             #region Validators
-
+            services.AddScoped<IValidator<ExpensesRequestDto>, ExpensesValidations>();
             #endregion Validators
 
 
