@@ -21,6 +21,8 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)] 
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
         public async Task<IActionResult> ConsultExpenses([FromQuery] FilterExpenses filter) 
         {
             var expenses = await _serviceExpenses.GetExpenses(filter);
@@ -29,6 +31,8 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         [HttpGet("{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
         public async Task<IActionResult> ConsultExpenseById(Guid expenseId) 
         {
             var expense = await _serviceExpenses.GetExpense(expenseId);
@@ -37,6 +41,8 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
         public async Task<IActionResult> AddAsync( ExpensesRequestDto expenseRequest) 
         {
             var response = await _serviceExpenses.AddAsync(expenseRequest);
@@ -44,6 +50,9 @@ namespace HandlingExtinguishers.WebApi.Controllers
         }
 
         [HttpPut("{expenseId}")]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
         public async Task<IActionResult> UpdateExpenses(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
            var result = await _serviceExpenses.UpdateExpense(expenseId,expenseRequest); 
@@ -52,7 +61,10 @@ namespace HandlingExtinguishers.WebApi.Controllers
         }
 
         [HttpPatch("{expenseId}")]
-        public async Task<IActionResult> UpdateExpensesField(Guid expenseId, ExpensesRequestDto expenseRequest) 
+        [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
+        public async Task<IActionResult> UpdateExpensesField(Guid expenseId, ExpensesRequestUpdateFieldDto expenseRequest) 
         {
             var result = await _serviceExpenses.UpdateExpenseField(expenseId, expenseRequest);
             return Ok(result);
@@ -61,14 +73,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         [HttpDelete("{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
+        [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
+        [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
         public async Task<IActionResult> Delete(Guid expenseId)
         {
             var result = await _serviceExpenses.DeleteExpenses(expenseId);
             return Ok(result);
         }
-    }
-
-    internal class HttpPachAttribute : Attribute
-    {
     }
 }

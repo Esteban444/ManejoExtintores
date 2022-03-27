@@ -13,14 +13,17 @@ namespace HandlingExtinguishers.WebApi.Configurations
         public static IServiceCollection AddDependenceInjectionConfiguration(this IServiceCollection services)
         {
             #region Repositories
-               services.AddTransient<IRepositoryExpenses, ExpensesRepository>();
+               services.AddScoped<IRepositoryCompanies, CompaniesRepository>();
+               services.AddScoped<IRepositoryExpenses, ExpensesRepository>();
             #endregion End Repositories
 
             #region Services
-            services.AddTransient<IServiceExpenses, ServiceExpenses>();
+            services.AddScoped<IServiceCompanies, ServiceCompanies>();
+            services.AddScoped<IServiceExpenses, ServiceExpenses>();
             #endregion End Services
 
             #region Validators
+            services.AddScoped<IValidator<CompanyRequestDto>, CompanyValidations>(); 
             services.AddScoped<IValidator<ExpensesRequestDto>, ExpensesValidations>();
             #endregion Validators
 

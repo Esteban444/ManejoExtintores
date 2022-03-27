@@ -47,7 +47,7 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<ExpenseResponseDto> UpdateExpense(Guid expenseId, ExpensesRequestDto expenseRequest) 
         {
             var expensebd = await _repositoryExpenses.FindBy(c => c.IdExpense == expenseId).FirstOrDefaultAsync();
-            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.BadRequest);
+            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
             _mapper.Map(expenseRequest, expensebd);
 
@@ -56,12 +56,12 @@ namespace HandlingExtinguishers.Core.Services
             return response;
         }
 
-        public async Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestDto expenseRequest)
+        public async Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestUpdateFieldDto expenseRequest)
         {
             var expensebd = await _repositoryExpenses.FindBy(x => x.IdExpense == expenseId).FirstOrDefaultAsync();
-            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.BadRequest);
+            if (expensebd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            var properties = new UpdateMapperProperties<Expenses, ExpensesRequestDto>();
+            var properties = new UpdateMapperProperties<Expenses, ExpensesRequestUpdateFieldDto>();
             var updateExpense =  await properties.MapperUpdate(expensebd!, expenseRequest);
             await _repositoryExpenses.Update(updateExpense);
             var response = _mapper.Map<ExpenseResponseDto>(updateExpense);

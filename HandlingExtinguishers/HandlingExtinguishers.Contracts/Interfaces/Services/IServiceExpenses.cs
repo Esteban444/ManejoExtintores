@@ -11,7 +11,7 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Services
        Task<ExpenseResponseDto> GetExpense(Guid expenseId); 
        Task<ExpenseResponseDto> AddAsync(ExpensesRequestDto expenseRequest); 
        Task<ExpenseResponseDto> UpdateExpense(Guid expenseId, ExpensesRequestDto expenseRequest);  
-       Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestDto expenseRequest);    
+       Task<ExpenseResponseDto> UpdateExpenseField(Guid expenseId, ExpensesRequestUpdateFieldDto expenseRequest);    
        Task<ExpenseResponseDto> DeleteExpenses(Guid expenseId);  
 
     }

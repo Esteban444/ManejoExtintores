@@ -15,6 +15,8 @@ namespace HandlingExtinguishers.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Companies>().Property(e => e.IdCompany).HasConversion<string>();
+
             modelBuilder.Entity<Expenses>().Property(e => e.IdExpense).HasConversion<string>();
 
         }

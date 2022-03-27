@@ -7,7 +7,7 @@ namespace HandlingExtinguishers.DTO.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int IdCompany { get; set; }
+        public Guid IdCompany { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Phone { get; set; }
