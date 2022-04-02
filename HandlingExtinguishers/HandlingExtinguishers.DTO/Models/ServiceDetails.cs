@@ -3,18 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingExtinguishers.DTO.Models
 {
-    public class ServiceDetails 
+    public class ServiceDetails : BaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IdDetailService { get; set; }
-        public string? IdService { get; set; }
-        public string? IdExtinguisherType  { get; set; }
-        public int? IdExtinguisherWeight { get; set; }
+        public Guid? IdDetailService { get; set; }
+        public Guid? IdService { get; set; }
+        public Guid? IdExtinguisherType  { get; set; }
+        public Guid? IdExtinguisherWeight { get; set; }
         public string? Description { get; set; }
         public decimal? Value { get; set; }
         public int? Amount { get; set; } 
         public decimal? Total { get; set; }
+        public bool Active { get; set; }
 
         public Services? Service { get; set; }
         public WeightExtinguishers? WeightExtinguisher { get; set; }

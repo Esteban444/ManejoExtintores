@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingExtinguishers.DTO.Models
 {
-    public class Products
+    public class Products: BaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IdProduct { get; set; }
-        public string? IdExtinguisherType { get; set; }
-        public string? IdExtinguisherWeight { get; set; }
+        public Guid? IdProduct { get; set; }
+        public Guid? IdExtinguisherType { get; set; }
+        public Guid? IdExtinguisherWeight { get; set; }
         public string? TypeProduct { get; set; }
+        public bool Active { get; set; }
 
         public WeightExtinguishers? WeightExtinguisher { get; set; }
         public TypeExtinguishers? TypeExtinguisher { get; set; }

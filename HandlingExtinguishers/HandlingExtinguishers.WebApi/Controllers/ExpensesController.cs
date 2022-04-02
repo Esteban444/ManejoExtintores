@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             
         }
 
-        [HttpGet]
+        [HttpGet("get-all-expenses")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)] 
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -29,7 +29,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(expenses);
         }
 
-        [HttpGet("{expenseId}")]
+        [HttpGet("get-expense-by/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -39,7 +39,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(expense);
         }
 
-        [HttpPost]
+        [HttpPost("expense")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -49,7 +49,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(response); 
         }
 
-        [HttpPut("{expenseId}")]
+        [HttpPut("update-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -60,7 +60,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             
         }
 
-        [HttpPatch("{expenseId}")]
+        [HttpPatch("update-fields-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -71,7 +71,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
-        [HttpDelete("{expenseId}")]
+        [HttpDelete("delete-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/companies")]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("get-all-companies")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -28,7 +28,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(companies);
         }
 
-        [HttpGet("{companyId}")]
+        [HttpGet("get-company-by/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -38,7 +38,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(company);
         }
 
-        [HttpPost]
+        [HttpPost("company")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -48,7 +48,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{companyId}")]
+        [HttpPut("update-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -59,7 +59,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
-        [HttpPatch("{companyId}")]
+        [HttpPatch("update-fields-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
@@ -70,7 +70,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
-        [HttpDelete("{companyId}")]
+        [HttpDelete("delete-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]

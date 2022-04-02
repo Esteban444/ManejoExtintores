@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingExtinguishers.DTO.Models
 {
-    public class Expenses
+    public class Expenses: BaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -12,5 +12,6 @@ namespace HandlingExtinguishers.DTO.Models
         public DateTime? Date { get; set; } 
         public int? Quantity { get; set; } 
         public decimal? Total { get; set; }
+        public bool Active { get; set; }
     }
 }

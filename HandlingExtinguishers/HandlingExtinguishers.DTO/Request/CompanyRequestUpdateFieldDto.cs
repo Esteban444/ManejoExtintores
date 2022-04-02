@@ -9,5 +9,6 @@ namespace HandlingExtinguishers.DTO.Request
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Nit { get; set; }
+        public bool? Active { get; set; }
     }
 }

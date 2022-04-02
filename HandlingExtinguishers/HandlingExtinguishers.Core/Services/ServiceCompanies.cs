@@ -22,7 +22,7 @@ namespace HandlingExtinguishers.Core.Services
         }
         public async Task<IEnumerable<CompanyResponseDto>> GetCompanies()
         {
-            var companies = _repositoryCompanies.GetAll();
+            var companies = await _repositoryCompanies.GetAll().ToListAsync();
             var companiesdt = _mapper.Map<IEnumerable<CompanyResponseDto>>(companies);
             return companiesdt;
         }

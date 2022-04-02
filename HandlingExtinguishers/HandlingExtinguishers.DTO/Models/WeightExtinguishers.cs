@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingExtinguishers.DTO.Models
 {
-    public class WeightExtinguishers
+    public class WeightExtinguishers: BaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string IdExtinguisherWeight { get; set; }
-        public int? WeightPound { get; set; }  
+        public Guid? IdExtinguisherWeight { get; set; }
+        public int? WeightPound { get; set; }
+        public bool Active { get; set; }
 
         public ICollection<ServiceDetails>? ServicesDetails { get; set; }
         public ICollection<Inventories>? Inventories { get; set; }

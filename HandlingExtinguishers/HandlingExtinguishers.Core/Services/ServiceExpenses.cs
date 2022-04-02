@@ -23,9 +23,20 @@ namespace HandlingExtinguishers.Core.Services
         }
         public async Task<IEnumerable<ExpenseResponseDto>> GetExpenses(FilterExpenses filter) 
         {
-            var expenses = await _repositoryExpenses.ConsultData(filter);  
-            var expensesdt = _mapper.Map<IEnumerable<ExpenseResponseDto>>(expenses);
-            return expensesdt;
+            var expenses = _repositoryExpenses.GetAll();
+
+            if (!String.IsNullOrEmpty(filter.Description))
+            {
+                expenses = expenses.Where(x => x.Description!.Contains(filter.Description!));
+            }
+
+            if (filter.StartDate <= DateTime.Now &&  filter.EndDate <= DateTime.Now)
+            {
+                expenses = expenses.Where(x => x.Date <= filter.EndDate);
+            }
+            var response = await expenses.OrderBy(x => x.Date).ToListAsync();
+            var expenseslist = _mapper.Map<IEnumerable<ExpenseResponseDto>>(response);
+            return expenseslist;
         }
 
         public async Task<ExpenseResponseDto> GetExpense(Guid expenseId) 

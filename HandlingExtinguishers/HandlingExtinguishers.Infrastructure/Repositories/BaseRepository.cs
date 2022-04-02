@@ -1,4 +1,5 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 
@@ -8,72 +9,94 @@ namespace HandlingExtinguishers.Infrastructure.Repositories
     {
         public HandlingExtinguishersDbContext DatabaseContext { get; set; }
 
-        public BaseRepository(HandlingExtinguishersDbContext context) 
+        public BaseRepository(HandlingExtinguishersDbContext context)
         {
             DatabaseContext = context;
         }
 
-        public virtual IQueryable<T> GetAll() 
+        public virtual IQueryable<T> GetAll()
         {
-            var entityset = DatabaseContext.Set<T>();
-            return entityset.AsQueryable();
+            var entitySet = DatabaseContext.Set<T>();
+            return entitySet.AsQueryable();
         }
-        public virtual T GetSingle(Expression<Func<T, bool>> predicate)  
+        public virtual T GetSingle(Expression<Func<T, bool>> predicate)
         {
-            return GetAll().FirstOrDefault(predicate);
+            return GetAll().FirstOrDefault(predicate)!;
+        }
+
+        public virtual Task<T> GetFirst(Expression<Func<T, bool>> predicate)
+        {
+            return GetAll().FirstOrDefaultAsync(predicate)!;
+        }
+
+        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            return GetAll().Where(predicate);
         }
 
         public async Task Add(T entity)
         {
+            var UpdatedAt = entity.GetType().GetProperty("UpdatedAt");
+            if (UpdatedAt != null) entity.GetType().GetProperty("UpdatedAt")?.SetValue(entity, DateTime.UtcNow);
+
+            var CreatedAt = entity.GetType().GetProperty("CreatedAt");
+            if (CreatedAt != null) entity.GetType().GetProperty("CreatedAt")?.SetValue(entity, DateTime.UtcNow);
+
             await DatabaseContext.AddAsync(entity);
+            DatabaseContext.Entry(entity).State = EntityState.Added;
             await DatabaseContext.SaveChangesAsync();
-
         }
 
-        public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate) 
+        public async Task AddRange(List<T> entity)
         {
-            return GetAll().Where(predicate);
+            DatabaseContext.AddRange(entity);
+            await DatabaseContext.SaveChangesAsync();
         }
-        public async Task Update(T entity) 
+
+        public async Task Delete(T entity)
         {
-            var updateT = entity.GetType().GetProperty("TimeMod");
-            if (updateT != null) entity.GetType().GetProperty("TimeMod")?.SetValue(entity, DateTime.Now);
+            DatabaseContext.Remove(entity);
+            await DatabaseContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteRange(List<T> entity)
+        {
+            DatabaseContext.RemoveRange(entity);
+            await DatabaseContext.SaveChangesAsync();
+        }
+
+        public async Task Update(T entity)
+        {
+            var UpdatedAt = entity.GetType().GetProperty("UpdatedAt");
+            if (UpdatedAt != null) entity.GetType().GetProperty("UpdatedAt")?.SetValue(entity, DateTime.UtcNow);
+
             DatabaseContext.Update(entity);
             await DatabaseContext.SaveChangesAsync();
-
         }
 
-        public async Task Delete(T entity) 
+        public async Task UpdateRange(List<T> entity)
         {
-            var updateDele = entity.GetType().GetProperty("IsDeleted");
-            if (updateDele != null)
-            {
-                entity.GetType().GetProperty("IsDeleted")?.SetValue(entity, true);
-
-                var update = entity.GetType().GetProperty("TimeDele");
-                if (update != null) entity.GetType().GetProperty("TimeDele")?.SetValue(entity, DateTime.Now);
-                DatabaseContext.Update(entity);
-            }
-            else
-            {
-                DatabaseContext.Remove(entity);
-            }
+            DatabaseContext.UpdateRange(entity);
             await DatabaseContext.SaveChangesAsync();
         }
-
-        public Task AddRange(List<T> entity)
+        public Task<T> MapperUpdate(T fromDB, T fromRequest)
         {
-            throw new NotImplementedException();
+            // copy fields
+            var typeOfSender = fromRequest.GetType();
+            var typeOfReceiver = fromDB.GetType();
+            foreach (var fieldOfReceiver in typeOfSender.GetFields())
+            {
+                var fieldOfB = typeOfReceiver.GetField(fieldOfReceiver.Name);
+                fieldOfB?.SetValue(fromDB, fieldOfReceiver.GetValue(fromRequest));
+            }
+            // copy properties
+            foreach (var propertyOfReceiver in typeOfSender.GetProperties())
+            {
+                var propertyOfB = typeOfReceiver.GetProperty(propertyOfReceiver.Name);
+                propertyOfB?.SetValue(fromDB, propertyOfReceiver.GetValue(fromRequest));
+            }
+            return Task.FromResult(fromDB);
         }
 
-        public Task UpdateRange(List<T> entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteRange(List<T> entity)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    }  
 }
