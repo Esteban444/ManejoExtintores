@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
 namespace HandlingExtinguishers.DTO.Models
 {
-    public class Employees: BaseModel
+    public class Employee: BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid? IdEmployee { get; set; }
-        public Guid? IdCompany { get; set; }
+        public Guid? CompanyId { get; set; } 
         public string? FirstName { get; set; }
         public string? SecondName { get; set; } 
         public string? LastName { get; set; }
@@ -22,7 +18,7 @@ namespace HandlingExtinguishers.DTO.Models
         public string? Email { get; set; }
         public bool Active { get; set; }
 
-        public Companies? Company { get; set; } 
-        public ICollection<Services>? Services { get; set; } 
+        public Company? Company { get; set; }  
+        public ICollection<Service>? Services { get; set; } 
     }
 }

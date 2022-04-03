@@ -9,13 +9,17 @@ namespace  HandlingExtinguishers.WebApi.Configurations
     {
         public AutoMapperProfile()
         {
-            CreateMap<Companies, CompanyResponseDto>().ReverseMap();
+            CreateMap<Company, CompanyResponseDto>().ReverseMap();
             CreateMap<CompanyRequestDto, CompanyResponseDto>().ReverseMap();
-            CreateMap<Companies, CompanyRequestDto>().ReverseMap();
+            CreateMap<Company, CompanyRequestDto>().ReverseMap();
 
-            CreateMap<Expenses, ExpenseResponseDto>().ReverseMap();
+            CreateMap<Expense, ExpenseResponseDto>().ReverseMap();
             CreateMap<ExpensesRequestDto, ExpenseResponseDto>().ReverseMap();
-            CreateMap<Expenses, ExpensesRequestDto>().ReverseMap();
+            CreateMap<Expense, ExpensesRequestDto>().ReverseMap();
+
+            CreateMap<Employee, EmployeeResponseDto>().ReverseMap();
+            CreateMap<EmployeeRequestDto, EmployeeResponseDto>().ReverseMap();
+            CreateMap<Employee, EmployeeRequestDto>().ReverseMap();
         }
     }
 }

@@ -3,7 +3,7 @@
 
 namespace HandlingExtinguishers.Contracts.Interfaces.Repositorios
 {
-    public interface IRepositoryCompanies: IBaseRepository<Companies>
+    public interface IRepositoryCompanies: IBaseRepository<Company>
     {
 
     }

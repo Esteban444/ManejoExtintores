@@ -1,13 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
 namespace HandlingExtinguishers.DTO.Models 
 {
-    public class Clients: BaseModel
+    public class Client: BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid? IdClient { get; set; }
         public decimal? ClientDocument { get; set; }
         public string? FirstName { get; set; }
         public string? SecondName { get; set; }
@@ -24,6 +20,6 @@ namespace HandlingExtinguishers.DTO.Models
         public bool Active { get; set; }
 
         //public ICollection<DetalleExtintorClientes> DetalleExtClientes { get; set; }
-        public ICollection<Services>? Services { get; set; }
+        public ICollection<Service>? Services { get; set; }
     }
 }

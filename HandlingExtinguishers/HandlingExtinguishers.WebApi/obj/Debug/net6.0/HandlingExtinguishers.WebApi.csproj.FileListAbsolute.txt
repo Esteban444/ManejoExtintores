@@ -1,10 +1,3 @@
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.csproj.AssemblyReference.cache
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.AssemblyInfoInputs.cache
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.AssemblyInfo.cs
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.csproj.CoreCompileInputs.cache
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\appsettings.Development.json
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\appsettings.json
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.WebApi.exe
@@ -66,6 +59,13 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.Infrastructure.pdb
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.Contracts.pdb
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.DTO.pdb
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.csproj.AssemblyReference.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.AssemblyInfoInputs.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.AssemblyInfo.cs
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.csproj.CoreCompileInputs.cache
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\staticwebassets.build.json
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\staticwebassets.development.json
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\scopedcss\bundle\HandlingExtinguishers.WebApi.styles.css

@@ -29,39 +29,41 @@ namespace HandlingExtinguishers.Core.Services
 
         public async Task<CompanyResponseDto> GetCompany(Guid companyId)  
         {
-            var companybd = await _repositoryCompanies.FindBy(c => c.IdCompany == companyId).FirstOrDefaultAsync();
-            if (companybd == null) throw new GlobalException("The company record does not exist in the database.", HttpStatusCode.NotFound);
+            var companyBd = await _repositoryCompanies.FindBy(c => c.Id == companyId).FirstOrDefaultAsync();
+            if (companyBd == null) throw new GlobalException("The company record does not exist in the database.", HttpStatusCode.NotFound);
 
-            return _mapper.Map<CompanyResponseDto>(companybd);
+            return _mapper.Map<CompanyResponseDto>(companyBd);
         }
 
-        public async Task<CompanyResponseDto> AddCompany(CompanyRequestDto companyRequest) 
+        public async Task<CompanyResponseDto> AddCompany(CompanyRequestDto companyRequestAdd) 
         {
-            var company = _mapper.Map<Companies>(companyRequest);
+            if(companyRequestAdd.Active == null) { companyRequestAdd.Active = true; }
+            var company = _mapper.Map<Company>(companyRequestAdd);
             await _repositoryCompanies.Add(company);
             var newcompany = _mapper.Map<CompanyResponseDto>(company);
             return newcompany;
         }
 
-        public async Task<CompanyResponseDto> UpdateCompany(Guid companyId, CompanyRequestDto companyRequest)
+        public async Task<CompanyResponseDto> UpdateCompany(Guid companyId, CompanyRequestDto companyRequestUpdate)
         {
-            var companybd = await _repositoryCompanies.FindBy(c => c.IdCompany == companyId).FirstOrDefaultAsync();
-            if (companybd == null) throw new GlobalException("The company record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
+            if (companyRequestUpdate.Active == null) { companyRequestUpdate.Active = true; }
+            var companyBd = await _repositoryCompanies.FindBy(c => c.Id == companyId).FirstOrDefaultAsync();
+            if (companyBd == null) throw new GlobalException("The company record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            _mapper.Map(companyRequest, companybd);
+            _mapper.Map(companyRequestUpdate, companyBd);
 
-            await _repositoryCompanies.Update(companybd);
-            var response = _mapper.Map<CompanyResponseDto>(companybd);
+            await _repositoryCompanies.Update(companyBd);
+            var response = _mapper.Map<CompanyResponseDto>(companyBd);
             return response;
         }
 
         public async Task<CompanyResponseDto> UpdateCompanyField(Guid companyId, CompanyRequestUpdateFieldDto companyRequestUpdateField) 
         {
-            var companybd = await _repositoryCompanies.FindBy(x => x.IdCompany == companyId).FirstOrDefaultAsync();
-            if (companybd == null) throw new GlobalException("The company record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
+            var companyBd = await _repositoryCompanies.FindBy(x => x.Id == companyId).FirstOrDefaultAsync();
+            if (companyBd == null) throw new GlobalException("The company record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            var properties = new UpdateMapperProperties<Companies, CompanyRequestUpdateFieldDto>();
-            var updateCompany = await properties.MapperUpdate(companybd!, companyRequestUpdateField);
+            var properties = new UpdateMapperProperties<Company, CompanyRequestUpdateFieldDto>();
+            var updateCompany = await properties.MapperUpdate(companyBd!, companyRequestUpdateField);
             await _repositoryCompanies.Update(updateCompany);
             var response = _mapper.Map<CompanyResponseDto>(updateCompany);
             return response;
@@ -69,10 +71,10 @@ namespace HandlingExtinguishers.Core.Services
 
         public async Task<CompanyResponseDto> DeleteCompany(Guid companyId)  
         {
-            var companybd = await _repositoryCompanies.FindBy(c => c.IdCompany == companyId).FirstOrDefaultAsync();
-            if (companybd == null) throw new GlobalException("The company record you are trying to delete does not exist in the database.", HttpStatusCode.NotFound);
-            await _repositoryCompanies.Delete(companybd);
-            var companyDeleted = _mapper.Map<CompanyResponseDto>(companybd);
+            var companyBd = await _repositoryCompanies.FindBy(c => c.Id == companyId).FirstOrDefaultAsync();
+            if (companyBd == null) throw new GlobalException("The company record you are trying to delete does not exist in the database.", HttpStatusCode.NotFound);
+            await _repositoryCompanies.Delete(companyBd);
+            var companyDeleted = _mapper.Map<CompanyResponseDto>(companyBd);
             return companyDeleted;
 
         }

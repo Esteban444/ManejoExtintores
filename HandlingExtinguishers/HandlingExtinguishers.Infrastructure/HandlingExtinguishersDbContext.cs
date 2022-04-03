@@ -11,28 +11,31 @@ namespace HandlingExtinguishers.Infrastructure
         {
         }
 
+        public DbSet<Client>? Client { get; set; }
+        public DbSet<Company>? Company { get; set; }
+        public DbSet<CreditService>? CreditService { get; set; }
+        public DbSet<Employee>? Employee { get; set; }
+        public DbSet<Expense>? Expense { get; set; }
+        public DbSet<Inventory>? Inventory { get; set; }
+        public DbSet<Price>? Price { get; set; }
+        public DbSet<Products>? Product { get; set; }
+        public DbSet<ServiceDetail>? ServiceDetail { get; set; }
+        public DbSet<Service>? Service { get; set; }
+        public DbSet<TypeExtinguisher>? TypeExtinguisher { get; set; }
+        public DbSet<WeightExtinguisher>? WeightExtinguisher { get; set; } 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Company>().Property(e => e.Id).HasConversion<string>();
+
+            modelBuilder.Entity<Expense>().Property(e => e.Id).HasConversion<string>();
+
+            modelBuilder.Entity<Employee>().Property(e => e.Id).HasConversion<string>();
+            modelBuilder.Entity<Employee>().Property(e => e.CompanyId).HasConversion<string>();
+
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Companies>().Property(e => e.IdCompany).HasConversion<string>();
-
-            modelBuilder.Entity<Expenses>().Property(e => e.IdExpense).HasConversion<string>();
-
         }
 
-        public virtual DbSet<Clients>? Clients { get; set; }
-        public virtual DbSet<Companies>? Companies { get; set; }
-        public virtual DbSet<CreditServices>? CreditServices { get; set; }
-        public virtual DbSet<Employees>? Employees { get; set; }
-        public virtual DbSet<Expenses>? Expenses { get; set; }
-        public virtual DbSet<Inventories>? Inventories { get; set; }
-        public virtual DbSet<Prices>? Prices { get; set; }
-        public virtual DbSet<Products>? Products { get; set; }
-        public virtual DbSet<ServiceDetails>? ServiceDetails { get; set; }
-        public virtual DbSet<Services>? Services { get; set; }
-        public virtual DbSet<TypeExtinguishers>? TypeExtinguishers { get; set; }
-        public virtual DbSet<WeightExtinguishers>? WeightExtinguishers { get; set; }
 
     }
 }
