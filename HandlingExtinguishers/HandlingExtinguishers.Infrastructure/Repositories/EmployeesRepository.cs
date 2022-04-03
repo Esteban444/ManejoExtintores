@@ -4,9 +4,9 @@ using HandlingExtinguishers.DTO.Models;
 
 namespace HandlingExtinguishers.Infrastructure.Repositories
 {
-    public class EmployeeRepository : BaseRepository<Employee>, IRepositoryEmployees
+    public class EmployeesRepository : BaseRepository<Employee>, IRepositoryEmployees
     {
-        public EmployeeRepository(HandlingExtinguishersDbContext context): base(context)    
+        public EmployeesRepository(HandlingExtinguishersDbContext context): base(context)    
         {
 
         }

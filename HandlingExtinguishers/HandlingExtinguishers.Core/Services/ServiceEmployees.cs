@@ -26,7 +26,7 @@ namespace HandlingExtinguishers.Core.Services
         {
             var employees = _repositoryEmployees.FindBy(x => x.Active);
 
-            if (!String.IsNullOrEmpty(filter.FirstName) || !String.IsNullOrEmpty(filter.FirstName))
+            if (!String.IsNullOrEmpty(filter.FirstName) || !String.IsNullOrEmpty(filter.LastName))
             {
                 employees = employees.Where(x => x.FirstName!.Contains(filter.FirstName!) ||  x.LastName!.Contains(filter.LastName!));
             }
@@ -48,10 +48,10 @@ namespace HandlingExtinguishers.Core.Services
             return _mapper.Map<EmployeeResponseDto>(employeeBd);
         }
 
-        public async Task<EmployeeResponseDto> AddAsync(EmployeeRequestDto employeeRequestAdd)
+        public async Task<EmployeeResponseDto> AddAsync(EmployeeRequestDto employeeRequest)
         {
-            if (employeeRequestAdd.Active == null) { employeeRequestAdd.Active = true; } 
-            var employee = _mapper.Map<Employee>(employeeRequestAdd);
+            if (employeeRequest.Active == null) { employeeRequest.Active = true; } 
+            var employee = _mapper.Map<Employee>(employeeRequest);
             await _repositoryEmployees.Add(employee);
             var newemployee = _mapper.Map<EmployeeResponseDto>(employee);
             return newemployee;
@@ -70,13 +70,13 @@ namespace HandlingExtinguishers.Core.Services
             return response;
         }
 
-        public async Task<EmployeeResponseDto> UpdateEmployeeField(Guid employeeId, EmployeeRequestUpdateFieldDto employeeRequest) 
+        public async Task<EmployeeResponseDto> UpdateEmployeeField(Guid employeeId, EmployeeRequestUpdateFieldDto employeeRequestUpdateField) 
         {
             var employeeBd = await _repositoryEmployees.FindBy(x => x.Id == employeeId).FirstOrDefaultAsync();
             if (employeeBd == null) throw new GlobalException("The employee record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
             var properties = new UpdateMapperProperties<Employee, EmployeeRequestUpdateFieldDto>();
-            var updateEmployee = await properties.MapperUpdate(employeeBd!, employeeRequest);
+            var updateEmployee = await properties.MapperUpdate(employeeBd!, employeeRequestUpdateField);
             await _repositoryEmployees.Update(updateEmployee);
             var response = _mapper.Map<EmployeeResponseDto>(updateEmployee);
             return response;

@@ -26,6 +26,8 @@ namespace HandlingExtinguishers.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>().Property(e => e.Id).HasConversion<string>();
+
             modelBuilder.Entity<Company>().Property(e => e.Id).HasConversion<string>();
 
             modelBuilder.Entity<Expense>().Property(e => e.Id).HasConversion<string>();

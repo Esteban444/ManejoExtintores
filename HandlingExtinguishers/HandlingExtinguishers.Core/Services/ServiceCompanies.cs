@@ -35,10 +35,10 @@ namespace HandlingExtinguishers.Core.Services
             return _mapper.Map<CompanyResponseDto>(companyBd);
         }
 
-        public async Task<CompanyResponseDto> AddCompany(CompanyRequestDto companyRequestAdd) 
+        public async Task<CompanyResponseDto> AddCompany(CompanyRequestDto companyRequest) 
         {
-            if(companyRequestAdd.Active == null) { companyRequestAdd.Active = true; }
-            var company = _mapper.Map<Company>(companyRequestAdd);
+            if(companyRequest.Active == null) { companyRequest.Active = true; }
+            var company = _mapper.Map<Company>(companyRequest);
             await _repositoryCompanies.Add(company);
             var newcompany = _mapper.Map<CompanyResponseDto>(company);
             return newcompany;
