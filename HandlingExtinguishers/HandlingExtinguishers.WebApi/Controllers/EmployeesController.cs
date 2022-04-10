@@ -1,24 +1,35 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Filters;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Employees;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
 {
+    /// <summary>
+    /// With this Api you will be able to manage employees.
+    /// </summary>
     [Route("api/employees")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
         private readonly IServiceEmployees _serviceEmployee;
 
-
+        /// <summary>
+        /// Methodo constructor.
+        /// </summary>
+        /// <param name="serviceEmployees"></param>
         public EmployeesController(IServiceEmployees serviceEmployees)
         {
             _serviceEmployee = serviceEmployees;
 
         }
 
+        /// <summary>
+        /// This endpoint returns all employees.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [HttpGet("get-all-employees")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
@@ -29,6 +40,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(employees);
         }
 
+        /// <summary>
+        /// This endpoint returns a employee by Id.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         [HttpGet("get-employee-by/{employeeId}")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
@@ -39,6 +55,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(employee);
         }
 
+        /// <summary>
+        /// This endpoint add a employee.
+        /// </summary>
+        /// <param name="employeeRequest"></param>
+        /// <returns></returns>
         [HttpPost("employee")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
@@ -49,6 +70,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// This endpoint update a employee by Id.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="employeeRequest"></param>
+        /// <returns></returns>
         [HttpPut("update-employee/{employeeId}")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
@@ -60,6 +87,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// This endpoint update a employee by Id.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="employeeRequest"></param>
+        /// <returns></returns>
         [HttpPatch("update-fields-employee/{employeeId}")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
@@ -70,7 +103,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(result);
 
         }
-
+        /// <summary>
+        /// This endpoint delete a employee by Id.
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
         [HttpDelete("delete-employee/{employeeId}")]
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]

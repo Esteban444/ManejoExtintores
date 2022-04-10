@@ -1,10 +1,16 @@
 ﻿using FluentValidation;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Clients;
 
 namespace HandlingExtinguishers.WebApi.Configurations.Validations
 {
+    /// <summary>
+    /// Class to validate cliente request.
+    /// </summary>
     public class ClientValidations: AbstractValidator<ClientRequestDto>
     {
+        /// <summary>
+        /// Methodo constructor.
+        /// </summary>
         public ClientValidations()
         {
             

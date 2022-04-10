@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
 using HandlingExtinguishers.DTO.Models;
-using HandlingExtinguishers.Infrastructure;
+using HandlingExtinguishers.Infrastructure.Data;
 using HandlingExtinguishers.WebApi.Configurations;
 using Microsoft.AspNetCore.Identity;
 
@@ -39,11 +39,10 @@ builder.Services.DatabaseConfiguration();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HandlingExtinguishers.WebApi v1"));
-}
+
+app.UseSwagger();
+
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HandlingExtinguishers.WebApi v1"));
 
 app.UseHttpsRedirection();
 
@@ -53,7 +52,7 @@ app.UseCors("api");
 
 app.UseRouting();
 
-///app.UseAuthentication();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

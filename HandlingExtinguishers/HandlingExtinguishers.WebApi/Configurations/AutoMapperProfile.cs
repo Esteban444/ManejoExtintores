@@ -1,29 +1,43 @@
 ﻿using AutoMapper;
 using HandlingExtinguishers.DTO.Models;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Clients;
+using HandlingExtinguishers.DTO.Request.Companies;
+using HandlingExtinguishers.DTO.Request.Employees;
+using HandlingExtinguishers.DTO.Request.Expenses;
+using HandlingExtinguishers.DTO.Request.Prices;
 using HandlingExtinguishers.DTO.Response;
 
 namespace  HandlingExtinguishers.WebApi.Configurations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class AutoMapperProfile: Profile
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public AutoMapperProfile()
         {
-            CreateMap<Client, ClientResponseDto>().ReverseMap();
+            CreateMap<ClientTable, ClientResponseDto>().ReverseMap();
             CreateMap<ClientRequestDto, ClientResponseDto>().ReverseMap();
-            CreateMap<Client, ClientRequestDto>().ReverseMap();
+            CreateMap<ClientTable, ClientRequestDto>().ReverseMap();
 
-            CreateMap<Company, CompanyResponseDto>().ReverseMap();
+            CreateMap<CompanyTable, CompanyResponseDto>().ReverseMap();
             CreateMap<CompanyRequestDto, CompanyResponseDto>().ReverseMap();
-            CreateMap<Company, CompanyRequestDto>().ReverseMap();
+            CreateMap<CompanyTable, CompanyRequestDto>().ReverseMap();
 
-            CreateMap<Expense, ExpenseResponseDto>().ReverseMap();
+            CreateMap<ExpenseTable, ExpenseResponseDto>().ReverseMap();
             CreateMap<ExpensesRequestDto, ExpenseResponseDto>().ReverseMap();
-            CreateMap<Expense, ExpensesRequestDto>().ReverseMap();
+            CreateMap<ExpenseTable, ExpensesRequestDto>().ReverseMap();
 
-            CreateMap<Employee, EmployeeResponseDto>().ReverseMap();
+            CreateMap<EmployeeTable, EmployeeResponseDto>().ReverseMap();
             CreateMap<EmployeeRequestDto, EmployeeResponseDto>().ReverseMap();
-            CreateMap<Employee, EmployeeRequestDto>().ReverseMap();
+            CreateMap<EmployeeTable, EmployeeRequestDto>().ReverseMap();
+
+            CreateMap<PriceTable, PriceResponseDto>().ReverseMap();
+            CreateMap<PriceRequestDto, PriceResponseDto>().ReverseMap();
+            CreateMap<PriceTable, PriceRequestDto>().ReverseMap();
         }
     }
 }

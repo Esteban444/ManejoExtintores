@@ -1,24 +1,35 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Filters;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
 {
+    /// <summary>
+    /// With this Api you will be able to manage expenses.
+    /// </summary>
     [Route("api/expenses")]
     [ApiController]
     public class ExpensesController : ControllerBase
     {
         private readonly IServiceExpenses _serviceExpenses;
-        
 
+        /// <summary>
+        /// Methodo constructor.
+        /// </summary>
+        /// <param name="serviceExpenses"></param>
         public ExpensesController(IServiceExpenses serviceExpenses ) 
         {
             _serviceExpenses = serviceExpenses;
             
         }
 
+        /// <summary>
+        /// This endpoint returns all expenses.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [HttpGet("get-all-expenses")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)] 
@@ -29,6 +40,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(expenses);
         }
 
+        /// <summary>
+        /// This endpoint returns a expense by Id.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
         [HttpGet("get-expense-by/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
@@ -39,6 +55,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(expense);
         }
 
+        /// <summary>
+        /// This endpoint add a expense.
+        /// </summary>
+        /// <param name="expenseRequest"></param>
+        /// <returns></returns>
         [HttpPost("expense")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
@@ -49,6 +70,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(response); 
         }
 
+        /// <summary>
+        /// This endpoint update a expense by Id.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <param name="expenseRequest"></param>
+        /// <returns></returns>
         [HttpPut("update-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
@@ -60,6 +87,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
             
         }
 
+        /// <summary>
+        /// This endpoint update a expense by Id.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <param name="expenseRequest"></param>
+        /// <returns></returns>
         [HttpPatch("update-fields-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]
@@ -71,6 +104,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// This endpoint delete a expense by Id.
+        /// </summary>
+        /// <param name="expenseId"></param>
+        /// <returns></returns>
         [HttpDelete("delete-expense/{expenseId}")]
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)]

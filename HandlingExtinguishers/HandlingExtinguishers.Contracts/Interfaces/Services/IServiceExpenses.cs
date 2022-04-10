@@ -1,5 +1,5 @@
 ﻿using HandlingExtinguishers.DTO.Filters;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Response;
 
 

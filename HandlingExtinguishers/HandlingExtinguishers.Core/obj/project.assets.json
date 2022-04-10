@@ -304,6 +304,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "AutoMapper": "11.0.1",
           "HandlingExtinguishers.DTO": "1.0.0"
         },
         "compile": {

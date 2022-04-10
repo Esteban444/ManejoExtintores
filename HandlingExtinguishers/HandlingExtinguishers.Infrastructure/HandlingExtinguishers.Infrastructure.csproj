@@ -16,8 +16,4 @@
     <ProjectReference Include="..\HandlingExtinguishers.DTO\HandlingExtinguishers.DTO.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

@@ -1,23 +1,33 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
 {
+    /// <summary>
+    /// With this Api you will be able to manage companies.
+    /// </summary>
     [Route("api/companies")]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
         private readonly IServiceCompanies _serviceCompanies;
 
-
+        /// <summary>
+        /// Methodo constructor.
+        /// </summary>
+        /// <param name="serviceCompanies"></param>
         public CompaniesController(IServiceCompanies serviceCompanies) 
         {
             _serviceCompanies = serviceCompanies;
 
         }
 
+        /// <summary>
+        /// This endpoint returns all companies.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("get-all-companies")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
@@ -28,6 +38,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(companies);
         }
 
+        /// <summary>
+        /// This endpoint returns a company by Id.
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
         [HttpGet("get-company-by/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
@@ -38,6 +53,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(company);
         }
 
+        /// <summary>
+        /// This endpoint add a company.
+        /// </summary>
+        /// <param name="companyRequest"></param>
+        /// <returns></returns>
         [HttpPost("company")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
@@ -48,6 +68,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// This endpoint update a company by Id.
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <param name="companyRequest"></param>
+        /// <returns></returns>
         [HttpPut("update-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
@@ -59,6 +85,12 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// This endpoint update a company by Id.
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <param name="companyRequestUpdateField"></param>
+        /// <returns></returns>
         [HttpPatch("update-fields-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]
@@ -70,6 +102,11 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
         }
 
+        /// <summary>
+        /// This endpoint delete a price by Id.
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
         [HttpDelete("delete-company/{companyId}")]
         [ProducesResponseType(typeof(CompanyResponseDto), 200)]
         [ProducesResponseType(typeof(CompanyResponseDto), 400)]

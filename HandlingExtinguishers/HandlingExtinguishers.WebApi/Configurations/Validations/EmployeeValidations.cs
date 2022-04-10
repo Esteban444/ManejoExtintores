@@ -1,10 +1,16 @@
 ﻿using FluentValidation;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Employees;
 
 namespace HandlingExtinguishers.WebApi.Configurations.Validations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EmployeeValidations: AbstractValidator<EmployeeRequestDto>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public EmployeeValidations()
         {
             RuleFor(e => e.CompanyId)

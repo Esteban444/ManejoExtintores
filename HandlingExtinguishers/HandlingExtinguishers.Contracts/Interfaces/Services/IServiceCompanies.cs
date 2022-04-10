@@ -1,4 +1,4 @@
-﻿using HandlingExtinguishers.DTO.Request;
+﻿using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Response;
 
 

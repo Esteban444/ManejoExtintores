@@ -4,7 +4,7 @@ using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.Core.Helpers;
 using HandlingExtinguishers.DTO.Filters;
 using HandlingExtinguishers.DTO.Models;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Clients;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -51,7 +51,7 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<ClientResponseDto> AddAsync(ClientRequestDto clientRequest)
         {
             if (clientRequest.Active == null) { clientRequest.Active = true; }
-            var client = _mapper.Map<Client>(clientRequest);
+            var client = _mapper.Map<ClientTable>(clientRequest);
             await _repositoryClients.Add(client);
             var newClient = _mapper.Map<ClientResponseDto>(client); 
             return newClient;
@@ -75,7 +75,7 @@ namespace HandlingExtinguishers.Core.Services
             var clientBd = await _repositoryClients.FindBy(x => x.Id == clientId).FirstOrDefaultAsync();
             if (clientBd == null) throw new GlobalException("The client record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            var properties = new UpdateMapperProperties<Client, ClientRequestUpdateFieldDto>();
+            var properties = new UpdateMapperProperties<ClientTable, ClientRequestUpdateFieldDto>();
             var updateClient = await properties.MapperUpdate(clientBd!, clientRequestField);
             await _repositoryClients.Update(updateClient);
             var response = _mapper.Map<ClientResponseDto>(updateClient);
@@ -85,7 +85,16 @@ namespace HandlingExtinguishers.Core.Services
         {
             var clientBd = await _repositoryClients.FindBy(c => c.Id == clientId).FirstOrDefaultAsync();
             if (clientBd == null) throw new GlobalException("The client record you are trying to delete does not exist in the database.", HttpStatusCode.NotFound);
-            await _repositoryClients.Delete(clientBd);
+
+            if(clientBd.Active == true)
+            {
+                clientBd.Active = false;
+            }
+            else
+            {
+                clientBd.Active = true;
+            }
+            await _repositoryClients.Update(clientBd);
             var clientDeleted = _mapper.Map<ClientResponseDto>(clientBd);
             return clientDeleted;
         }

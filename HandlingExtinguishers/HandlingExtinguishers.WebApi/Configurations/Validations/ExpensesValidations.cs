@@ -1,10 +1,16 @@
 ﻿using FluentValidation;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Expenses;
 
 namespace HandlingExtinguishers.WebApi.Configurations.Validations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExpensesValidations: AbstractValidator<ExpensesRequestDto>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ExpensesValidations()
         {
             RuleFor(exp => exp.Description)

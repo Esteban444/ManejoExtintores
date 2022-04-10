@@ -1,4 +1,5 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
+using HandlingExtinguishers.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

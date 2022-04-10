@@ -4,7 +4,7 @@ using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.Core.Helpers;
 using HandlingExtinguishers.DTO.Filters;
 using HandlingExtinguishers.DTO.Models;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -50,7 +50,7 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<ExpenseResponseDto> AddAsync(ExpensesRequestDto expenseRequest) 
         {
             if (expenseRequest.Active == null) { expenseRequest.Active = true; }
-            var expense = _mapper.Map<Expense>(expenseRequest);
+            var expense = _mapper.Map<ExpenseTable>(expenseRequest);
             await _repositoryExpenses.Add(expense);
             var newexpense = _mapper.Map<ExpenseResponseDto>(expense);
             return newexpense;
@@ -74,7 +74,7 @@ namespace HandlingExtinguishers.Core.Services
             var expenseBd = await _repositoryExpenses.FindBy(x => x.Id == expenseId).FirstOrDefaultAsync();
             if (expenseBd == null) throw new GlobalException("The expense record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            var properties = new UpdateMapperProperties<Expense, ExpensesRequestUpdateFieldDto>();
+            var properties = new UpdateMapperProperties<ExpenseTable, ExpensesRequestUpdateFieldDto>();
             var updateExpense =  await properties.MapperUpdate(expenseBd!, expenseRequestUpdateField);
             await _repositoryExpenses.Update(updateExpense);
             var response = _mapper.Map<ExpenseResponseDto>(updateExpense);

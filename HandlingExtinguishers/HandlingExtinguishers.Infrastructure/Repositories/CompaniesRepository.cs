@@ -1,12 +1,11 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
 using HandlingExtinguishers.DTO.Models;
-
+using HandlingExtinguishers.Infrastructure.Data;
 
 namespace HandlingExtinguishers.Infrastructure.Repositories
 {
-    public class CompaniesRepository : BaseRepository<Company>, IRepositoryCompanies
+    public class CompaniesRepository : BaseRepository<CompanyTable>, IRepositoryCompanies
     {
-        //public HandlingExtinguishersDbContext handlingExtinguishersDbContext { get; set; }
         public CompaniesRepository(HandlingExtinguishersDbContext context) : base(context)
         {
             

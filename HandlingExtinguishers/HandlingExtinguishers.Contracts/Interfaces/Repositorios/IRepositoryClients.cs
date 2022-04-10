@@ -2,7 +2,7 @@
 
 namespace HandlingExtinguishers.Contracts.Interfaces.Repositorios
 {
-    public interface IRepositoryClients : IBaseRepository<Client>
+    public interface IRepositoryClients : IBaseRepository<ClientTable>
     {
     }
 }

@@ -3,7 +3,7 @@ using HandlingExtinguishers.Contracts.Interfaces.Repositorios;
 using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.Core.Helpers;
 using HandlingExtinguishers.DTO.Models;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Response;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -38,7 +38,7 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<CompanyResponseDto> AddCompany(CompanyRequestDto companyRequest) 
         {
             if(companyRequest.Active == null) { companyRequest.Active = true; }
-            var company = _mapper.Map<Company>(companyRequest);
+            var company = _mapper.Map<CompanyTable>(companyRequest);
             await _repositoryCompanies.Add(company);
             var newcompany = _mapper.Map<CompanyResponseDto>(company);
             return newcompany;
@@ -62,7 +62,7 @@ namespace HandlingExtinguishers.Core.Services
             var companyBd = await _repositoryCompanies.FindBy(x => x.Id == companyId).FirstOrDefaultAsync();
             if (companyBd == null) throw new GlobalException("The company record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
-            var properties = new UpdateMapperProperties<Company, CompanyRequestUpdateFieldDto>();
+            var properties = new UpdateMapperProperties<CompanyTable, CompanyRequestUpdateFieldDto>();
             var updateCompany = await properties.MapperUpdate(companyBd!, companyRequestUpdateField);
             await _repositoryCompanies.Update(updateCompany);
             var response = _mapper.Map<CompanyResponseDto>(updateCompany);

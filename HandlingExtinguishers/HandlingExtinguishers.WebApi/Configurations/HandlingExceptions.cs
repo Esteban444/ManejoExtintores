@@ -6,8 +6,15 @@ using System.Text.Json;
 
 namespace HandlingExtinguishers.WebApi.Configurations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class HandlingExceptions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
         public static void UseAPIErrorHandling(IApplicationBuilder action)
         {
             action.Run(

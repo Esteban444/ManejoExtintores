@@ -1,10 +1,16 @@
 ﻿using FluentValidation;
-using HandlingExtinguishers.DTO.Request;
+using HandlingExtinguishers.DTO.Request.Companies;
 
 namespace HandlingExtinguishers.WebApi.Configurations.Validations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CompanyValidations: AbstractValidator<CompanyRequestDto>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public CompanyValidations() 
         {
             RuleFor(com => com.Name)

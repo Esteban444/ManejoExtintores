@@ -2,9 +2,16 @@
 
 namespace HandlingExtinguishers.WebApi.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class JsonHelper
     {
         private static JsonSerializerOptions _jsonSerializerOptions;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static JsonSerializerOptions GetSerializerOptions()
         {
             if (_jsonSerializerOptions != null)
