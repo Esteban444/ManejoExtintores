@@ -50,8 +50,19 @@ namespace HandlingExtinguishers.WebApi.Configurations
                             },
                             new List<string>()
                             }
-                        });
+                });
             });
+            var JWTkey = Environment.GetEnvironmentVariable("JWTKey");
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTkey!)),
+                    ClockSkew = TimeSpan.Zero
+                });
 
             return services;
         }
