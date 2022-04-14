@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HandlingExtinguishers.DTO.Models;
+using HandlingExtinguishers.DTO.Request;
 using HandlingExtinguishers.DTO.Request.Clients;
 using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Request.Employees;
@@ -19,6 +20,8 @@ namespace  HandlingExtinguishers.WebApi.Configurations
         /// </summary>
         public AutoMapperProfile()
         {
+            CreateMap<ApplicationUser, RegisterUserRequestDto>().ReverseMap();
+
             CreateMap<ClientTable, ClientResponseDto>().ReverseMap();
             CreateMap<ClientRequestDto, ClientResponseDto>().ReverseMap();
             CreateMap<ClientTable, ClientRequestDto>().ReverseMap();

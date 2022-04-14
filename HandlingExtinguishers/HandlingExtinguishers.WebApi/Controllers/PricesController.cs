@@ -1,6 +1,8 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Request.Prices;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -10,7 +12,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
     /// </summary>
     [Route("api/prices")]
     [ApiController]
-
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PricesController : ControllerBase
     {
         private readonly IServicePrices _servicePrices;

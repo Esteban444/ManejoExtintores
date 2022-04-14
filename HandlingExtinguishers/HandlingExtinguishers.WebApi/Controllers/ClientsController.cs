@@ -2,6 +2,8 @@
 using HandlingExtinguishers.DTO.Filters;
 using HandlingExtinguishers.DTO.Request.Clients;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -11,6 +13,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
     /// </summary>
     [Route("api/clients")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientsController : ControllerBase
     {
         private readonly IServiceClients _serviceClients;

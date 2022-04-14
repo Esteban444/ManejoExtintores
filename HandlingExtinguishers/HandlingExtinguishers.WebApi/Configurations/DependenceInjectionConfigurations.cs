@@ -30,9 +30,11 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IRepositoryExpenses, ExpensesRepository>();
             services.AddScoped<IRepositoryEmployees, EmployeesRepository>();
             services.AddScoped<IRepositoryPrice, PricesRepository>();
+            services.AddScoped<ISettingsRepository, SettingsRepository>();
             #endregion End Repositories
 
             #region Services
+            services.AddScoped<IAuthService, AuthService>(); 
             services.AddScoped<IServiceClients, ServiceClients>(); 
             services.AddScoped<IServiceCompanies, ServiceCompanies>();
             services.AddScoped<IServiceExpenses, ServiceExpenses>();

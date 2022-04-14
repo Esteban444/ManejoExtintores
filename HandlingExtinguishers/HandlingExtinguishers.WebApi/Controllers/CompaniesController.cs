@@ -1,6 +1,8 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -10,6 +12,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
     /// </summary>
     [Route("api/companies")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CompaniesController : ControllerBase
     {
         private readonly IServiceCompanies _serviceCompanies;

@@ -2,6 +2,8 @@
 using HandlingExtinguishers.DTO.Filters;
 using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -11,6 +13,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
     /// </summary>
     [Route("api/expenses")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ExpensesController : ControllerBase
     {
         private readonly IServiceExpenses _serviceExpenses;

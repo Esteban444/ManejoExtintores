@@ -6,6 +6,6 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Services
     public interface IAuthService
     {
         Task<AuthenticationResponseDto> LoginUser(LoginRequestDto loginRequest);  
-        Task<AuthenticationResponseDto> RegisterUser(RegisterUserRequestDto registerUser);  
+        Task<RegisterResponseDto> RegisterUser(RegisterUserRequestDto registerUser);  
     }
 }

@@ -5,9 +5,12 @@ namespace HandlingExtinguishers.DTO.Request
     public class RegisterUserRequestDto
     {
         [Required(ErrorMessage = "The names field cannot be empty.")]
-        public string? Names { get; set; }
+        public string? Name { get; set; }
+        public string? SecondName { get; set; }  
+
         [Required(ErrorMessage = "The lastName field cannot be empty.")]
-        public string? LastNames { get; set; } 
+        public string? LastName { get; set; } 
+        public string? SecondLastName { get; set; }   
         public string? Email { get; set; }
         [Required(ErrorMessage = "The userName field cannot be empty.")]
         public string? UserName { get; set; }

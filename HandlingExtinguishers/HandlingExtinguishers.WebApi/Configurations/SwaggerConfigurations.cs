@@ -1,6 +1,8 @@
-﻿using Microsoft.OpenApi.Models;
-using Swashbuckle.Swagger;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
 
 namespace HandlingExtinguishers.WebApi.Configurations
 {

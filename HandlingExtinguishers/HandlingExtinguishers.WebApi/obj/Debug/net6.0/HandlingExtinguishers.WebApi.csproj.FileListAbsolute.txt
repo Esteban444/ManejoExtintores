@@ -80,3 +80,4 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.pdb
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.genruntimeconfig.cache
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\ref\HandlingExtinguishers.WebApi.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
