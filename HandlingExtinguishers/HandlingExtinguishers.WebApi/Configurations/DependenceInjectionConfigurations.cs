@@ -7,6 +7,7 @@ using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Request.Employees;
 using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Request.Prices;
+using HandlingExtinguishers.DTO.Request.TypeExtinguisher;
 using HandlingExtinguishers.Infrastructure.Repositories;
 using HandlingExtinguishers.WebApi.Configurations.Validations;
 
@@ -31,6 +32,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IRepositoryEmployees, EmployeesRepository>();
             services.AddScoped<IRepositoryPrice, PricesRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
+            services.AddScoped<IRepositoryTypeExtinguisher, TypeExtinguishersRepository>();
             #endregion End Repositories
 
             #region Services
@@ -40,6 +42,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IServiceExpenses, ServiceExpenses>();
             services.AddScoped<IServiceEmployees, ServiceEmployees>();
             services.AddScoped<IServicePrices, ServicePrices>();
+            services.AddScoped<IServiceTypeExtinguishers, ServiceTypeExtinguishers>();
             #endregion End Services
 
             #region Validators
@@ -49,6 +52,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IValidator<EmployeeRequestDto>, EmployeeValidations>();  
             services.AddScoped<IValidator<PriceRequestDto>, PriceValidations>();  
             services.AddScoped<IValidator<PriceRequestUpdateFieldDto>, PricePatchValidations>();  
+            services.AddScoped<IValidator<TypeExtinguisherRequestDto>, TypeExtinguisherValidations>();  
             #endregion Validators
 
 

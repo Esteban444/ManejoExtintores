@@ -39,6 +39,8 @@ namespace HandlingExtinguishers.Infrastructure.Data
             modelBuilder.Entity<PriceTable>().Property(e => e.ProductId).HasConversion<string>();
             modelBuilder.Entity<PriceTable>().Property(e => e.DetailServiceId).HasConversion<string>();
 
+            modelBuilder.Entity<TypeExtinguisherTable>().Property(e => e.Id).HasConversion<string>();
+
             base.OnModelCreating(modelBuilder);
         }
 

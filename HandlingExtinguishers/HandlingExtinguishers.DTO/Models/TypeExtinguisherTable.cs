@@ -4,7 +4,7 @@ namespace HandlingExtinguishers.DTO.Models
 {
     public class TypeExtinguisherTable: BaseModel
     {
-        public string? Type { get; set; } 
+        public string? TypeExtinguisher { get; set; }  
         public bool Active { get; set; }
 
         public ICollection<ServiceDetailTable>? ServiceDetails { get; set; }
