@@ -29,7 +29,7 @@ namespace HandlingExtinguishers.Core.Services
 
         public async Task<TypeExtinguisherResponseDto> GetTypeById(Guid typeId)
         {
-            var type = await _repositoryTypeExtinguisher.FindBy(x => x.Id == typeId).FirstOrDefaultAsync();
+            var type = await _repositoryTypeExtinguisher.FindBy(x => x.Active && x.Id == typeId).FirstOrDefaultAsync();
             if (type == null) throw new GlobalException("The type extinguisher record does not exist in the database.", HttpStatusCode.NotFound);
             var response = _mapper.Map<TypeExtinguisherResponseDto>(type);
             return response;
@@ -45,7 +45,7 @@ namespace HandlingExtinguishers.Core.Services
         public async Task<TypeExtinguisherResponseDto> UpdateType(Guid typeId, TypeExtinguisherRequestDto typeExtinguisherRequest)
         {
             if (typeExtinguisherRequest.Active == null) typeExtinguisherRequest.Active = true;
-            var type = await _repositoryTypeExtinguisher.FindBy(c => c.Id == typeId).FirstOrDefaultAsync();
+            var type = await _repositoryTypeExtinguisher.FindBy(c =>  c.Active && c.Id == typeId).FirstOrDefaultAsync();
             if (type == null) throw new GlobalException("The type extinguisher record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
             _mapper.Map(typeExtinguisherRequest, type);
@@ -56,8 +56,7 @@ namespace HandlingExtinguishers.Core.Services
 
         public async Task<TypeExtinguisherResponseDto> UpdateTypeField(Guid typeId, TypeExtinguisherFieldRequestDto typeExtinguisherRequest)
         {
-            if (typeExtinguisherRequest.Active == null) typeExtinguisherRequest.Active = true;
-            var type = await _repositoryTypeExtinguisher.FindBy(c => c.Id == typeId).FirstOrDefaultAsync(); 
+            var type = await _repositoryTypeExtinguisher.FindBy(c => c.Active && c.Id == typeId).FirstOrDefaultAsync(); 
             if (type == null) throw new GlobalException("The type extinguisher record you are trying to update does not exist in the database.", HttpStatusCode.NotFound);
 
             var properties = new UpdateMapperProperties<TypeExtinguisherTable, TypeExtinguisherFieldRequestDto>();

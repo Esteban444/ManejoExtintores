@@ -17,6 +17,6 @@ namespace HandlingExtinguishers.DTO.Models
         public ClientTable? Client { get; set; } 
         public EmployeeTable? Employee { get; set; }
         public ICollection<CreditServiceTable>? CreditServices { get; set; }
-        public ICollection<ServiceDetailTable>? ServiceDetails { get; set; }
+        public ICollection<ServiceDetailtTable>? ServiceDetailts { get; set; } 
     }
 }

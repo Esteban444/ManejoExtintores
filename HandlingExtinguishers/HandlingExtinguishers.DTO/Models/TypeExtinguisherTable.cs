@@ -7,8 +7,8 @@ namespace HandlingExtinguishers.DTO.Models
         public string? TypeExtinguisher { get; set; }  
         public bool Active { get; set; }
 
-        public ICollection<ServiceDetailTable>? ServiceDetails { get; set; }
+        public ICollection<ServiceDetailtTable>? ServiceDetailts { get; set; } 
         public ICollection<InventoryTable>? Inventories { get; set; }
-        public ICollection<Products>? Products { get; set; }
+        public ICollection<ProductTable>? Products { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using HandlingExtinguishers.DTO.Request.Employees;
 using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Request.Prices;
 using HandlingExtinguishers.DTO.Request.TypeExtinguisher;
+using HandlingExtinguishers.DTO.Request.WeightExtinguisher;
 using HandlingExtinguishers.DTO.Response;
 
 namespace  HandlingExtinguishers.WebApi.Configurations
@@ -46,6 +47,10 @@ namespace  HandlingExtinguishers.WebApi.Configurations
             CreateMap<TypeExtinguisherTable, TypeExtinguisherResponseDto>().ReverseMap();
             CreateMap<TypeExtinguisherRequestDto, TypeExtinguisherResponseDto>().ReverseMap();
             CreateMap<TypeExtinguisherTable, TypeExtinguisherRequestDto>().ReverseMap();
+
+            CreateMap<WeightExtinguisherTable, WeightExtinguisherResponseDto>().ReverseMap(); 
+            CreateMap<WeightExtinguisherRequestDto, WeightExtinguisherResponseDto>().ReverseMap();
+            CreateMap<WeightExtinguisherTable, WeightExtinguisherRequestDto>().ReverseMap();
         }
     }
 }

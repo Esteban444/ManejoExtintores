@@ -7,8 +7,8 @@ namespace HandlingExtinguishers.DTO.Models
         public int? WeightPound { get; set; }
         public bool Active { get; set; }
 
-        public ICollection<ServiceDetailTable>? ServicesDetails { get; set; }
+        public ICollection<ServiceDetailtTable>? ServicesDetailts { get; set; }
         public ICollection<InventoryTable>? Inventories { get; set; }
-        public ICollection<Products>? Products { get; set; }
+        public ICollection<ProductTable>? Products { get; set; }
     }
 }

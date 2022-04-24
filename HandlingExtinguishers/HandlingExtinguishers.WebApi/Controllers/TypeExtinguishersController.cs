@@ -1,6 +1,8 @@
 ﻿using HandlingExtinguishers.Contracts.Interfaces.Services;
 using HandlingExtinguishers.DTO.Request.TypeExtinguisher;
 using HandlingExtinguishers.DTO.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandlingExtinguishers.WebApi.Controllers
@@ -11,6 +13,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
 
     [Route("api/typeextinguisher")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TypeExtinguishersController : ControllerBase
     {
         private readonly IServiceTypeExtinguishers _typeExtinguishers;

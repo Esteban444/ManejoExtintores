@@ -18,8 +18,7 @@ namespace HandlingExtinguishers.DTO.Models
         public string? Email { get; set; }
         public string? Nit { get; set; }
         public bool Active { get; set; }
-
-        //public ICollection<DetalleExtintorClientes> DetalleExtClientes { get; set; }
+        public ICollection<CreditServiceTable>? CreditServices { get; set; } 
         public ICollection<ServiceTable>? Services { get; set; }
     }
 }
