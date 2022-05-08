@@ -37,7 +37,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
         [ProducesResponseType(typeof(ClientResponseDto), 200)]
         [ProducesResponseType(typeof(ClientResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
-        public async Task<IActionResult> ConsultClient([FromQuery] ClientFilter filter)
+        public async Task<IActionResult> ConsultClient([FromQuery] ClientFilterDto filter)
         {
             var clients = await _serviceClients.GetAllClients(filter);
             return Ok(clients);

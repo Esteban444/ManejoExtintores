@@ -2,7 +2,7 @@
 
 namespace HandlingExtinguishers.DTO.Filters
 {
-    public class ClientFilter
+    public class ClientFilterDto
     {
         public decimal? Document { get; set; }
         public string? FirstName { get; set; }

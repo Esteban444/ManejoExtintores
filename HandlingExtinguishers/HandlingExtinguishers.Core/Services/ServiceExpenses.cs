@@ -21,7 +21,7 @@ namespace HandlingExtinguishers.Core.Services
             _repositoryExpenses = repositoryExpenses;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ExpenseResponseDto>> GetExpenses(FilterExpenses filter) 
+        public async Task<IEnumerable<ExpenseResponseDto>> GetExpenses(FilterExpensesDto filter) 
         {
             var expenses = _repositoryExpenses.GetAll();
 

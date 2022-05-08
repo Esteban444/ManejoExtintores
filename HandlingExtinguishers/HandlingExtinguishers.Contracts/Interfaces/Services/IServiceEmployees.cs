@@ -7,7 +7,7 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Services
 {
     public interface IServiceEmployees
     {
-        Task<IEnumerable<EmployeeResponseDto>> GetAllEmployees(EmployeeFilter filter);
+        Task<IEnumerable<EmployeeResponseDto>> GetAllEmployees(EmployeeFilterDto filter);
         Task<EmployeeResponseDto> GetEmployeeBy(Guid employeeId); 
         Task<EmployeeResponseDto> AddAsync(EmployeeRequestDto employeeRequest);
         Task<EmployeeResponseDto> UpdateEmployee(Guid employeeId, EmployeeRequestDto employeeRequest);

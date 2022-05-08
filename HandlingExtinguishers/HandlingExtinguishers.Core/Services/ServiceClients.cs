@@ -21,7 +21,7 @@ namespace HandlingExtinguishers.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ClientResponseDto>> GetAllClients(ClientFilter filter)
+        public async Task<IEnumerable<ClientResponseDto>> GetAllClients(ClientFilterDto filter)
         {
             var clients = _repositoryClients.FindBy(x => x.Active);
 

@@ -7,7 +7,7 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Services
 {
     public interface IServiceExpenses
     {
-       Task<IEnumerable<ExpenseResponseDto>> GetExpenses(FilterExpenses filter);
+       Task<IEnumerable<ExpenseResponseDto>> GetExpenses(FilterExpensesDto filter);
        Task<ExpenseResponseDto> GetExpense(Guid expenseId); 
        Task<ExpenseResponseDto> AddAsync(ExpensesRequestDto expenseRequest); 
        Task<ExpenseResponseDto> UpdateExpense(Guid expenseId, ExpensesRequestDto expenseRequest);  

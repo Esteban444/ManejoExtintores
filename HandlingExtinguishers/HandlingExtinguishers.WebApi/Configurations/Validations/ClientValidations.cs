@@ -4,7 +4,7 @@ using HandlingExtinguishers.DTO.Request.Clients;
 namespace HandlingExtinguishers.WebApi.Configurations.Validations
 {
     /// <summary>
-    /// Class to validate cliente request.
+    /// Class to validate client request.
     /// </summary>
     public class ClientValidations: AbstractValidator<ClientRequestDto>
     {

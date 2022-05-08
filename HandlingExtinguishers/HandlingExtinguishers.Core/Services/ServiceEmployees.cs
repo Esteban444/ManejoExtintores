@@ -22,7 +22,7 @@ namespace HandlingExtinguishers.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<EmployeeResponseDto>> GetAllEmployees(EmployeeFilter filter)
+        public async Task<IEnumerable<EmployeeResponseDto>> GetAllEmployees(EmployeeFilterDto filter)
         {
             var employees = _repositoryEmployees.FindBy(x => x.Active);
 

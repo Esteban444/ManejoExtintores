@@ -7,7 +7,7 @@ namespace HandlingExtinguishers.Contracts.Interfaces.Services
 {
     public interface IServiceClients
     {
-        Task<IEnumerable<ClientResponseDto>> GetAllClients(ClientFilter filter); 
+        Task<IEnumerable<ClientResponseDto>> GetAllClients(ClientFilterDto filter); 
         Task<ClientResponseDto> GetClientById(Guid clientId);
         Task<ClientResponseDto> AddAsync(ClientRequestDto clientRequest);
         Task<ClientResponseDto> UpdateClient(Guid clientId, ClientRequestDto clientRequest); 

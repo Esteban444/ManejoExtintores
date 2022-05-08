@@ -4,8 +4,8 @@ namespace HandlingExtinguishers.DTO.Models
 {
     public class ProductTable: BaseModel 
     {
-        public Guid? ExtinguisherTypeId { get; set; } 
-        public Guid? ExtinguisherWeightId { get; set; }
+        public Guid? TypeExtinguisherId { get; set; }   
+        public Guid? WeightExtinguisherId { get; set; }
         public Guid? PriceId { get; set; } 
         public string? TypeProduct { get; set; }
         public bool Active { get; set; }

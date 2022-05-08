@@ -37,7 +37,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
         [ProducesResponseType(typeof(ExpenseResponseDto), 200)]
         [ProducesResponseType(typeof(ExpenseResponseDto), 400)] 
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
-        public async Task<IActionResult> ConsultExpenses([FromQuery] FilterExpenses filter) 
+        public async Task<IActionResult> ConsultExpenses([FromQuery] FilterExpensesDto filter) 
         {
             var expenses = await _serviceExpenses.GetExpenses(filter);
             return Ok(expenses);

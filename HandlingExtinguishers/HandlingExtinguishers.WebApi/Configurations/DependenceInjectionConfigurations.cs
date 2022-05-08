@@ -7,6 +7,7 @@ using HandlingExtinguishers.DTO.Request.Companies;
 using HandlingExtinguishers.DTO.Request.Employees;
 using HandlingExtinguishers.DTO.Request.Expenses;
 using HandlingExtinguishers.DTO.Request.Prices;
+using HandlingExtinguishers.DTO.Request.Products;
 using HandlingExtinguishers.DTO.Request.TypeExtinguisher;
 using HandlingExtinguishers.DTO.Request.WeightExtinguisher;
 using HandlingExtinguishers.Infrastructure.Repositories;
@@ -32,6 +33,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IRepositoryExpenses, ExpensesRepository>();
             services.AddScoped<IRepositoryEmployees, EmployeesRepository>();
             services.AddScoped<IRepositoryPrice, PricesRepository>();
+            services.AddScoped<IRepositoryProducts, ProductsRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<IRepositoryTypeExtinguisher, TypeExtinguishersRepository>();
             services.AddScoped<IRepositoryWeightExtinguisher, WeightExtinguisherRepository>(); 
@@ -44,6 +46,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IServiceExpenses, ServiceExpenses>();
             services.AddScoped<IServiceEmployees, ServiceEmployees>();
             services.AddScoped<IServicePrices, ServicePrices>();
+            services.AddScoped<IProductsService, ServiceProducts>();
             services.AddScoped<IServiceTypeExtinguishers, ServiceTypeExtinguishers>();
             services.AddScoped<IServiceWeightExtinguishers, ServiceWeightExtinguishers>();
             #endregion End Services
@@ -55,6 +58,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IValidator<EmployeeRequestDto>, EmployeeValidations>();  
             services.AddScoped<IValidator<PriceRequestDto>, PriceValidations>();  
             services.AddScoped<IValidator<PriceRequestUpdateFieldDto>, PricePatchValidations>();  
+            services.AddScoped<IValidator<ProductsRequestDto>, ProductsValidations>();  
             services.AddScoped<IValidator<TypeExtinguisherRequestDto>, TypeExtinguisherValidations>();  
             services.AddScoped<IValidator<WeightExtinguisherRequestDto>, WeightExtinguisherValidations>();  
             #endregion Validators

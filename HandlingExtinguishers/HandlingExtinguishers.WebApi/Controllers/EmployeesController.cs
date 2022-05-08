@@ -37,7 +37,7 @@ namespace HandlingExtinguishers.WebApi.Controllers
         [ProducesResponseType(typeof(EmployeeResponseDto), 200)]
         [ProducesResponseType(typeof(EmployeeResponseDto), 400)]
         [ProducesResponseType(typeof(FailedOperationResultDto), 404)]
-        public async Task<IActionResult> ConsultEmployees([FromQuery] EmployeeFilter filter)
+        public async Task<IActionResult> ConsultEmployees([FromQuery] EmployeeFilterDto filter)
         {
             var employees = await _serviceEmployee.GetAllEmployees(filter);
             return Ok(employees);

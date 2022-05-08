@@ -37,9 +37,16 @@ namespace HandlingExtinguishers.Infrastructure.Data
 
             modelBuilder.Entity<PriceTable>().Property(e => e.Id).HasConversion<string>();
 
+            modelBuilder.Entity<ProductTable>().Property(e => e.Id).HasConversion<string>();
+            modelBuilder.Entity<ProductTable>().Property(e => e.TypeExtinguisherId).HasConversion<string>();
+            modelBuilder.Entity<ProductTable>().Property(e => e.WeightExtinguisherId).HasConversion<string>();
+            modelBuilder.Entity<ProductTable>().Property(e => e.PriceId).HasConversion<string>();
+
             modelBuilder.Entity<TypeExtinguisherTable>().Property(e => e.Id).HasConversion<string>();
 
             modelBuilder.Entity<WeightExtinguisherTable>().Property(e => e.Id).HasConversion<string>();
+
+
 
             base.OnModelCreating(modelBuilder);
         }
