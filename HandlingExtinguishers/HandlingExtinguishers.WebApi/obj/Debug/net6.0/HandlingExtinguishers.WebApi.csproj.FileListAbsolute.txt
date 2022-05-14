@@ -13,6 +13,7 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\System.Net.Http.Formatting.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\System.Web.Http.dll
+C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -80,4 +81,3 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.pdb
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\HandlingExtinguishers.WebApi.genruntimeconfig.cache
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\obj\Debug\net6.0\ref\HandlingExtinguishers.WebApi.dll
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

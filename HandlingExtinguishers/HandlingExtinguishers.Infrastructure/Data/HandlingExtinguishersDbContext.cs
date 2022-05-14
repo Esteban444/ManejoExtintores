@@ -35,6 +35,11 @@ namespace HandlingExtinguishers.Infrastructure.Data
             modelBuilder.Entity<EmployeeTable>().Property(e => e.Id).HasConversion<string>();
             modelBuilder.Entity<EmployeeTable>().Property(e => e.CompanyId).HasConversion<string>();
 
+            modelBuilder.Entity<InventoryTable>().Property(e => e.Id).HasConversion<string>();
+            modelBuilder.Entity<InventoryTable>().Property(e => e.ExtinguisherTypeId).HasConversion<string>();
+            modelBuilder.Entity<InventoryTable>().Property(e => e.ExtinguisherWeightId).HasConversion<string>();
+            modelBuilder.Entity<InventoryTable>().Property(e => e.ProductId).HasConversion<string>();
+
             modelBuilder.Entity<PriceTable>().Property(e => e.Id).HasConversion<string>();
 
             modelBuilder.Entity<ProductTable>().Property(e => e.Id).HasConversion<string>();
