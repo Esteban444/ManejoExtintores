@@ -5,7 +5,6 @@ C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\D
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.WebApi.runtimeconfig.json
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.WebApi.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.WebApi.pdb
-C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\HandlingExtinguishers.WebApi.xml
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Mas\ManejoExtintores\HandlingExtinguishers\HandlingExtinguishers.WebApi\bin\Debug\net6.0\FluentValidation.dll

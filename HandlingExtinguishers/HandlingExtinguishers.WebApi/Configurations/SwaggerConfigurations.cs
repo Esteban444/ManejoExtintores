@@ -21,9 +21,9 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HandlingExtinguishers.WebApi", Version = "v1" });
-                var xmlFile = $"{ Assembly.GetExecutingAssembly().GetName().Name}.Xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlFile);
+                //var xmlFile = $"{ Assembly.GetExecutingAssembly().GetName().Name}.Xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlFile);
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
