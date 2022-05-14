@@ -21,16 +21,16 @@ namespace HandlingExtinguishers.Core.Services
         }
         public async Task<IEnumerable<InventoryResponseDto>> GetAllInventories()
         {
-            var inventories = await _repositoryInventory.FindBy(x => x.Active).Include(x => x.Product). Include(x => x.TypeExtinguisher).
-                Include(x => x.WeightExtinguisher).ToListAsync();
+            var inventories = await _repositoryInventory.FindBy(x => x.Active).Include(x => x.Product). Include(x => x.TypeExtinguisher)
+                .Include(x => x.WeightExtinguisher).ToListAsync();
             var response = _mapper.Map<IEnumerable<InventoryResponseDto>>(inventories);
             return response;
         }
 
         public async Task<InventoryResponseDto> GetInventoryById(Guid inventoryId)
         {
-            var product = await _repositoryInventory.FindBy(x => x.Active && x.Id == inventoryId).Include(x => x.Product).Include(x => x.TypeExtinguisher).
-                Include(x => x.WeightExtinguisher).FirstOrDefaultAsync();
+            var product = await _repositoryInventory.FindBy(x => x.Active && x.Id == inventoryId).Include(x => x.Product).Include(x => x.TypeExtinguisher)
+                . Include(x => x.WeightExtinguisher).FirstOrDefaultAsync();
             if (product == null) throw new GlobalException("The inventory record does not exist in the database.", HttpStatusCode.NotFound);
             var response = _mapper.Map<InventoryResponseDto>(product);
             return response;

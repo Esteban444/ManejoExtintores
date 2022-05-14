@@ -43,6 +43,8 @@ namespace  HandlingExtinguishers.WebApi.Configurations
             CreateMap<EmployeeTable, EmployeeRequestDto>().ReverseMap();
 
             CreateMap<InventoryTable, InventoryResponseDto>().ReverseMap();
+                //.ForMember(x => x.TypeExtinguisher, z => z.MapFrom(y => y.Product!.TypeExtinguisher))
+                //.ForMember(x => x.WeightExtinguisher, e => e.MapFrom(w => w.Product!.WeightExtinguisher)).ReverseMap();
             CreateMap<InventoryRequestDto, InventoryResponseDto>().ReverseMap();
             CreateMap<InventoryTable, InventoryRequestDto>().ReverseMap();
 

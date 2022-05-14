@@ -11,7 +11,5 @@ namespace HandlingExtinguishers.DTO.Response
         public bool? Active { get; set; }
 
         public ProductsResponseDto? Product { get; set; }
-        public WeightExtinguisherResponseDto? WeightExtinguisher { get; set; }
-        public TypeExtinguisherResponseDto? TypeExtinguisher { get; set; }
     }
 }
