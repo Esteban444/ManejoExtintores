@@ -36,6 +36,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IRepositoryInventory, InventoryRepository>();
             services.AddScoped<IRepositoryPrice, PricesRepository>();
             services.AddScoped<IRepositoryProducts, ProductsRepository>();
+            services.AddScoped<IRepositoryService, ServicesRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
             services.AddScoped<IRepositoryTypeExtinguisher, TypeExtinguishersRepository>();
             services.AddScoped<IRepositoryWeightExtinguisher, WeightExtinguisherRepository>(); 
@@ -50,6 +51,7 @@ namespace HandlingExtinguishers.WebApi.Configurations
             services.AddScoped<IInventoryService, ServiceInventory>();
             services.AddScoped<IServicePrices, ServicePrices>();
             services.AddScoped<IProductsService, ServiceProducts>();
+            services.AddScoped<IService_Services, Service_Services>();
             services.AddScoped<IServiceTypeExtinguishers, ServiceTypeExtinguishers>();
             services.AddScoped<IServiceWeightExtinguishers, ServiceWeightExtinguishers>();
             #endregion End Services

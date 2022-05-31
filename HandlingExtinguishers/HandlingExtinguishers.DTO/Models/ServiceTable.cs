@@ -7,11 +7,7 @@ namespace HandlingExtinguishers.DTO.Models
         public Guid? ClientId { get; set; }
         public Guid? EmployeeId { get; set; }
         public DateTime? DateOfService { get; set; } 
-        public decimal? Value { get; set; } 
         public string? State { get; set; }
-        public DateTime? ExpirationDate { get; set; } 
-        public DateTime? MaintenanceDate { get; set; } 
-        public decimal? InitialFee { get; set; }
         public bool Active { get; set; }
 
         public ClientTable? Client { get; set; } 
